@@ -1,0 +1,631 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE database SYSTEM "file:///System/Library/DTDs/CoreData.dtd">
+
+<database>
+    <databaseInfo>
+        <version>134481920</version>
+        <UUID>3F07BFD0-DBD9-4199-B502-754A1EB64FCC</UUID>
+        <nextObjectID>146</nextObjectID>
+        <metadata>
+            <plist version="1.0">
+                <dict>
+                    <key>NSPersistenceFrameworkVersion</key>
+                    <integer>481</integer>
+                    <key>NSStoreModelVersionHashes</key>
+                    <dict>
+                        <key>action</key>
+                        <data>
+		Gl79yicU/qMmmjW+02T6r/N/3wY/MXt1/ETG6BgiQvk=
+		</data>
+                        <key>command</key>
+                        <data>
+		LnTEAxQizumf4LEx7vWu/AEuw8pYLvlU+A+QAxxNV1Q=
+		</data>
+                        <key>location</key>
+                        <data>
+		l1GW8zsQs6xToCTE303HdInkm0pvem69Qmej6Ixq3k4=
+		</data>
+                        <key>trigger</key>
+                        <data>
+		kWwewq0GT8KPB4ELML1wT0S2IYIZ5+/6CI0GsK9LDns=
+		</data>
+                    </dict>
+                    <key>NSStoreModelVersionHashesVersion</key>
+                    <integer>3</integer>
+                    <key>NSStoreModelVersionIdentifiers</key>
+                    <array>
+                        <string></string>
+                    </array>
+                </dict>
+            </plist>
+        </metadata>
+    </databaseInfo>
+    <object type="ACTION" id="z102">
+        <attribute name="text" type="string">Shift-DownArrow</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="data" type="binary">RmFzZFVBUyAxLjEwMS4xMA4AAAAED///AAEAAgADAf//AAANAAEAA2wAAgAAAAD//v/9//wB//4A
+AAH//QAAAf/8AAAOAAIAAA8QAAMAAv/7AAQB//sAABAABAAAAGFzY3IAAQAN+t7erQ==
+</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z141"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="COMMAND" id="z103">
+        <attribute name="version" type="int32">1</attribute>
+        <attribute name="vendor" type="string">igormoreno</attribute>
+        <attribute name="type" type="string">AppleScript</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isspelling" type="bool">0</attribute>
+        <attribute name="issleep" type="bool">0</attribute>
+        <attribute name="isdictation" type="bool">0</attribute>
+        <attribute name="iscorrection" type="bool">0</attribute>
+        <attribute name="iscommand" type="bool">1</attribute>
+        <attribute name="engineid" type="int32">-1</attribute>
+        <attribute name="display" type="bool">1</attribute>
+        <attribute name="commandid" type="int32">-902364397</attribute>
+        <attribute name="appversion" type="int32">7</attribute>
+        <attribute name="appbundle" type="string">org.vim.MacVim</attribute>
+        <attribute name="active" type="bool">1</attribute>
+        <relationship name="currentaction" type="1/1" destination="ACTION"></relationship>
+        <relationship name="currenttrigger" type="1/1" destination="TRIGGER"></relationship>
+        <relationship name="location" type="1/1" destination="LOCATION"></relationship>
+        <relationship name="action" type="0/0" destination="ACTION" idrefs="z123"></relationship>
+        <relationship name="trigger" type="1/0" destination="TRIGGER" idrefs="z122"></relationship>
+    </object>
+    <object type="ACTION" id="z104">
+        <attribute name="text" type="string"> -\u3e00</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z146"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="ACTION" id="z105">
+        <attribute name="text" type="string">Hidden Command Text</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z132"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND" idrefs="z132"></relationship>
+    </object>
+    <object type="TRIGGER" id="z106">
+        <attribute name="string" type="string">scratch</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="desc" type="string">Command Description</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z130"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="ACTION" id="z107">
+        <attribute name="text" type="string">Option-Command-g</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="data" type="binary">RmFzZFVBUyAxLjEwMS4xMA4AAAAED///AAEAAgADAf//AAANAAEAA2wAAgAAAAD//v/9//wB//4A
+AAH//QAAAf/8AAAOAAIAAA8QAAMAAv/7AAQB//sAABAABAAAAGFzY3IAAQAN+t7erQ==
+</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z111"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="TRIGGER" id="z108">
+        <attribute name="string" type="string">Hidden Command Name</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="desc" type="string">Hidden Command Description</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z127"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND" idrefs="z127"></relationship>
+    </object>
+    <object type="ACTION" id="z109">
+        <attribute name="text" type="string">tell application "System Events"	repeat 5 times		key code 125	end repeatend tell</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="data" type="binary">RmFzZFVBUyAxLjEwMS4xMA4AAAAED///AAEAAgADAf//AAANAAEAA2wAAgAAABYABP/+//0NAAQA
+Ak8AAAAAABYABQAGDQAFAAJVAAAABAAVAAcACA0ABwADSQACAAsAEP/8AAn/+wr//AAYLnByY3NrY29kbnVsbP//gAAAABAAbG9uZw0ACQABbQAAAAsADP/6A//6AH0C//sAAA0ACAABbQAAAAcACP/5A//5AAUNAAYAAW0AAAAAAAEACg8ACgHwCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABzZXZzAAIBAGFsaXMAAAAAAZIAAgABDE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAM/URuZIKwAAAAAALxFTeXN0ZW0gRXZlbnRzLmFwcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8yzz1E03gAAAAAAAAAA/////wAACSAAAAAAAAAAAAAAAAAAAAAMQ29yZVNlcnZpY2VzABAACAAAz9QqxgAAABEACAAAz1EmzgAAAAEADAAAAC8AAAAsAAAAKwACAD1NYWNpbnRvc2ggSEQ6U3lzdGVtOgBMaWJyYXJ5OgBDb3JlU2VydmljZXM6AFN5c3RlbSBFdmVudHMuYXBwAAAOACQAEQBTAHkAcwB0AGUAbQAgAEUAdgBlAG4AdABzAC4AYQBwAHAADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgAtU3lzdGVtL0xpYnJhcnkvQ29yZVNlcnZpY2VzL1N5c3RlbSBFdmVudHMuYXBwAAATAAEvAP//AAAB//4AAAH//QAADgACAAAPEAADAAP/+AALAAwB//gAABAACwAB//cK//cAGC5hZXZ0b2FwcG51bGwAAIAAAACQACoqKioOAAwABxD/9gAN//X/9AAOAA//8wr/9gAYLmFldnRvYXBwbnVsbAAAgAAAAJAAKioqKg0ADQABawAAAAAAFgAQAgAQAAIAAf/yAv/yAAAB//UAAAL/9AAAEAAOAAAQAA8ABAAK//H/8P/vA//xAAUD//AAfQr/7wAYLnByY3NrY29kbnVsbP//gAAAABAAbG9uZxH/8wAX4BIAExcAEOFraBjiagwAA1tPWf/3VQ8AYXNjcgABAA363t6t
+</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z131"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="ACTION" id="z110">
+        <attribute name="text" type="string">Hidden Command Text</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z127"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND" idrefs="z127"></relationship>
+    </object>
+    <object type="COMMAND" id="z111">
+        <attribute name="version" type="int32">1</attribute>
+        <attribute name="vendor" type="string">igormoreno</attribute>
+        <attribute name="type" type="string">Keystroke</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isspelling" type="bool">0</attribute>
+        <attribute name="issleep" type="bool">0</attribute>
+        <attribute name="isdictation" type="bool">0</attribute>
+        <attribute name="iscorrection" type="bool">0</attribute>
+        <attribute name="iscommand" type="bool">1</attribute>
+        <attribute name="engineid" type="int32">-1</attribute>
+        <attribute name="display" type="bool">1</attribute>
+        <attribute name="commandid" type="int32">-904426884</attribute>
+        <attribute name="appversion" type="int32">7</attribute>
+        <attribute name="appbundle" type="string">com.apple.Preview</attribute>
+        <attribute name="active" type="bool">1</attribute>
+        <relationship name="currentaction" type="1/1" destination="ACTION"></relationship>
+        <relationship name="currenttrigger" type="1/1" destination="TRIGGER"></relationship>
+        <relationship name="location" type="1/1" destination="LOCATION"></relationship>
+        <relationship name="action" type="0/0" destination="ACTION" idrefs="z107"></relationship>
+        <relationship name="trigger" type="1/0" destination="TRIGGER" idrefs="z116"></relationship>
+    </object>
+    <object type="COMMAND" id="z112">
+        <attribute name="version" type="int32">1</attribute>
+        <attribute name="vendor" type="string">igormoreno</attribute>
+        <attribute name="type" type="string">Keystroke</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isspelling" type="bool">0</attribute>
+        <attribute name="issleep" type="bool">0</attribute>
+        <attribute name="isdictation" type="bool">0</attribute>
+        <attribute name="iscorrection" type="bool">0</attribute>
+        <attribute name="iscommand" type="bool">1</attribute>
+        <attribute name="engineid" type="int32">-1</attribute>
+        <attribute name="display" type="bool">1</attribute>
+        <attribute name="commandid" type="int32">-902804542</attribute>
+        <attribute name="appversion" type="int32">0</attribute>
+        <attribute name="active" type="bool">1</attribute>
+        <relationship name="currentaction" type="1/1" destination="ACTION"></relationship>
+        <relationship name="currenttrigger" type="1/1" destination="TRIGGER"></relationship>
+        <relationship name="location" type="1/1" destination="LOCATION"></relationship>
+        <relationship name="action" type="0/0" destination="ACTION" idrefs="z125"></relationship>
+        <relationship name="trigger" type="1/0" destination="TRIGGER" idrefs="z134"></relationship>
+    </object>
+    <object type="TRIGGER" id="z113">
+        <attribute name="string" type="string">5 down</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="desc" type="string">Command Description</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z131"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="TRIGGER" id="z114">
+        <attribute name="string" type="string">select line</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="desc" type="string">Command Description</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z133"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="ACTION" id="z115">
+        <attribute name="text" type="string">git </attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z137"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="TRIGGER" id="z116">
+        <attribute name="string" type="string">Go to page</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="desc" type="string">Command Description</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z111"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="COMMAND" id="z117">
+        <attribute name="version" type="int32">1</attribute>
+        <attribute name="vendor" type="string">igormoreno</attribute>
+        <attribute name="type" type="string">Text</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isspelling" type="bool">0</attribute>
+        <attribute name="issleep" type="bool">0</attribute>
+        <attribute name="isdictation" type="bool">0</attribute>
+        <attribute name="iscorrection" type="bool">0</attribute>
+        <attribute name="iscommand" type="bool">1</attribute>
+        <attribute name="engineid" type="int32">-1</attribute>
+        <attribute name="display" type="bool">1</attribute>
+        <attribute name="commandid" type="int32">-902798467</attribute>
+        <attribute name="appversion" type="int32">0</attribute>
+        <attribute name="active" type="bool">1</attribute>
+        <relationship name="currentaction" type="1/1" destination="ACTION"></relationship>
+        <relationship name="currenttrigger" type="1/1" destination="TRIGGER"></relationship>
+        <relationship name="location" type="1/1" destination="LOCATION"></relationship>
+        <relationship name="action" type="0/0" destination="ACTION" idrefs="z136"></relationship>
+        <relationship name="trigger" type="1/0" destination="TRIGGER" idrefs="z145"></relationship>
+    </object>
+    <object type="TRIGGER" id="z118">
+        <attribute name="string" type="string">Insert</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="desc" type="string">Command Description</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z124"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="TRIGGER" id="z119">
+        <attribute name="string" type="string">select down</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="desc" type="string">Command Description</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z141"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="ACTION" id="z120">
+        <attribute name="text" type="string">tell application "System Events"	key code 123 using command down	key code 125 using shift downend tell</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="data" type="binary">RmFzZFVBUyAxLjEwMS4xMA4AAAAED///AAEAAgADAf//AAANAAEAA2wAAgAAABQABP/+//0NAAQA
+Ak8AAAAAABQABQAGDQAFAAFrAAAABAATAAcCAAcAAgAIAAkNAAgAA0kAAgAEAAv//AAKAAsK//wAGC5wcmNza2NvZG51bGz//4AAAAAQAGxvbmcNAAoAAW0AAAAEAAX/+wP/+wB7BgALAAP/+gAM//kK//oABApmYWFsDQAMAAFtAAAABgAH//gK//gACAtlTWRzS2NtZAb/+QAAAgAJAAIADf/3DQANAANJAAIADAAT//YADgAPCv/2ABgucHJjc2tjb2RudWxs//+AAAAAEABsb25nDQAOAAFtAAAADAAN//UD//UAfQYADwAD//QAEP/zCv/0AAQKZmFhbA0AEAABbQAAAA4AD//yCv/yAAgLZU1kc0tzZnQG//MAAAL/9wAADQAGAAFtAAAAAAABABEPABEB8AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAc2V2cwACAQBhbGlzAAAAAAGSAAIAAQxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAADP1EbmSCsAAAAAAC8RU3lzdGVtIEV2ZW50cy5hcHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPMs89RNN4AAAAAAAAAAP////8AAAkgAAAAAAAAAAAAAAAAAAAADENvcmVTZXJ2aWNlcwAQAAgAAM/UKsYAAAARAAgAAM9RJs4AAAABAAwAAAAvAAAALAAAACsAAgA9TWFjaW50b3NoIEhEOlN5c3RlbToATGlicmFyeToAQ29yZVNlcnZpY2VzOgBTeXN0ZW0gRXZlbnRzLmFwcAAADgAkABEAUwB5AHMAdABlAG0AIABFAHYAZQBuAHQAcwAuAGEAcABwAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIALVN5c3RlbS9MaWJyYXJ5L0NvcmVTZXJ2aWNlcy9TeXN0ZW0gRXZlbnRzLmFwcAAAEwABLwD//wAAAf/+AAAB//0AAA4AAgAADxAAAwAD//EAEgATAf/xAAAQABIAAf/wCv/wABguYWV2dG9hcHBudWxsAACAAAAAkAAqKioqDgATAAcQ/+8AFP/u/+0AFQAW/+wK/+8AGC5hZXZ0b2FwcG51bGwAAIAAAACQACoqKioNABQAAWsAAAAAABQAFwIAFwACAAH/6wL/6wAAAf/uAAAC/+0AABAAFQAAEAAWAAcAEf/q/+n/6P/n/+b/5QP/6gB7Cv/pAAQKZmFhbAr/6AAIC2VNZHNLY21kCv/nABgucHJjc2tjb2RudWxs//+AAAAAEABsb25nA//mAH0K/+UACAtlTWRzS3NmdBH/7AAV4BIAEeHi42wMAARP5eLmbAwABFUPAGFzY3IAAQAN+t7erQ==
+</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z133"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="COMMAND" id="z121">
+        <attribute name="version" type="int32">1</attribute>
+        <attribute name="vendor" type="string">igormoreno</attribute>
+        <attribute name="type" type="string">Keystroke</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isspelling" type="bool">0</attribute>
+        <attribute name="issleep" type="bool">0</attribute>
+        <attribute name="isdictation" type="bool">0</attribute>
+        <attribute name="iscorrection" type="bool">0</attribute>
+        <attribute name="iscommand" type="bool">1</attribute>
+        <attribute name="engineid" type="int32">-1</attribute>
+        <attribute name="display" type="bool">1</attribute>
+        <attribute name="commandid" type="int32">-902804225</attribute>
+        <attribute name="appversion" type="int32">0</attribute>
+        <attribute name="active" type="bool">1</attribute>
+        <relationship name="currentaction" type="1/1" destination="ACTION"></relationship>
+        <relationship name="currenttrigger" type="1/1" destination="TRIGGER"></relationship>
+        <relationship name="location" type="1/1" destination="LOCATION"></relationship>
+        <relationship name="action" type="0/0" destination="ACTION" idrefs="z129"></relationship>
+        <relationship name="trigger" type="1/0" destination="TRIGGER" idrefs="z139"></relationship>
+    </object>
+    <object type="TRIGGER" id="z122">
+        <attribute name="string" type="string">escape</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="desc" type="string">Command Description</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z103"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="ACTION" id="z123">
+        <attribute name="text" type="string">set _dictateApp to (name of current application)tell application _dictateApp	--set microphone to spelling	set microphone to spellingend telltell application "System Events"	key code 53end tell</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="data" type="binary">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
+</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z103"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="COMMAND" id="z124">
+        <attribute name="version" type="int32">1</attribute>
+        <attribute name="vendor" type="string">igormoreno</attribute>
+        <attribute name="type" type="string">AppleScript</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isspelling" type="bool">0</attribute>
+        <attribute name="issleep" type="bool">0</attribute>
+        <attribute name="isdictation" type="bool">0</attribute>
+        <attribute name="iscorrection" type="bool">0</attribute>
+        <attribute name="iscommand" type="bool">1</attribute>
+        <attribute name="engineid" type="int32">-1</attribute>
+        <attribute name="display" type="bool">1</attribute>
+        <attribute name="commandid" type="int32">-902025458</attribute>
+        <attribute name="appversion" type="int32">7</attribute>
+        <attribute name="appbundle" type="string">org.vim.MacVim</attribute>
+        <attribute name="active" type="bool">1</attribute>
+        <relationship name="currentaction" type="1/1" destination="ACTION"></relationship>
+        <relationship name="currenttrigger" type="1/1" destination="TRIGGER"></relationship>
+        <relationship name="location" type="1/1" destination="LOCATION"></relationship>
+        <relationship name="action" type="0/0" destination="ACTION" idrefs="z135"></relationship>
+        <relationship name="trigger" type="1/0" destination="TRIGGER" idrefs="z118"></relationship>
+    </object>
+    <object type="ACTION" id="z125">
+        <attribute name="text" type="string">PageUp</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="data" type="binary">RmFzZFVBUyAxLjEwMS4xMA4AAAAED///AAEAAgADAf//AAANAAEAA2wAAgAAAAD//v/9//wB//4A
+AAH//QAAAf/8AAAOAAIAAA8QAAMAAv/7AAQB//sAABAABAAAAGFzY3IAAQAN+t7erQ==
+</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z112"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="COMMAND" id="z126">
+        <attribute name="version" type="int32">1</attribute>
+        <attribute name="vendor" type="string">igormoreno</attribute>
+        <attribute name="type" type="string">AppleScript</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isspelling" type="bool">0</attribute>
+        <attribute name="issleep" type="bool">0</attribute>
+        <attribute name="isdictation" type="bool">0</attribute>
+        <attribute name="iscorrection" type="bool">0</attribute>
+        <attribute name="iscommand" type="bool">1</attribute>
+        <attribute name="engineid" type="int32">-1</attribute>
+        <attribute name="display" type="bool">1</attribute>
+        <attribute name="commandid" type="int32">-902210246</attribute>
+        <attribute name="appversion" type="int32">0</attribute>
+        <attribute name="active" type="bool">1</attribute>
+        <relationship name="currentaction" type="1/1" destination="ACTION"></relationship>
+        <relationship name="currenttrigger" type="1/1" destination="TRIGGER"></relationship>
+        <relationship name="location" type="1/1" destination="LOCATION"></relationship>
+        <relationship name="action" type="0/0" destination="ACTION" idrefs="z138"></relationship>
+        <relationship name="trigger" type="1/0" destination="TRIGGER" idrefs="z140"></relationship>
+    </object>
+    <object type="COMMAND" id="z127">
+        <attribute name="version" type="int32">1</attribute>
+        <attribute name="vendor" type="string">igormoreno</attribute>
+        <attribute name="type" type="string">*Hidden*</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isspelling" type="bool">0</attribute>
+        <attribute name="issleep" type="bool">0</attribute>
+        <attribute name="isdictation" type="bool">0</attribute>
+        <attribute name="iscorrection" type="bool">0</attribute>
+        <attribute name="iscommand" type="bool">1</attribute>
+        <attribute name="engineid" type="int32">-1</attribute>
+        <attribute name="display" type="bool">1</attribute>
+        <attribute name="commandid" type="int32">-308643948</attribute>
+        <attribute name="appversion" type="int32">7</attribute>
+        <attribute name="appbundle" type="string">org.vim.MacVim</attribute>
+        <attribute name="active" type="bool">1</attribute>
+        <relationship name="currentaction" type="1/1" destination="ACTION" idrefs="z110"></relationship>
+        <relationship name="currenttrigger" type="1/1" destination="TRIGGER" idrefs="z108"></relationship>
+        <relationship name="location" type="1/1" destination="LOCATION"></relationship>
+        <relationship name="action" type="0/0" destination="ACTION" idrefs="z110"></relationship>
+        <relationship name="trigger" type="1/0" destination="TRIGGER" idrefs="z108"></relationship>
+    </object>
+    <object type="TRIGGER" id="z128">
+        <attribute name="string" type="string">function arrow</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="desc" type="string">Command Description</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z146"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="ACTION" id="z129">
+        <attribute name="text" type="string">PageDown</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z121"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="COMMAND" id="z130">
+        <attribute name="version" type="int32">1</attribute>
+        <attribute name="vendor" type="string">igormoreno</attribute>
+        <attribute name="type" type="string">AppleScript</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isspelling" type="bool">0</attribute>
+        <attribute name="issleep" type="bool">0</attribute>
+        <attribute name="isdictation" type="bool">0</attribute>
+        <attribute name="iscorrection" type="bool">0</attribute>
+        <attribute name="iscommand" type="bool">1</attribute>
+        <attribute name="engineid" type="int32">-1</attribute>
+        <attribute name="display" type="bool">1</attribute>
+        <attribute name="commandid" type="int32">-902365869</attribute>
+        <attribute name="appversion" type="int32">7</attribute>
+        <attribute name="appbundle" type="string">org.vim.MacVim</attribute>
+        <attribute name="active" type="bool">1</attribute>
+        <relationship name="currentaction" type="1/1" destination="ACTION"></relationship>
+        <relationship name="currenttrigger" type="1/1" destination="TRIGGER"></relationship>
+        <relationship name="location" type="1/1" destination="LOCATION"></relationship>
+        <relationship name="action" type="0/0" destination="ACTION" idrefs="z143"></relationship>
+        <relationship name="trigger" type="1/0" destination="TRIGGER" idrefs="z106"></relationship>
+    </object>
+    <object type="COMMAND" id="z131">
+        <attribute name="version" type="int32">1</attribute>
+        <attribute name="vendor" type="string">igormoreno</attribute>
+        <attribute name="type" type="string">AppleScript</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isspelling" type="bool">0</attribute>
+        <attribute name="issleep" type="bool">0</attribute>
+        <attribute name="isdictation" type="bool">0</attribute>
+        <attribute name="iscorrection" type="bool">0</attribute>
+        <attribute name="iscommand" type="bool">1</attribute>
+        <attribute name="engineid" type="int32">-1</attribute>
+        <attribute name="display" type="bool">1</attribute>
+        <attribute name="commandid" type="int32">-902360735</attribute>
+        <attribute name="appversion" type="int32">0</attribute>
+        <attribute name="active" type="bool">1</attribute>
+        <relationship name="currentaction" type="1/1" destination="ACTION"></relationship>
+        <relationship name="currenttrigger" type="1/1" destination="TRIGGER"></relationship>
+        <relationship name="location" type="1/1" destination="LOCATION"></relationship>
+        <relationship name="action" type="0/0" destination="ACTION" idrefs="z109"></relationship>
+        <relationship name="trigger" type="1/0" destination="TRIGGER" idrefs="z113"></relationship>
+    </object>
+    <object type="COMMAND" id="z132">
+        <attribute name="version" type="int32">1</attribute>
+        <attribute name="vendor" type="string">igormoreno</attribute>
+        <attribute name="type" type="string">*Hidden*</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isspelling" type="bool">0</attribute>
+        <attribute name="issleep" type="bool">0</attribute>
+        <attribute name="isdictation" type="bool">0</attribute>
+        <attribute name="iscorrection" type="bool">0</attribute>
+        <attribute name="iscommand" type="bool">1</attribute>
+        <attribute name="engineid" type="int32">-1</attribute>
+        <attribute name="display" type="bool">1</attribute>
+        <attribute name="commandid" type="int32">-308643948</attribute>
+        <attribute name="appversion" type="int32">7</attribute>
+        <attribute name="appbundle" type="string">com.apple.Preview</attribute>
+        <attribute name="active" type="bool">1</attribute>
+        <relationship name="currentaction" type="1/1" destination="ACTION" idrefs="z105"></relationship>
+        <relationship name="currenttrigger" type="1/1" destination="TRIGGER" idrefs="z144"></relationship>
+        <relationship name="location" type="1/1" destination="LOCATION"></relationship>
+        <relationship name="action" type="0/0" destination="ACTION" idrefs="z105"></relationship>
+        <relationship name="trigger" type="1/0" destination="TRIGGER" idrefs="z144"></relationship>
+    </object>
+    <object type="COMMAND" id="z133">
+        <attribute name="version" type="int32">1</attribute>
+        <attribute name="vendor" type="string">igormoreno</attribute>
+        <attribute name="type" type="string">AppleScript</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isspelling" type="bool">0</attribute>
+        <attribute name="issleep" type="bool">0</attribute>
+        <attribute name="isdictation" type="bool">0</attribute>
+        <attribute name="iscorrection" type="bool">0</attribute>
+        <attribute name="iscommand" type="bool">1</attribute>
+        <attribute name="engineid" type="int32">-1</attribute>
+        <attribute name="display" type="bool">1</attribute>
+        <attribute name="commandid" type="int32">-902789650</attribute>
+        <attribute name="appversion" type="int32">0</attribute>
+        <attribute name="active" type="bool">1</attribute>
+        <relationship name="currentaction" type="1/1" destination="ACTION"></relationship>
+        <relationship name="currenttrigger" type="1/1" destination="TRIGGER"></relationship>
+        <relationship name="location" type="1/1" destination="LOCATION"></relationship>
+        <relationship name="action" type="0/0" destination="ACTION" idrefs="z120"></relationship>
+        <relationship name="trigger" type="1/0" destination="TRIGGER" idrefs="z114"></relationship>
+    </object>
+    <object type="TRIGGER" id="z134">
+        <attribute name="string" type="string">page up</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="desc" type="string">Command Description</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z112"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="ACTION" id="z135">
+        <attribute name="text" type="string">set _dictateApp to (name of current application)tell application _dictateApp	set microphone to dictationend telltell application "System Events"	keystroke "i"end tell</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="data" type="binary">RmFzZFVBUyAxLjEwMS4xMA4AAAAED///AAEAAgADAf//AAANAAEAAWsAAAAAAAAABAIABAACAAUA
+Bg0ABQADbAACAAAABQAH//7//Q0ABwACcgAAAAAABQAIAAkNAAgAA2wABQAAAAMACv/8//sNAAoAAm4AAAAAAAMACwAMDQALAAExAAAAAQAD//oK//oABApwbmFtDQAMAAFtAAAAAAAB//kK//kACAttaXNjY3VyYQH//AAAAf/7AAANAAkAAW8AAAAAAAD/+Av/+AAaMAALX2RpY3RhdGVhcHAAC19kaWN0YXRlQXBwAf/+AAAB//0AAAIABgACAA0ADg0ADQADbAACAAYAEwAP//f/9g0ADwACTwAAAAYAEwAQABENABAAAnIAAAANABIAEgATDQASAAFtAAAADQAO//UK//UACAtEcG1kRE1kdA0AEwABMQAAAA4AEf/0Cv/0AAQKbUljUg0AEQACNAAAAAYACv/zABQK//MABApjYXBwDQAUAAFvAAAACAAJ//IL//IAGjAAC19kaWN0YXRlYXBwAAtfZGljdGF0ZUFwcAH/9wAAAf/2AAACAA4AAgAVABYNABUAA2wAAgAAAAD/8f/w/+8B//EAAAH/8AAAAf/vAAACABYAAgAX/+4NABcAA2wAAgAUAB4AGP/t/+wNABgAAk8AAAAUAB4AGQAaDQAZAANJAAIAGAAd/+sAG//qCv/rABgucHJjc2twcnNudWxs//+AAAAAEAB1dHh0DQAbAAFtAAAAGAAZABwOABwAAbEAHREAHQACAGkC/+oAAA0AGgABbQAAABQAFQAeDwAeAfAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHNldnMAAgEAYWxpcwAAAAABkgACAAEMTWFjaW50b3NoIEhEAAAAAAAAAAAAAAAAAAAAz9RG5kgrAAAAAAAvEVN5c3RlbSBFdmVudHMuYXBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADzLPPUTTeAAAAAAAAAAD/////AAAJIAAAAAAAAAAAAAAAAAAAAAxDb3JlU2VydmljZXMAEAAIAADP1CrGAAAAEQAIAADPUSbOAAAAAQAMAAAALwAAACwAAAArAAIAPU1hY2ludG9zaCBIRDpTeXN0ZW06AExpYnJhcnk6AENvcmVTZXJ2aWNlczoAU3lzdGVtIEV2ZW50cy5hcHAAAA4AJAARAFMAeQBzAHQAZQBtACAARQB2AGUAbgB0AHMALgBhAHAAcAAPABoADABNAGEAYwBpAG4AdABvAHMAaAAgAEgARAASAC1TeXN0ZW0vTGlicmFyeS9Db3JlU2VydmljZXMvU3lzdGVtIEV2ZW50cy5hcHAAABMAAS8A//8AAAH/7QAAAf/sAAAC/+4AAA4AAgAADxAAAwAD/+kAHwAgAf/pAAAQAB8AAf/oCv/oABguYWV2dG9hcHBudWxsAACAAAAAkAAqKioqDgAgAAcQ/+cAIf/m/+UAIgAj/+QK/+cAGC5hZXZ0b2FwcG51bGwAAIAAAACQACoqKioNACEAAWsAAAAAAB4AJAIAJAACAAUAJQIAJQACAA0AJgIAJgACABf/4wL/4wAAAf/mAAAC/+UAABAAIgAAEAAjAAn/4v/h/+D/3//e/90AHgAc/9wK/+IACAttaXNjY3VyYQr/4QAECnBuYW0L/+AAGjAAC19kaWN0YXRlYXBwAAtfZGljdGF0ZUFwcAr/3wAECmNhcHAK/94ACAtEcG1kRE1kdAr/3QAECm1JY1IK/9wAGC5wcmNza3Byc251bGz//4AAAAAQAHV0eHQR/+QAH+DhLEXSTyrjwi8SAAfkKuUsRlVP5hIAB+dqDAAIVQ9hc2NyAAEADPre3q0=
+</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z124"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="ACTION" id="z136">
+        <attribute name="text" type="string">ghci</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z117"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="COMMAND" id="z137">
+        <attribute name="version" type="int32">1</attribute>
+        <attribute name="vendor" type="string">igormoreno</attribute>
+        <attribute name="type" type="string">Text</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isspelling" type="bool">0</attribute>
+        <attribute name="issleep" type="bool">0</attribute>
+        <attribute name="isdictation" type="bool">0</attribute>
+        <attribute name="iscorrection" type="bool">0</attribute>
+        <attribute name="iscommand" type="bool">1</attribute>
+        <attribute name="engineid" type="int32">-1</attribute>
+        <attribute name="display" type="bool">1</attribute>
+        <attribute name="commandid" type="int32">-902798771</attribute>
+        <attribute name="appversion" type="int32">0</attribute>
+        <attribute name="active" type="bool">1</attribute>
+        <relationship name="currentaction" type="1/1" destination="ACTION"></relationship>
+        <relationship name="currenttrigger" type="1/1" destination="TRIGGER"></relationship>
+        <relationship name="location" type="1/1" destination="LOCATION"></relationship>
+        <relationship name="action" type="0/0" destination="ACTION" idrefs="z115"></relationship>
+        <relationship name="trigger" type="1/0" destination="TRIGGER" idrefs="z142"></relationship>
+    </object>
+    <object type="ACTION" id="z138">
+        <attribute name="text" type="string">tell application "System Events"	repeat 5 times		key code 126	end repeatend tell</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="data" type="binary">RmFzZFVBUyAxLjEwMS4xMA4AAAAED///AAEAAgADAf//AAANAAEAA2wAAgAAABYABP/+//0NAAQA
+Ak8AAAAAABYABQAGDQAFAAJVAAAABAAVAAcACA0ABwADSQACAAsAEP/8AAn/+wr//AAYLnByY3NrY29kbnVsbP//gAAAABAAbG9uZw0ACQABbQAAAAsADP/6A//6AH4C//sAAA0ACAABbQAAAAcACP/5A//5AAUNAAYAAW0AAAAAAAEACg8ACgHwCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABzZXZzAAIBAGFsaXMAAAAAAZIAAgABDE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAM/URuZIKwAAAAAALxFTeXN0ZW0gRXZlbnRzLmFwcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8yzz1E03gAAAAAAAAAA/////wAACSAAAAAAAAAAAAAAAAAAAAAMQ29yZVNlcnZpY2VzABAACAAAz9QqxgAAABEACAAAz1EmzgAAAAEADAAAAC8AAAAsAAAAKwACAD1NYWNpbnRvc2ggSEQ6U3lzdGVtOgBMaWJyYXJ5OgBDb3JlU2VydmljZXM6AFN5c3RlbSBFdmVudHMuYXBwAAAOACQAEQBTAHkAcwB0AGUAbQAgAEUAdgBlAG4AdABzAC4AYQBwAHAADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgAtU3lzdGVtL0xpYnJhcnkvQ29yZVNlcnZpY2VzL1N5c3RlbSBFdmVudHMuYXBwAAATAAEvAP//AAAB//4AAAH//QAADgACAAAPEAADAAP/+AALAAwB//gAABAACwAB//cK//cAGC5hZXZ0b2FwcG51bGwAAIAAAACQACoqKioOAAwABxD/9gAN//X/9AAOAA//8wr/9gAYLmFldnRvYXBwbnVsbAAAgAAAAJAAKioqKg0ADQABawAAAAAAFgAQAgAQAAIAAf/yAv/yAAAB//UAAAL/9AAAEAAOAAAQAA8ABAAK//H/8P/vA//xAAUD//AAfgr/7wAYLnByY3NrY29kbnVsbP//gAAAABAAbG9uZxH/8wAX4BIAExcAEOFraBjiagwAA1tPWf/3VQ8AYXNjcgABAA363t6t
+</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z126"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="TRIGGER" id="z139">
+        <attribute name="string" type="string">page down</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="desc" type="string">Command Description</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z121"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="TRIGGER" id="z140">
+        <attribute name="string" type="string">5 up</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="desc" type="string">Command Description</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z126"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="COMMAND" id="z141">
+        <attribute name="version" type="int32">1</attribute>
+        <attribute name="vendor" type="string">igormoreno</attribute>
+        <attribute name="type" type="string">Keystroke</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isspelling" type="bool">0</attribute>
+        <attribute name="issleep" type="bool">0</attribute>
+        <attribute name="isdictation" type="bool">0</attribute>
+        <attribute name="iscorrection" type="bool">0</attribute>
+        <attribute name="iscommand" type="bool">1</attribute>
+        <attribute name="engineid" type="int32">-1</attribute>
+        <attribute name="display" type="bool">1</attribute>
+        <attribute name="commandid" type="int32">-902811138</attribute>
+        <attribute name="appversion" type="int32">0</attribute>
+        <attribute name="active" type="bool">1</attribute>
+        <relationship name="currentaction" type="1/1" destination="ACTION"></relationship>
+        <relationship name="currenttrigger" type="1/1" destination="TRIGGER"></relationship>
+        <relationship name="location" type="1/1" destination="LOCATION"></relationship>
+        <relationship name="action" type="0/0" destination="ACTION" idrefs="z102"></relationship>
+        <relationship name="trigger" type="1/0" destination="TRIGGER" idrefs="z119"></relationship>
+    </object>
+    <object type="TRIGGER" id="z142">
+        <attribute name="string" type="string">unpleasant</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="desc" type="string">Command Description</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z137"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="ACTION" id="z143">
+        <attribute name="text" type="string">tell application "System Events"	key code 53	keystroke "u"	keystroke "i"end tell</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="data" type="binary">RmFzZFVBUyAxLjEwMS4xMA4AAAAED///AAEAAgADAf//AAANAAEAA2wAAgAAABYABP/+//0NAAQA
+Ak8AAAAAABYABQAGDQAFAAFrAAAABAAVAAcCAAcAAgAIAAkNAAgAA0kAAgAEAAn//AAK//sK//wAGC5wcmNza2NvZG51bGz//4AAAAAQAGxvbmcNAAoAAW0AAAAEAAX/+gP/+gA1Av/7AAACAAkAAgALAAwNAAsAA0kAAgAKAA//+QAN//gK//kAGC5wcmNza3Byc251bGz//4AAAAAAAGN0eHQNAA0AAW0AAAAKAAsADg4ADgABsQAPEQAPAAIAdQL/+AAAAgAMAAIAEP/3DQAQAANJAAIAEAAV//YAEf/1Cv/2ABgucHJjc2twcnNudWxs//+AAAAAAABjdHh0DQARAAFtAAAAEAARABIOABIAAbEAExEAEwACAGkC//UAAAL/9wAADQAGAAFtAAAAAAABABQPABQB8AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAc2V2cwACAQBhbGlzAAAAAAGSAAIAAQxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAADP1EbmSCsAAAAAAC8RU3lzdGVtIEV2ZW50cy5hcHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPMs89RNN4AAAAAAAAAAP////8AAAkgAAAAAAAAAAAAAAAAAAAADENvcmVTZXJ2aWNlcwAQAAgAAM/UKsYAAAARAAgAAM9RJs4AAAABAAwAAAAvAAAALAAAACsAAgA9TWFjaW50b3NoIEhEOlN5c3RlbToATGlicmFyeToAQ29yZVNlcnZpY2VzOgBTeXN0ZW0gRXZlbnRzLmFwcAAADgAkABEAUwB5AHMAdABlAG0AIABFAHYAZQBuAHQAcwAuAGEAcABwAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIALVN5c3RlbS9MaWJyYXJ5L0NvcmVTZXJ2aWNlcy9TeXN0ZW0gRXZlbnRzLmFwcAAAEwABLwD//wAAAf/+AAAB//0AAA4AAgAADxAAAwAD//QAFQAWAf/0AAAQABUAAf/zCv/zABguYWV2dG9hcHBudWxsAACAAAAAkAAqKioqDgAWAAcQ//IAF//x//AAGAAZ/+8K//IAGC5hZXZ0b2FwcG51bGwAAIAAAACQACoqKioNABcAAWsAAAAAABYAGgIAGgACAAH/7gL/7gAAAf/xAAAC//AAABAAGAAAEAAZAAYAFP/t/+wADv/rABID/+0ANQr/7AAYLnByY3NrY29kbnVsbP//gAAAABAAbG9uZwr/6wAYLnByY3NrcHJzbnVsbP//gAAAAAAAY3R4dBH/7wAX4BIAE+FqDAACT+NqDAAET+VqDAAEVQ8AYXNjcgABAA363t6t
+</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z130"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="TRIGGER" id="z144">
+        <attribute name="string" type="string">Hidden Command Name</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="desc" type="string">Hidden Command Description</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z132"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND" idrefs="z132"></relationship>
+    </object>
+    <object type="TRIGGER" id="z145">
+        <attribute name="string" type="string">Haskell interactive</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="isuser" type="bool">1</attribute>
+        <attribute name="desc" type="string">Command Description</attribute>
+        <relationship name="command" type="1/1" destination="COMMAND" idrefs="z117"></relationship>
+        <relationship name="currentcommand" type="1/1" destination="COMMAND"></relationship>
+    </object>
+    <object type="COMMAND" id="z146">
+        <attribute name="version" type="int32">1</attribute>
+        <attribute name="vendor" type="string">igormoreno</attribute>
+        <attribute name="type" type="string">Text</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="oslanguage" type="string">en_GB</attribute>
+        <attribute name="isspelling" type="bool">0</attribute>
+        <attribute name="issleep" type="bool">0</attribute>
+        <attribute name="isdictation" type="bool">0</attribute>
+        <attribute name="iscorrection" type="bool">0</attribute>
+        <attribute name="iscommand" type="bool">1</attribute>
+        <attribute name="engineid" type="int32">-1</attribute>
+        <attribute name="display" type="bool">1</attribute>
+        <attribute name="commandid" type="int32">-902618163</attribute>
+        <attribute name="appversion" type="int32">0</attribute>
+        <attribute name="active" type="bool">1</attribute>
+        <relationship name="currentaction" type="1/1" destination="ACTION"></relationship>
+        <relationship name="currenttrigger" type="1/1" destination="TRIGGER"></relationship>
+        <relationship name="location" type="1/1" destination="LOCATION"></relationship>
+        <relationship name="action" type="0/0" destination="ACTION" idrefs="z104"></relationship>
+        <relationship name="trigger" type="1/0" destination="TRIGGER" idrefs="z128"></relationship>
+    </object>
+</database>
