@@ -1,2 +1,5 @@
-in com.apple.Terminal:
+in com.apple.Terminal, another program:
 saying test: types "it really really works!"
+
+in another program:
+saying something: types "whatever"

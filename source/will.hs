@@ -1,6 +1,7 @@
 import Text.ParserCombinators.Parsec
 import Text.Parsec.Token
 import System.Random
+import Data.List
 
 data Program = Program [CommandSet] deriving Show
 data CommandSet = CommandSet Context [Command] deriving Show
@@ -28,8 +29,10 @@ data ActionElement = Keys String
 -- Parser
 ---------
 
-parsing :: String -> Either ParseError Program
-parsing = parse program "(unknown)" 
+parsing :: String -> Either String Program
+parsing input = case parse program "(unknown)" input of
+	Right program -> Right program
+	Left problem -> Left $ "Parsing error:\n" ++ (show problem)
 
 
 program :: Parser Program
@@ -205,17 +208,53 @@ eol =   try (string "\n\r")
 ---------
 
 ---------
+-- Trigger and action contraction
+---------
+
+---------
 -- Context normalization
 ---------
 
---contextNormalization :: Program -> Program
---contextNormalization program = fmap (groupCommandsByContext . expandContext) program
---
---expand1Context :: CommandSet -> [CommandSet]
---expand1Context c @ (CommandSet Global commands) = [c] 
---expand1Context c @ (CommandSet (In []) commands) = [c] 
---expand1Context c @ (CommandSet (In name:[]) commands) = [c] 
---expand1Context c @ (CommandSet (In name:names) commands) = (CommandSet (In name:[]) commands):(expand1Context $ CommandSet (In names) commands)
+{-
+The AST of the program
+
+in Firefox, Google Chrome:
+command 1
+command 2
+
+in Firefox:
+command 3
+
+ will be turned into =>
+
+in Firefox:
+command 1
+command 2
+command 3
+
+in Google Chrome:
+command 1
+command 2
+-}
+
+contextNormalization :: Program -> Program
+contextNormalization (Program list) = Program $ (groupCommandsByContext . expandContext) list
+
+expandContext :: [CommandSet] -> [CommandSet]
+expandContext = concatMap expand1
+	where
+	expand1 c @ (CommandSet Global _) = [c] 
+	expand1 c @ (CommandSet (In []) _) = [c] 
+	expand1 c @ (CommandSet (In (name:[])) _) = [c] 
+	expand1 c @ (CommandSet (In (name:names)) commands) = 
+		(CommandSet (In (name:[])) commands):(expand1 $ CommandSet (In names) commands)
+
+groupCommandsByContext :: [CommandSet] -> [CommandSet]
+groupCommandsByContext = (map $ foldl1 combine) . (groupBy sameContext) . (sortBy compareContext)
+	where
+	compareContext (CommandSet (In (p:[])) _) (CommandSet (In (q:[])) _) = compare p q
+	sameContext (CommandSet (In (p:[])) _) (CommandSet (In (q:[])) _) = p == q
+	combine (CommandSet context cmds1) (CommandSet _ cmds2) = CommandSet context (cmds1++cmds2)
 
 
 ---------
@@ -228,21 +267,26 @@ data XMLFile = XMLFile FileName Content deriving Show
 type FileName = String
 type Content = String
 
-codeGeneration :: Program -> [XMLFile]
-codeGeneration (Program list) = map generateCommandSet list
+codeGeneration :: Program -> Either String [XMLFile]
+codeGeneration program @ (Program list) = case mapM generateCommandSet list of
+	Right okay -> Right okay
+	Left problem -> Left $ "Code generation error:\n" ++ problem ++ dumpAST program
 
-generateCommandSet :: CommandSet -> XMLFile
+generateCommandSet :: CommandSet -> Either String XMLFile
 generateCommandSet (CommandSet context commands) = generateXMLFile (getApplication context) commands
 
-getApplication :: Context -> Maybe Application
-getApplication Global = Nothing
-getApplication (In (name:[])) = Just (Application name 1)
+getApplication :: Context -> Either String (Maybe Application)
+getApplication Global = Right $ Nothing
+getApplication (In (name:[])) = Right $ Just (Application name 1)
+getApplication context @ _ = Left $ "context should have been normalized: " ++ show context
 
-generateXMLFile :: Maybe Application -> [Command] -> XMLFile
-generateXMLFile application commands = case application of
-	Nothing -> XMLFile ("global" ++ fileExtension) xml
-	Just (Application name _) -> XMLFile (name ++ fileExtension) xml
-	where xml = fullXML $ generateCommandList application commands
+generateXMLFile :: Either String (Maybe Application) -> [Command] -> Either String XMLFile
+generateXMLFile a commands = do
+	app <- a
+	case app of
+		Nothing -> return $ XMLFile ("global" ++ fileExtension) (xml app)
+		Just (Application name _) -> return $ XMLFile (name ++ fileExtension) (xml app)
+	where xml app = fullXML $ generateCommandList app commands
 
 -- Generate XML for an application and a command list
 generateCommandList :: Maybe Application -> [Command] -> String
@@ -362,10 +406,14 @@ actionXML actionContent actionId commandId
 --------- 
 
 compile something = do
-	result <- parsing something
-	return $ codeGeneration result
+	result1 <- parsing something
+	result2 <- return $ contextNormalization result1
+	codeGeneration result2
 
 ---------
+
+
+dumpAST program = "\n\nAST\n" ++ show program
 
 
 --test :: String -> Either ParseError Context
@@ -379,8 +427,7 @@ writingXMLFile (XMLFile name content) = writeFile name content
 main =
     do content <- getContents
        case compile content of
-            Left e -> do putStrLn "Error:"
-                         print e
+            Left e -> putStrLn e
             Right list -> mapM_ writingXMLFile list 
             --Right list -> sequence $ map writingXMLFile list 
             --Right list -> do map writingXMLFile list 
