@@ -6,6 +6,7 @@ import Control.Monad
 import Control.Applicative ((<*), (*>), (<*>), (<$>))
 import Data.Hashable
 import System.Process
+import System.IO.Unsafe -- :D
 
 data Program = Program [CommandSet] deriving Show
 data CommandSet = CommandSet Context [Command] deriving Show
@@ -88,23 +89,27 @@ command = do
 
 action :: Parser Action
 action = do
-	actionType <- try typeKeystroke <|> try typeOpen <|> try typeRun
+	actionType <- try typeKeystroke <|> typeText
 	elements <- actions
 	return $ Action actionType elements
 
 actions = sepEndBy1 actionElement ws
 
-typeKeystroke = do
+typeText = do
 	try (punctuation "types") <|> punctuation "type"
 	return Text
 
-typeOpen = do
-	try (punctuation "opens") <|> punctuation "open"
-	return Open
+typeKeystroke = do
+	try (punctuation "presses") <|> punctuation "press"
+	return Keystroke
 
-typeRun = do
-	try (punctuation "runs") <|> punctuation "run"
-	return Run
+--typeOpen = do
+--	try (punctuation "opens") <|> punctuation "open"
+--	return Open
+--
+--typeRun = do
+--	try (punctuation "runs") <|> punctuation "run"
+--	return Run
 
 actionElement = try repetition
 	<|> try text
@@ -335,7 +340,7 @@ triggerAndActionContraction (Program commandSetList) = Right $ Program (do
 		return $ CommandSet context [Command (triggerContraction trigger) (actionContraction action) | Command trigger action <- commands])
 		
 triggerContraction (Trigger elements) = Trigger [Word $ intercalate " " [word | Word word <- elements]]
-actionContraction (Action t elements) = Action t [S $ intercalate " " [word | S word <- elements]]
+actionContraction (Action t elements) = Action t [S $ intercalate "" [word | S word <- elements]]
 
 ---------
 -- Context normalization
@@ -403,7 +408,9 @@ generateCommandSet (CommandSet context commands) = generateXMLFile (getApplicati
 
 getApplication :: Context -> Either String (Maybe Application)
 getApplication Global = Right $ Nothing
-getApplication (In (name:[])) = Right $ Just (Application name 1)
+getApplication (In (name:[])) = do
+	let bid = getBundleId name
+	Right $ Just (Application bid 1) -- hardcoded version
 getApplication context @ _ = Left $ "context should have been normalized: " ++ show context
 
 generateXMLFile :: Either String (Maybe Application) -> [Command] -> Either String XMLFile
@@ -431,6 +438,7 @@ generateCommandList application commandList =
 		    st = case application of
 				Just (Application st _) -> st
 				_ -> ""
+		    -- TODO: get rid of this ugly thing below
 		    randomId = ((`div` 10000000000) . abs) (hash (tc ++ st)) 
 		in accumulator ++ (generateCommand application command ids randomId)
 
@@ -443,11 +451,18 @@ generateCommand app (Command trigger action) (commandId, actionId, triggerId) ra
 	   (triggerXML triggerContent triggerDescription triggerId commandId) ++
 	   (actionXML actionContent actionId commandId)
 
--- getBundleId :: String -> IO String 
--- getBundleId name = 
-	-- readProcess "/usr/libexec/PlistBuddy"  (["-c",
-				  -- "'Print CFBundleIdentifier'",
-				  -- "/Applications/"++name++".app/Contents/Info.plist"]) ""
+-- TODO: Add a nice error message in case things went wrong
+-- TODO: What about the version
+-- TODO: get rid of unsafeIO
+getBundleId :: String -> String 
+getBundleId name = let path1 = unsafePerformIO $ readProcess "find" (["/Applications", "-name", name++".app"]) ""
+		       dropLast l = take (length l - 1) l
+		       path = dropLast path1
+		       output = unsafePerformIO $ readProcess "/usr/libexec/PlistBuddy"  (["-c",
+
+				     "Print CFBundleIdentifier", 
+				     path ++ "/Contents/Info.plist"]) ""
+		   in dropLast output
 	
 
 ---------
