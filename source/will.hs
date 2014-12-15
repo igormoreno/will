@@ -2,6 +2,10 @@ import Text.ParserCombinators.Parsec
 import Text.Parsec.Token
 import System.Random
 import Data.List
+import Control.Monad
+import Control.Applicative ((<*), (*>), (<*>), (<$>))
+import Data.Hashable
+import System.Process
 
 data Program = Program [CommandSet] deriving Show
 data CommandSet = CommandSet Context [Command] deriving Show
@@ -20,14 +24,18 @@ data Action = Action ActionType [ActionElement] deriving Show
 data ActionType = Keystroke | Text | Open | Run deriving Show
 data ActionElement = Keys String 
 	| S String
-	| Repetition Int Action deriving Show
-
+	| VariableUse String
+	| Repeat RepeatNumber [ActionElement] deriving Show
+data RepeatNumber = RVariable String | RNumber Int deriving Show
 
 
 
 ---------
 -- Parser
 ---------
+
+ws :: Parser String
+ws = many $ (char ' ' <|> char '\t')
 
 parsing :: String -> Either String Program
 parsing input = case parse program "(unknown)" input of
@@ -38,14 +46,14 @@ parsing input = case parse program "(unknown)" input of
 program :: Parser Program
 program = do
 	spaces
-	set <- many1 commandSet
+	set <- sepBy1 commandSet $ char '\n'
 	eof
 	return $ Program set
 
 commandSet = do
-	c <- context
-	commands <- many1 command
-	--commands <- sepEndBy1 command (string "\n")
+	c <- context <* (char '\n')
+	-- commands <- many1 command
+	commands <- sepEndBy1 command (string "\n")
 	return $ CommandSet c commands
 
 context :: Parser Context
@@ -57,12 +65,12 @@ context = do
 
 everywhere = do
 	string "Everywhere" <|> string "everywhere"
-	--spaces
+	--ws
 	return Global
 
 programList = do
 	string "in" <|> string "In"
-	spaces
+	ws
 	l <- list
 	return $ In l
 	where
@@ -71,19 +79,20 @@ programList = do
 command :: Parser Command
 command = do
 	string "saying"
-	spaces
+	ws
 	t <- trigger
 	punctuation ":"
 	a <- action
-	spaces
+	ws
 	return $ Command t a
 
 action :: Parser Action
 action = do
 	actionType <- try typeKeystroke <|> try typeOpen <|> try typeRun
-	--sepBy1 actionElement spaces
-	element <- text
-	return $ Action actionType [element]
+	elements <- actions
+	return $ Action actionType elements
+
+actions = sepEndBy1 actionElement ws
 
 typeKeystroke = do
 	try (punctuation "types") <|> punctuation "type"
@@ -97,17 +106,35 @@ typeRun = do
 	try (punctuation "runs") <|> punctuation "run"
 	return Run
 
+actionElement = try repetition
+	<|> try text
+	<|> variableUse
 
---actionElement = try repetition
---	<|> try text
 --	<|> try keystroke
---	<|> variable
---
+
+repetition = do
+	string "repeat"
+	ws
+	number <- repeatWithVariable <|> repeatWithNumber
+	punctuation "("
+	list <- actions
+	punctuation ")"
+	return $ Repeat number list
+
+repeatWithNumber = do
+	number <- many1 digit
+	return $ RNumber (read number)
+
+repeatWithVariable = fmap RVariable variableName
+
 text = do
 	char '"'
 	content <- many1 (noneOf "\"")
 	char '"'
 	return $ S content
+
+variableUse = fmap VariableUse variableName
+
 
 --Keystroke = Key | ML "-" Key | ML "-" Variable
 --ML = M | M "-" ML
@@ -119,39 +146,39 @@ text = do
 --
 
 
-modifier =  try (string "Command")
-	<|> try (string "Control")
-	<|> try (string "Shift")
-	<|> string "Option"
-
-keystroke = try (string "DownArrow") 
-	<|> try (string "LeftArrow")
-	<|> try (string "RightArrow")
-	<|> try (string "UpArrow")
-	<|> try (string "Delete")
-	<|> try (string "End")
-	<|> try (string "Esc")
-	<|> try (string "F1")
-	<|> try (string "F2")
-	<|> try (string "F3")
-	<|> try (string "F4")
-	<|> try (string "F5")
-	<|> try (string "F6")
-	<|> try (string "F7")
-	<|> try (string "F8")
-	<|> try (string "F9")
-	<|> try (string "F10")
-	<|> try (string "F11")
-	<|> try (string "F12")
-	<|> try (string "Home")
-	<|> try (string "PageDown")
-	<|> try (string "PageUp")
-	<|> try (string "Return")
-	<|> try (string "Space")
-	<|> string "Tab"
+-- modifier =  try (string "Command")
+-- 	<|> try (string "Control")
+-- 	<|> try (string "Shift")
+-- 	<|> string "Option"
+-- 
+-- keystroke = try (string "DownArrow") 
+-- 	<|> try (string "LeftArrow")
+-- 	<|> try (string "RightArrow")
+-- 	<|> try (string "UpArrow")
+-- 	<|> try (string "Delete")
+-- 	<|> try (string "End")
+-- 	<|> try (string "Esc")
+-- 	<|> try (string "F1")
+-- 	<|> try (string "F2")
+-- 	<|> try (string "F3")
+-- 	<|> try (string "F4")
+-- 	<|> try (string "F5")
+-- 	<|> try (string "F6")
+-- 	<|> try (string "F7")
+-- 	<|> try (string "F8")
+-- 	<|> try (string "F9")
+-- 	<|> try (string "F10")
+-- 	<|> try (string "F11")
+-- 	<|> try (string "F12")
+-- 	<|> try (string "Home")
+-- 	<|> try (string "PageDown")
+-- 	<|> try (string "PageUp")
+-- 	<|> try (string "Return")
+-- 	<|> try (string "Space")
+-- 	<|> string "Tab"
 
 trigger :: Parser Trigger
-trigger = fmap Trigger (sepBy1 triggerElement spaces)
+trigger = fmap Trigger (sepBy1 triggerElement ws)
 
 triggerElement = try variableDeclaration 
 	<|> try optionalWord 
@@ -177,9 +204,9 @@ variableDeclaration = do
 
 
 punctuation s = do
-	spaces
+	ws
 	p <- string s
-	spaces
+	ws
 	return p
 
 eol =   try (string "\n\r")
@@ -195,6 +222,37 @@ eol =   try (string "\n\r")
 -- Semantic analysis
 ---------
 
+semanticAnalysis :: Program -> Either String Program
+semanticAnalysis program = isVariableDeclared program >>= rangeValidation
+
+isVariableDeclared program @ (Program commandSetList) = 
+	let errorList = do
+		CommandSet _ commands <- commandSetList
+		Command (Trigger triggerElements) (Action _ actionElements) <- commands
+		name <- allVariables actionElements
+		guard $ name `notElem` [name | Variable name _ <- triggerElements]
+		return $ "Variable '" ++ name ++ "' not defined"
+	in if null errorList 
+	   then Right program
+	   else Left $ intercalate "\n" errorList
+
+allVariables :: [ActionElement] -> [String]
+allVariables actionElements =
+	[name | VariableUse name <- actionElements] ++
+	[name | Repeat (RVariable name) _ <- actionElements] ++
+	concat [allVariables elements | Repeat _ elements <- actionElements]
+
+rangeValidation program @ (Program commandSetList) = 
+	let errorList = do
+		CommandSet _ commands <- commandSetList
+		Command (Trigger triggerElements) _ <- commands
+		Variable name (Range begin end) <- triggerElements
+		guard $ begin >= end 
+		return $ "Variable '" ++ name ++ "' with inconsistent range"
+	in if null errorList 
+	   then Right program
+	   else Left $ intercalate "\n" errorList
+
 ---------
 -- Option expansion
 ---------
@@ -207,9 +265,77 @@ eol =   try (string "\n\r")
 -- Variable unrolling
 ---------
 
+{-
+The AST of the program
+
+in Firefox:
+saying down number=1-3: types repeat number (DownArrow)
+command without variables
+
+ will be turned into =>
+
+in Firefox:
+saying down 1: types repeat 1 (DownArrow)
+saying down 2: types repeat 2 (DownArrow)
+saying down 3: types repeat 3 (DownArrow)
+command without variables
+-}
+
+variableUnrolling :: Program -> Either String Program
+variableUnrolling (Program commandSetList) = Right $ Program (do
+	CommandSet context commands <- commandSetList
+	return $ CommandSet context (concatMap expandCommand commands))
+
+expandCommand :: Command -> [Command]
+expandCommand command @ (Command (Trigger triggerElements) _) = 
+	let newlist = do
+		Variable name (Range begin end) <- triggerElements
+		number <- [begin..end]
+		return $ replaceCommand name number command
+	in if null newlist then [command] -- there were no variables in this command
+	   else newlist
+
+replaceCommand name number (Command trigger action) =
+	Command (replaceTrigger trigger) (replaceAction action)
+	where
+	replaceTrigger (Trigger elements) = Trigger (map replaceTriggerElement elements)
+	replaceAction (Action t elements) = Action t (map replaceActionElement elements)
+	replaceTriggerElement element = case element of
+		(Variable name2 _) -> if name == name2 then Word (show number) else element
+		_ -> element
+	replaceActionElement element = case element of
+		(VariableUse name2) -> 
+			if name == name2 then S (show number) else element
+		(Repeat (RNumber x) elements) -> 
+			Repeat (RNumber x) (map replaceActionElement elements)
+		(Repeat (RVariable name2) elements) -> 
+			if name == name2 
+			then Repeat (RNumber number) (map replaceActionElement elements)
+			else Repeat (RVariable name2) (map replaceActionElement elements)
+		_ -> element
+	
+
+--let
+--fun2 (CommandSet _ list2) = map fun3 list2
+--fun1 (Program list1) = map fun2 list1
+--in fun1 program
+--
+--fun3 (Command (Trigger list3) (Action _ list4)) = fun4 list3 list4
+--
+-- :: Command -> [Command]
+-- command @ (Command (Trigger triggers) (Action _ actionElements)) =
+--let
+
 ---------
 -- Trigger and action contraction
 ---------
+
+triggerAndActionContraction (Program commandSetList) = Right $ Program (do
+		CommandSet context commands <- commandSetList
+		return $ CommandSet context [Command (triggerContraction trigger) (actionContraction action) | Command trigger action <- commands])
+		
+triggerContraction (Trigger elements) = Trigger [Word $ intercalate " " [word | Word word <- elements]]
+actionContraction (Action t elements) = Action t [S $ intercalate " " [word | S word <- elements]]
 
 ---------
 -- Context normalization
@@ -237,8 +363,8 @@ command 1
 command 2
 -}
 
-contextNormalization :: Program -> Program
-contextNormalization (Program list) = Program $ (groupCommandsByContext . expandContext) list
+contextNormalization :: Program -> Either String Program
+contextNormalization (Program list) = (Right . Program . groupCommandsByContext . expandContext) list
 
 expandContext :: [CommandSet] -> [CommandSet]
 expandContext = concatMap expand1
@@ -288,6 +414,10 @@ generateXMLFile a commands = do
 		Just (Application name _) -> return $ XMLFile (name ++ fileExtension) (xml app)
 	where xml app = fullXML $ generateCommandList app commands
 
+-- our version of hash code
+-- hash :: String -> Int
+-- hash = foldl' (\h c -> 33*h `xor` fromEnum c) 5381
+
 -- Generate XML for an application and a command list
 generateCommandList :: Maybe Application -> [Command] -> String
 generateCommandList application commandList =
@@ -295,9 +425,14 @@ generateCommandList application commandList =
 	where
 	function accumulator (index, command) =
 		let z i = "z" ++ show (3*index + i)
-		    ids = (z 1, z 2, z 3)
-		    (randomId, _) = random (mkStdGen 1) :: (Int, StdGen)  
-		in (generateCommand application command ids randomId) ++ accumulator
+		    ids = (z 3, z 1, z 2)
+		    --(randomId, _) = random (mkStdGen 1) :: (Int, StdGen)  
+		    (Command (Trigger ((Word tc):[])) _) = command
+		    st = case application of
+				Just (Application st _) -> st
+				_ -> ""
+		    randomId = ((`div` 10000000000) . abs) (hash (tc ++ st)) 
+		in accumulator ++ (generateCommand application command ids randomId)
 
 generateCommand app (Command trigger action) (commandId, actionId, triggerId) randomId =
 	let vendor = "igormoreno" 
@@ -308,6 +443,12 @@ generateCommand app (Command trigger action) (commandId, actionId, triggerId) ra
 	   (triggerXML triggerContent triggerDescription triggerId commandId) ++
 	   (actionXML actionContent actionId commandId)
 
+-- getBundleId :: String -> IO String 
+-- getBundleId name = 
+	-- readProcess "/usr/libexec/PlistBuddy"  (["-c",
+				  -- "'Print CFBundleIdentifier'",
+				  -- "/Applications/"++name++".app/Contents/Info.plist"]) ""
+	
 
 ---------
 -- XML
@@ -405,10 +546,13 @@ actionXML actionContent actionId commandId
 -- compiler phases
 --------- 
 
-compile something = do
-	result1 <- parsing something
-	result2 <- return $ contextNormalization result1
-	codeGeneration result2
+compile input = 
+	parsing input >>=
+	semanticAnalysis >>=
+	variableUnrolling >>=
+	contextNormalization >>=
+	triggerAndActionContraction >>=
+	codeGeneration
 
 ---------
 

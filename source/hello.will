@@ -1,5 +1,6 @@
-in com.apple.Terminal, another program:
+in com.apple.Terminal, org.mozilla.firefox:
 saying test: types "it really really works!"
+saying test number = 1-3: types "super " number " mega!"
 
-in another program:
-saying something: types "whatever"
+in org.mozilla.firefox:
+saying right: types "wrong"
