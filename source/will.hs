@@ -262,9 +262,6 @@ rangeValidation program @ (Program commandSetList) =
 -- Option expansion
 ---------
 
----------
--- Loop unrolling
----------
 
 ---------
 -- Variable unrolling
@@ -330,6 +327,43 @@ replaceCommand name number (Command trigger action) =
 -- :: Command -> [Command]
 -- command @ (Command (Trigger triggers) (Action _ actionElements)) =
 --let
+
+---------
+-- Loop unrolling
+---------
+
+{-
+The AST of the program
+
+in Firefox:
+saying down 1: types repeat 1 (DownArrow)
+saying down 2: types repeat 2 (DownArrow)
+saying down 3: types repeat 3 (DownArrow)
+command without variables
+
+ will be turned into =>
+
+in Firefox:
+saying down 1: types DownArrow
+saying down 2: types DownArrow DownArrow
+saying down 3: types DownArrow DownArrow DownArrow
+command without variables
+-}
+
+
+loopUnrolling :: Program -> Either String Program
+loopUnrolling (Program commandSetList) = Right $ Program (do
+	CommandSet context commands <- commandSetList
+	return $ CommandSet context (map expand commands))
+	where expand (Command trigger (Action actionType actionElements)) = 
+		Command trigger (Action actionType (concatMap expandRepeat actionElements))
+
+
+
+expandRepeat :: ActionElement -> [ActionElement]
+expandRepeat (Repeat (RNumber number) elements) =
+	intersperse (S " ") (concat (replicate number (concatMap expandRepeat elements)))
+expandRepeat element  = [element]
 
 ---------
 -- Trigger and action contraction
@@ -565,6 +599,7 @@ compile input =
 	parsing input >>=
 	semanticAnalysis >>=
 	variableUnrolling >>=
+	loopUnrolling >>=
 	contextNormalization >>=
 	triggerAndActionContraction >>=
 	codeGeneration

@@ -4,3 +4,4 @@ saying test number = 1-3: types "super " number " mega!"
 
 in Firefox:
 saying tab number = 1-3: presses "Command-" number
+saying down number = 1-3: presses repeat number ("DownArrow")
