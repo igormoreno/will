@@ -30,6 +30,8 @@ data ActionElement = Keys String
 data RepeatNumber = RVariable String | RNumber Int deriving Show
 
 
+-- TO DO: treat special characters inside commands such as "\" and "<"
+
 
 ---------
 -- Parser
@@ -47,7 +49,7 @@ parsing input = case parse program "(unknown)" input of
 program :: Parser Program
 program = do
 	spaces
-	set <- sepBy1 commandSet $ char '\n'
+	set <- sepEndBy1 commandSet spaces
 	eof
 	return $ Program set
 
@@ -186,16 +188,17 @@ trigger :: Parser Trigger
 trigger = fmap Trigger (sepBy1 triggerElement ws)
 
 triggerElement = try variableDeclaration 
-	<|> try optionalWord 
 	<|> fmap Word (many1 letter)
+	-- <|> try optionalWord 
 
-optionalWord = do
-	punctuation "["
-	word <- many1 (noneOf "]")
-	punctuation "]"
-	return $ Optional word
+--optionalWord = do
+--	punctuation "["
+--	word <- many1 (noneOf "]")
+--	punctuation "]"
+--	return $ Optional word
 
-variableName = many1 letter
+variableName :: Parser String
+variableName =  (:) <$> letter <*> many (letter <|> digit <|> char '_')
 
 variableDeclaration = do
 	name <- variableName
@@ -290,31 +293,38 @@ variableUnrolling (Program commandSetList) = Right $ Program (do
 
 expandCommand :: Command -> [Command]
 expandCommand command @ (Command (Trigger triggerElements) _) = 
-	let newlist = do
-		Variable name (Range begin end) <- triggerElements
-		number <- [begin..end]
-		return $ replaceCommand name number command
-	in if null newlist then [command] -- there were no variables in this command
-	   else newlist
+	replaceCommand [variable | variable @ (Variable _ _) <- triggerElements] command
+--	let newlist = do
+--		Variable name (Range begin end) <- triggerElements
+--		number <- [begin..end]
+--		return $ replaceCommand name number command
+--	in if null newlist then [command] -- there were no variables in this command
+--	   else newlist
 
-replaceCommand name number (Command trigger action) =
-	Command (replaceTrigger trigger) (replaceAction action)
-	where
-	replaceTrigger (Trigger elements) = Trigger (map replaceTriggerElement elements)
-	replaceAction (Action t elements) = Action t (map replaceActionElement elements)
-	replaceTriggerElement element = case element of
-		(Variable name2 _) -> if name == name2 then Word (show number) else element
-		_ -> element
-	replaceActionElement element = case element of
-		(VariableUse name2) -> 
-			if name == name2 then S (show number) else element
-		(Repeat (RNumber x) elements) -> 
-			Repeat (RNumber x) (map replaceActionElement elements)
-		(Repeat (RVariable name2) elements) -> 
-			if name == name2 
-			then Repeat (RNumber number) (map replaceActionElement elements)
-			else Repeat (RVariable name2) (map replaceActionElement elements)
-		_ -> element
+replaceCommand :: [TriggerElement] -> Command -> [Command]
+replaceCommand [] command = [command]
+replaceCommand ((Variable name (Range begin end)):variables) command = 
+	concatMap (replaceCommand variables) [replaceVariable name number command | number <- [begin..end]] 
+	
+
+replaceVariable name number (Command trigger action) =
+	 Command (replaceTrigger trigger) (replaceAction action)
+	 where
+	 replaceTrigger (Trigger elements) = Trigger (map replaceTriggerElement elements)
+	 replaceAction (Action t elements) = Action t (map replaceActionElement elements)
+	 replaceTriggerElement element = case element of
+	 	(Variable name2 _) -> if name == name2 then Word (show number) else element
+	 	_ -> element
+	 replaceActionElement element = case element of
+	 	(VariableUse name2) -> 
+	 		if name == name2 then S (show number) else element
+	 	(Repeat (RNumber x) elements) -> 
+	 		Repeat (RNumber x) (map replaceActionElement elements)
+	 	(Repeat (RVariable name2) elements) -> 
+	 		if name == name2 
+	 		then Repeat (RNumber number) (map replaceActionElement elements)
+	 		else Repeat (RVariable name2) (map replaceActionElement elements)
+	 	_ -> element
 	
 
 --let
@@ -362,7 +372,7 @@ loopUnrolling (Program commandSetList) = Right $ Program (do
 
 expandRepeat :: ActionElement -> [ActionElement]
 expandRepeat (Repeat (RNumber number) elements) =
-	intersperse (S " ") (concat (replicate number (concatMap expandRepeat elements)))
+	concat (replicate number (concatMap expandRepeat elements))
 expandRepeat element  = [element]
 
 ---------
@@ -374,6 +384,7 @@ triggerAndActionContraction (Program commandSetList) = Right $ Program (do
 		return $ CommandSet context [Command (triggerContraction trigger) (actionContraction action) | Command trigger action <- commands])
 		
 triggerContraction (Trigger elements) = Trigger [Word $ intercalate " " [word | Word word <- elements]]
+actionContraction (Action (Keystroke) elements) = Action Keystroke [S $ intercalate " " [word | S word <- elements]]
 actionContraction (Action t elements) = Action t [S $ intercalate "" [word | S word <- elements]]
 
 ---------
@@ -483,7 +494,15 @@ generateCommand app (Command trigger action) (commandId, actionId, triggerId) ra
 	    Action actionType ((S actionContent):[]) = action
 	in (commandXML app actionType vendor commandId actionId triggerId randomId) ++
 	   (triggerXML triggerContent triggerDescription triggerId commandId) ++
-	   (actionXML actionContent actionId commandId)
+	   (actionXML (xmlify actionContent) actionId commandId)
+
+xmlify :: String -> String
+xmlify string = 
+	concatMap replacer string
+	where encodings = [('"', "&quot;"), ('&', "&amp;"), ('\'', "&apos;"), ('<', "&lt;"), ('>', "&gt;"), ('\n', "&#xD;&#xA;")]
+	      replacer x = case lookup x encodings of 
+			Just b -> b
+			Nothing -> [x]
 
 -- TODO: Add a nice error message in case things went wrong
 -- TODO: What about the version
@@ -611,7 +630,15 @@ dumpAST program = "\n\nAST\n" ++ show program
 
 
 --test :: String -> Either ParseError Context
-test input = parse command "(unknown)" input
+--test input = parse command "(unknown)" input
+test input = 
+	parsing input >>=
+	semanticAnalysis >>=
+	variableUnrolling >>=
+	loopUnrolling 
+--	contextNormalization >>=
+--	triggerAndActionContraction >>=
+--	codeGeneration
 
 fileExtension = ".commandstext"
 

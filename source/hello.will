@@ -1,7 +1,13 @@
-in Terminal:
+in Terminal, Firefox:
 saying test: types "it really really works!"
 saying test number = 1-3: types "super " number " mega!"
 
 in Firefox:
-saying tab number = 1-3: presses "Command-" number
+saying tab number = 1 - 3: presses "Command-" number
 saying down number = 1-3: presses repeat number ("DownArrow")
+
+in Aquamacs:
+saying matrix rows = 1-3 columns = 1-3: types repeat rows (repeat columns ("-") "*")
+saying test number1_ = 1-4 number_2 = 1-2: types number1_ "I'm myself, if you dont know" number_2
+saying back arrow: types "<-"
+saying another test: types "al;dfkjalsfjd\na;lskdfjaf"
