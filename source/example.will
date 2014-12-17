@@ -1,0 +1,16 @@
+in Aquamacs, Firefox:
+saying hello: types "hello world"
+saying matrix something = 1-3 else = 1-3: types repeat something (repeat else ("-") "*")
+
+in Firefox, Google Chrome:
+saying tab number = 1-3: presses "Command-" number
+saying create new tab: presses "Command-t"
+
+in iTerm, Terminal:
+saying scratch number = 1-4: presses repeat number ("Control-w ")
+saying do again: presses "UpArrow Return"
+saying complete: presses "Tab Tab"
+
+in Skype:
+saying search: presses "Command-Option-f"
+saying click call: presses "Command-Shift-r"
