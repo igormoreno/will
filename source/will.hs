@@ -293,12 +293,6 @@ variableUnrolling (Program commandSetList) = Right $ Program (do
 expandCommand :: Command -> [Command]
 expandCommand command @ (Command (Trigger triggerElements) _) = 
 	replaceCommand [variable | variable @ (Variable _ _) <- triggerElements] command
---	let newlist = do
---		Variable name (Range begin end) <- triggerElements
---		number <- [begin..end]
---		return $ replaceCommand name number command
---	in if null newlist then [command] -- there were no variables in this command
---	   else newlist
 
 replaceCommand :: [TriggerElement] -> Command -> [Command]
 replaceCommand [] command = [command]
@@ -325,17 +319,6 @@ replaceVariable name number (Command trigger action) =
 	 		else Repeat (RVariable name2) (map replaceActionElement elements)
 	 	_ -> element
 	
-
---let
---fun2 (CommandSet _ list2) = map fun3 list2
---fun1 (Program list1) = map fun2 list1
---in fun1 program
---
---fun3 (Command (Trigger list3) (Action _ list4)) = fun4 list3 list4
---
--- :: Command -> [Command]
--- command @ (Command (Trigger triggers) (Action _ actionElements)) =
---let
 
 ---------
 -- Loop unrolling
@@ -469,10 +452,6 @@ generateXMLFile a commands = do
 		Nothing -> return $ XMLFile ("global" ++ fileExtension) (xml app)
 		Just (Application name _) -> return $ XMLFile (name ++ fileExtension) (xml app)
 	where xml app = fullXML $ generateCommandList app commands
-
--- our version of hash code
--- hash :: String -> Int
--- hash = foldl' (\h c -> 33*h `xor` fromEnum c) 5381
 
 -- Generate XML for an application and a command list
 generateCommandList :: Maybe Application -> [Command] -> String
@@ -654,15 +633,4 @@ main =
        case compile content of
             Left e -> putStrLn e
             Right list -> mapM_ writingXMLFile list 
-            --Right list -> sequence $ map writingXMLFile list 
-            --Right list -> do map writingXMLFile list 
-	    --		    return ()
-            --Right list -> writingXMLFile (head list)
-
-	
---    do c <- getContents
---       case parse program "(stdin)" c of
---            Left e -> do putStrLn "Error parsing input:"
---                         print e
---            Right r -> putStrLn $ show r
 
