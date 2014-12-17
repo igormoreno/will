@@ -22,7 +22,7 @@ in Firefox:
 command 4
 
 3 files will be generated, one with the commands to be executed in the context "Firefox" and the other 2 for the contexts "Google Chrome" and "Terminal".
-These files have extension ".commands text" and can be directly imported into Dragon (for Mac).
+These files have extension ".commandstext" and can be directly imported into Dragon (for Mac).
 
 
 ==============
