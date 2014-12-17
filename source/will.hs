@@ -30,7 +30,6 @@ data ActionElement = Keys String
 data RepeatNumber = RVariable String | RNumber Int deriving Show
 
 
--- TO DO: treat special characters inside commands such as "\" and "<"
 
 
 ---------
@@ -56,7 +55,7 @@ program = do
 commandSet = do
 	c <- context <* (char '\n')
 	-- commands <- many1 command
-	commands <- sepEndBy1 command (string "\n")
+	commands <- sepEndBy1 command (char '\n')
 	return $ CommandSet c commands
 
 context :: Parser Context
@@ -384,8 +383,13 @@ triggerAndActionContraction (Program commandSetList) = Right $ Program (do
 		return $ CommandSet context [Command (triggerContraction trigger) (actionContraction action) | Command trigger action <- commands])
 		
 triggerContraction (Trigger elements) = Trigger [Word $ intercalate " " [word | Word word <- elements]]
-actionContraction (Action (Keystroke) elements) = Action Keystroke [S $ intercalate " " [word | S word <- elements]]
+
+--TO DO: remove redundancies in this function
+actionContraction (Action (Keystroke) elements) = Action Keystroke [S $ trim $ intercalate "" [word | S word <- elements]]
 actionContraction (Action t elements) = Action t [S $ intercalate "" [word | S word <- elements]]
+
+trim = f . f where f = reverse . dropWhile  (== ' ')
+
 
 ---------
 -- Context normalization
@@ -499,7 +503,7 @@ generateCommand app (Command trigger action) (commandId, actionId, triggerId) ra
 xmlify :: String -> String
 xmlify string = 
 	concatMap replacer string
-	where encodings = [('"', "&quot;"), ('&', "&amp;"), ('\'', "&apos;"), ('<', "&lt;"), ('>', "&gt;"), ('\n', "&#xD;&#xA;")]
+	where encodings = [('"', "&quot;"), ('&', "&amp;"), ('\'', "&apos;"), ('<', "&lt;"), ('>', "&gt;")] --, ('\n', "&#xD;&#xA;")]
 	      replacer x = case lookup x encodings of 
 			Just b -> b
 			Nothing -> [x]
@@ -635,10 +639,10 @@ test input =
 	parsing input >>=
 	semanticAnalysis >>=
 	variableUnrolling >>=
-	loopUnrolling 
---	contextNormalization >>=
---	triggerAndActionContraction >>=
---	codeGeneration
+	loopUnrolling >>=
+	contextNormalization >>=
+	triggerAndActionContraction >>=
+	codeGeneration
 
 fileExtension = ".commandstext"
 
