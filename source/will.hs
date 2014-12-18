@@ -1,6 +1,4 @@
 import Text.ParserCombinators.Parsec
-import Text.Parsec.Token
-import System.Random
 import Data.List
 import Control.Monad
 import Control.Applicative ((<*), (*>), (<*>), (<$>))
