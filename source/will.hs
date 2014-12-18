@@ -53,21 +53,20 @@ program = do
 	return $ Program set
 
 commandSet = do
-	c <- context <* (char '\n')
+	c <- context
 	-- commands <- many1 command
-	commands <- sepEndBy1 command (char '\n')
+	commands <- sepEndBy1 command eol
 	return $ CommandSet c commands
 
 context :: Parser Context
 context = do
 	c <- everywhere <|> programList
 	punctuation ":"
-	--eol
+	eol
 	return c
 
 everywhere = do
 	string "Everywhere" <|> string "everywhere"
-	--ws
 	return Global
 
 programList = do
@@ -208,8 +207,6 @@ variableDeclaration = do
 	return $ Variable name (Range (read start) (read end))
 
 
-
-
 punctuation s = do
 	ws
 	p <- string s
@@ -221,8 +218,6 @@ eol =   try (string "\n\r")
     <|> string "\n"
     <|> string "\r"
     <?> "end of line"
-
-
 
 
 ---------
