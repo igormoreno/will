@@ -239,9 +239,7 @@ isVariableDeclared program @ (Program commandSetList) =
 		name <- allVariables actionElements
 		guard $ name `notElem` [name | Variable name _ <- triggerElements]
 		return $ "Variable '" ++ name ++ "' not defined"
-	in if null errorList 
-	   then Right program
-	   else Left $ intercalate "\n" errorList
+	in reportErrors program errorList
 
 allVariables :: [ActionElement] -> [String]
 allVariables actionElements =
@@ -256,9 +254,11 @@ rangeValidation program @ (Program commandSetList) =
 		Variable name (Range begin end) <- triggerElements
 		guard $ begin >= end 
 		return $ "Variable '" ++ name ++ "' with inconsistent range"
-	in if null errorList 
-	   then Right program
-	   else Left $ intercalate "\n" errorList
+	in reportErrors program errorList
+
+reportErrors program [] = Right program
+reportErrors program errorList = Left $ intercalate "\n" errorList
+
 
 ---------
 -- Option expansion
