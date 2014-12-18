@@ -355,14 +355,15 @@ expandRepeat element  = [element]
 ---------
 
 triggerAndActionContraction (Program commandSetList) = Right $ Program (do
-		CommandSet context commands <- commandSetList
-		return $ CommandSet context [Command (triggerContraction trigger) (actionContraction action) | Command trigger action <- commands])
+	CommandSet context commands <- commandSetList
+	return $ CommandSet context [Command (triggerContraction trigger) (actionContraction action) | Command trigger action <- commands])
 		
-triggerContraction (Trigger elements) = Trigger [Word $ intercalate " " [word | Word word <- elements]]
+triggerContraction (Trigger list) = Trigger [Word $ intercalate " " [word | Word word <- list]]
 
---TO DO: remove redundancies in this function
-actionContraction (Action (Keystroke) elements) = Action Keystroke [S $ trim $ intercalate "" [word | S word <- elements]]
-actionContraction (Action t elements) = Action t [S $ intercalate "" [word | S word <- elements]]
+actionContraction (Action t elements) = case t of
+	Keystroke -> Action Keystroke [S $ trim words]
+	_ -> Action t [S words]
+	where words = intercalate "" [word | S word <- elements]
 
 trim = f . f where f = reverse . dropWhile  (== ' ')
 
