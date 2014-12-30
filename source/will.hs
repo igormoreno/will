@@ -9,7 +9,7 @@ import System.IO.Unsafe -- :D
 data Program = Program [CommandSet] deriving Show
 data CommandSet = CommandSet Context [Command] deriving Show
 
-data Context = Global | In [String] deriving Show
+data Context = Global | In [String] deriving (Show, Eq, Ord)
 
 data Command = Command Trigger Action deriving Show
 
@@ -407,10 +407,9 @@ expandContext = concatMap expand1
 		(CommandSet (In (name:[])) commands):(expand1 $ CommandSet (In names) commands)
 
 groupCommandsByContext :: [CommandSet] -> [CommandSet]
-groupCommandsByContext = (map $ foldl1 combine) . (groupBy sameContext) . (sortBy compareContext)
+groupCommandsByContext = (map $ foldl1 combine) . (groupBy $ f (==)) . (sortBy $ f compare)
 	where
-	compareContext (CommandSet (In (p:[])) _) (CommandSet (In (q:[])) _) = compare p q
-	sameContext (CommandSet (In (p:[])) _) (CommandSet (In (q:[])) _) = p == q
+	f g (CommandSet c1 _) (CommandSet c2 _) = g c1 c2
 	combine (CommandSet context cmds1) (CommandSet _ cmds2) = CommandSet context (cmds1++cmds2)
 
 
