@@ -1,8 +1,10 @@
 import Text.ParserCombinators.Parsec
-import Data.List
 import Control.Monad
 import Control.Applicative ((<*), (*>), (<*>), (<$>))
+import Data.List
+import Data.Int
 import Data.Hashable
+import System.Random
 import System.Process
 import System.IO.Unsafe -- :D
 
@@ -453,22 +455,25 @@ generateCommandList application commandList =
 	where
 	function accumulator (index, command) =
 		let z i = "z" ++ show (3*index + i)
-		    ids = (z 3, z 1, z 2)
-		    --(randomId, _) = random (mkStdGen 1) :: (Int, StdGen)  
-		    (Command (Trigger ((Word tc):[])) _) = command
-		    st = case application of
-				Just (Application st _) -> st
-				_ -> ""
-		    -- TODO: get rid of this ugly thing below
-		    randomId = ((`div` 10000000000) . abs) (hash (tc ++ st)) 
-		in accumulator ++ (generateCommand application command ids randomId)
+		    ids = (z 1, z 2, z 3)
+		    uniqueId = generateUniqueId application command
+		in accumulator ++ (generateCommand application command ids uniqueId)
 
-generateCommand app (Command trigger action) (commandId, actionId, triggerId) randomId =
+generateUniqueId :: Maybe Application -> Command -> Int32
+generateUniqueId application command =
+	let (Command (Trigger ((Word trigger):[])) _) = command
+	    applicationName = case application of
+			Just (Application name _) -> name
+			_ -> ""
+	    (uniqueId, _) = random (mkStdGen (hash (applicationName ++ trigger))) :: (Int32, StdGen)
+	in uniqueId
+
+generateCommand app (Command trigger action) (actionId, triggerId, commandId) uniqueId =
 	let vendor = "igormoreno" 
 	    triggerDescription = ""
 	    Trigger ((Word triggerContent):[]) = trigger
 	    Action actionType ((S actionContent):[]) = action
-	in (commandXML app actionType vendor commandId actionId triggerId randomId) ++
+	in (commandXML app actionType vendor commandId actionId triggerId uniqueId) ++
 	   (triggerXML triggerContent triggerDescription triggerId commandId) ++
 	   (actionXML (xmlify actionContent) actionId commandId)
 
@@ -538,7 +543,7 @@ fullXML body = "<database>\n" ++
          body ++
       "</database>\n"
 
-commandXML app commandType vendor commandId actionId triggerId randomId
+commandXML app commandType vendor commandId actionId triggerId uniqueId
   = "<object type=\"COMMAND\" id=" ++ show commandId ++ ">\n" ++
   "  <attribute name=\"version\" type=\"int32\">1</attribute>\n" ++
   "  <attribute name=\"vendor\" type=\"string\">" ++ vendor ++"</attribute>\n" ++
@@ -552,7 +557,7 @@ commandXML app commandType vendor commandId actionId triggerId randomId
   "  <attribute name=\"iscommand\" type=\"bool\">1</attribute>\n" ++
   "  <attribute name=\"engineid\" type=\"int32\">-1</attribute>\n" ++
   "  <attribute name=\"display\" type=\"bool\">1</attribute>\n" ++
-  "  <attribute name=\"commandid\" type=\"int32\">" ++ show randomId ++ "</attribute>\n" ++
+  "  <attribute name=\"commandid\" type=\"int32\">" ++ show uniqueId ++ "</attribute>\n" ++
 	printApplication app ++
   "  <attribute name=\"active\" type=\"bool\">1</attribute>\n" ++
   "  <relationship name=\"currentaction\" type=\"1/1\" destination=\"ACTION\"></relationship>\n" ++
