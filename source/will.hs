@@ -430,21 +430,20 @@ codeGeneration program @ (Program list) = case mapM generateCommandSet list of
   Left problem -> Left $ "Code generation error:\n" ++ problem ++ dumpAST program
 
 generateCommandSet :: CommandSet -> Either String XMLFile
-generateCommandSet (CommandSet context commands) = generateXMLFile (getApplication context) commands
+generateCommandSet (CommandSet context commands) = do
+  c <- normalizeContext context
+  return $ generateXMLFile (makeApplication c) commands
+  where makeApplication c = do {name <- c; return $ Application (getBundleId name) 1} -- hardcoded version
 
-getApplication :: Context -> Either String (Maybe Application)
-getApplication Global = Right $ Nothing
-getApplication (In (name:[])) = do
-  let bid = getBundleId name
-  Right $ Just (Application bid 1) -- hardcoded version
-getApplication context @ _ = Left $ "context should have been normalized: " ++ show context
+normalizeContext :: Context -> Either String (Maybe String)
+normalizeContext Global = Right Nothing
+normalizeContext (In (name:[])) = Right $ Just name
+normalizeContext context @ _ = Left $ "context should have been normalized: " ++ show context
 
-generateXMLFile :: Either String (Maybe Application) -> [Command] -> Either String XMLFile
-generateXMLFile a commands = do
-  app <- a
-  case app of
-    Nothing -> return $ XMLFile ("global" ++ fileExtension) (xml app)
-    Just (Application name _) -> return $ XMLFile (name ++ fileExtension) (xml app)
+generateXMLFile :: Maybe Application -> [Command] -> XMLFile
+generateXMLFile app commands = case app of
+  Nothing -> XMLFile ("global" ++ fileExtension) (xml app)
+  Just (Application name _) -> XMLFile (name ++ fileExtension) (xml app)
   where xml app = fullXML $ generateCommandList app commands
 
 -- Generate XML for an application and a command list
