@@ -36,7 +36,9 @@ data RepeatNumber = RVariable String | RNumber Int deriving Show
 -- Parser
 ---------
 
-parsing :: String -> Either String Program
+type Error = String
+
+parsing :: String -> Either Error Program
 parsing input = case parse program "(unknown)" input of
   Right program -> Right program
   Left problem -> Left $ "Parsing error:\n" ++ (show problem)
@@ -224,9 +226,10 @@ eol =   try (string "\n\r")
 -- Semantic analysis
 ---------
 
-semanticAnalysis :: Program -> Either String Program
+semanticAnalysis :: Program -> Either Error Program
 semanticAnalysis program = isVariableDeclared program >>= rangeValidation
 
+isVariableDeclared :: Program -> Either Error Program
 isVariableDeclared program @ (Program commandSetList) =
   let errorList = do
         CommandSet _ commands <- commandSetList
@@ -242,6 +245,7 @@ allVariables actionElements =
   [name | Repeat (RVariable name) _ <- actionElements] ++
   concat [allVariables elements | Repeat _ elements <- actionElements]
 
+rangeValidation :: Program -> Either Error Program
 rangeValidation program @ (Program commandSetList) =
   let errorList = do
         CommandSet _ commands <- commandSetList
@@ -251,6 +255,7 @@ rangeValidation program @ (Program commandSetList) =
         return $ "Variable '" ++ name ++ "' with inconsistent range"
   in reportErrors program errorList
 
+reportErrors :: Program -> [Error] -> Either Error Program
 reportErrors program [] = Right program
 reportErrors program errorList = Left $ intercalate "\n" errorList
 
@@ -280,7 +285,7 @@ saying down 3: types repeat 3 (DownArrow)
 command without variables
 -}
 
-variableUnrolling :: Program -> Either String Program
+variableUnrolling :: Program -> Either Error Program
 variableUnrolling (Program commandSetList) = Right $ Program (do
   CommandSet context commands <- commandSetList
   return $ CommandSet context (concatMap expandCommand commands))
@@ -337,7 +342,7 @@ saying down 3: types DownArrow DownArrow DownArrow
 command without variables
 -}
 
-loopUnrolling :: Program -> Either String Program
+loopUnrolling :: Program -> Either Error Program
 loopUnrolling (Program commandSetList) = Right $ Program (do
   CommandSet context commands <- commandSetList
   return $ CommandSet context (map expand commands))
@@ -395,7 +400,7 @@ command 1
 command 2
 -}
 
-contextNormalization :: Program -> Either String Program
+contextNormalization :: Program -> Either Error Program
 contextNormalization (Program list) = (Right . Program . groupCommandsByContext . expandContext) list
 
 expandContext :: [CommandSet] -> [CommandSet]
@@ -424,18 +429,18 @@ data XMLFile = XMLFile FileName Content deriving Show
 type FileName = String
 type Content = String
 
-codeGeneration :: Program -> Either String [XMLFile]
+codeGeneration :: Program -> Either Error [XMLFile]
 codeGeneration program @ (Program list) = case mapM generateCommandSet list of
   Right okay -> Right okay
   Left problem -> Left $ "Code generation error:\n" ++ problem ++ dumpAST program
 
-generateCommandSet :: CommandSet -> Either String XMLFile
+generateCommandSet :: CommandSet -> Either Error XMLFile
 generateCommandSet (CommandSet context commands) = do
   c <- normalizeContext context
   return $ generateXMLFile (makeApplication c) commands
   where makeApplication c = do {name <- c; return $ Application (getBundleId name) 1} -- hardcoded version
 
-normalizeContext :: Context -> Either String (Maybe String)
+normalizeContext :: Context -> Either Error (Maybe String)
 normalizeContext Global = Right Nothing
 normalizeContext (In (name:[])) = Right $ Just name
 normalizeContext context @ _ = Left $ "context should have been normalized: " ++ show context
