@@ -36,9 +36,6 @@ data RepeatNumber = RVariable String | RNumber Int deriving Show
 -- Parser
 ---------
 
-ws :: Parser String
-ws = many $ (char ' ' <|> char '\t')
-
 parsing :: String -> Either String Program
 parsing input = case parse program "(unknown)" input of
   Right program -> Right program
@@ -212,6 +209,9 @@ punctuation s = do
   p <- string s
   ws
   return p
+
+ws :: Parser String
+ws = many $ (char ' ' <|> char '\t')
 
 eol =   try (string "\n\r")
     <|> try (string "\r\n")
@@ -444,18 +444,18 @@ generateXMLFile :: Maybe Application -> [Command] -> XMLFile
 generateXMLFile app commands = case app of
   Nothing -> XMLFile ("global" ++ fileExtension) (xml app)
   Just (Application name _) -> XMLFile (name ++ fileExtension) (xml app)
-  where xml app = fullXML $ generateCommandList app commands
+  where xml app = fullXML $ generateCommandListXML app commands
 
 -- Generate XML for an application and a command list
-generateCommandList :: Maybe Application -> [Command] -> String
-generateCommandList application commandList =
+generateCommandListXML :: Maybe Application -> [Command] -> String
+generateCommandListXML application commandList =
   foldl function "" (zip [0..] commandList)
   where
   function accumulator (index, command) =
     let z i = "z" ++ show (3*index + i)
         ids = (z 1, z 2, z 3)
         uniqueId = generateUniqueId application command
-    in accumulator ++ (generateCommand application command ids uniqueId)
+    in accumulator ++ (generateCommandXML application command ids uniqueId)
 
 generateUniqueId :: Maybe Application -> Command -> Int32
 generateUniqueId application command =
@@ -467,7 +467,7 @@ generateUniqueId application command =
       (uniqueId, _) = random (mkStdGen (hash (applicationName ++ trigger))) :: (Int32, StdGen)
   in uniqueId
 
-generateCommand app (Command trigger action) (actionId, triggerId, commandId) uniqueId =
+generateCommandXML app (Command trigger action) (actionId, triggerId, commandId) uniqueId =
   let vendor = "igormoreno"
       triggerDescription = ""
       Trigger ((Word triggerContent):[]) = trigger
