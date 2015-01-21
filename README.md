@@ -1,8 +1,7 @@
-===============
 How to use Will
-===============
+---------------
 
-the Will compiler is implemented in Haskell and right now all its source code is in the file will.hs.
+The Will compiler is implemented in Haskell and right now all its source code is in the file will.hs.
 So compile it with, for example:
 ghc will.hs
 
@@ -25,17 +24,29 @@ command 4
 These files have extension ".commandstext" and can be directly imported into Dragon (for Mac).
 
 
-==============
 Implementation
-==============
+--------------
 
 The functions that implement each compiler phase are grouped together and separated by a set of comments naming each compiler phase. They are chained together in the function "compile" in the bottom of the file.
 
 
-=====
 To do
-=====
+-----
 
-- Optional words in command trigger
+- Properly report error when the application name doesn't exist
+- The "vendor" should be the username of the current loged in user
+- Look for ID collisions
+- Properly interpret \n
+
+- Use heredocs or another approach to avoid overly concat strings
+- Add syntax for comments
+- Parse key names (instead of just reading them as strings)
+- Re-factor code to avoid using unsafe I/O
+- Break the code in multiple modules
+
+- Read input from a file instead of the standard input
+- Add the shell script command type
 - Read multiple input files from the command line
+- Optional words in command trigger
+- Improve the readme file
 
