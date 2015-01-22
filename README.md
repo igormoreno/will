@@ -45,7 +45,6 @@ To do
 - Break the code in multiple modules
 
 - Read input from a file instead of the standard input
-- Add the shell script command type
 - Read multiple input files from the command line
 - Optional words in command trigger
 - Improve the readme file

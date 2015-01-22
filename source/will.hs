@@ -22,7 +22,7 @@ data TriggerElement = Word String
 data Range = Range Int Int deriving Show
 
 data Action = Action ActionType [ActionElement] deriving Show
-data ActionType = Keystroke | Text | Open | Run deriving Show
+data ActionType = Keystroke | Text | Open | ShellScript deriving Show
 data ActionElement = Keys String
   | S String
   | VariableUse String
@@ -88,7 +88,7 @@ command = do
 
 action :: Parser Action
 action = do
-  actionType <- try typeKeystroke <|> typeText
+  actionType <- try typeKeystroke <|> try typeText <|> typeShellScript
   elements <- actions
   return $ Action actionType elements
 
@@ -102,13 +102,13 @@ typeKeystroke = do
   try (punctuation "presses") <|> punctuation "press"
   return Keystroke
 
+typeShellScript = do
+  try (punctuation "runs") <|> punctuation "run"
+  return ShellScript
+
 --typeOpen = do
 --  try (punctuation "opens") <|> punctuation "open"
 --  return Open
---
---typeRun = do
---  try (punctuation "runs") <|> punctuation "run"
---  return Run
 
 actionElement = try repetition
   <|> try text
@@ -367,7 +367,8 @@ triggerAndActionContraction (Program commandSetList) = Right $ Program (do
 triggerContraction (Trigger list) = Trigger [Word $ intercalate " " [word | Word word <- list]]
 
 actionContraction (Action t elements) = case t of
-  Keystroke -> Action Keystroke [S $ trim words]
+  Keystroke -> Action t [S $ trim words]
+  ShellScript -> Action t [S $ "#!/bin/bash\n" ++ words]
   _ -> Action t [S words]
   where words = intercalate "" [word | S word <- elements]
 
