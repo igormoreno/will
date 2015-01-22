@@ -33,18 +33,21 @@ The functions that implement each compiler phase are grouped together and separa
 To do
 -----
 
+### Known limitations
 - Properly report error when the application name doesn't exist
 - The "vendor" should be the username of the current loged in user
 - Look for ID collisions
 - Properly interpret \n
 
+### Code improvements
 - Use heredocs or another approach to avoid overly concat strings
-- Add syntax for comments
-- Parse key names (instead of just reading them as strings)
 - Re-factor code to avoid using unsafe I/O
 - Break the code in multiple modules
 
+### New features
 - Read input from a file instead of the standard input
+- Add syntax for comments
+- Parse key names (instead of just reading them as strings)
 - Read multiple input files from the command line
 - Optional words in command trigger
 - Improve the readme file
