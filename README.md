@@ -10,15 +10,15 @@ The Will source file is right now read by the compiler from the standard input. 
 
 The compiler will output one XML file for each context in the Will file. For example, if the source file contains:
 
-in Firefox, Google Chrome:
-command 1
-command 2
-
-in Terminal:
-command 3
-
-in Firefox:
-command 4
+    in Firefox, Google Chrome:
+    command 1
+    command 2
+    
+    in Terminal:
+    command 3
+    
+    in Firefox:
+    command 4
 
 3 files will be generated, one with the commands to be executed in the context "Firefox" and the other 2 for the contexts "Google Chrome" and "Terminal".
 These files have extension ".commandstext" and can be directly imported into Dragon (for Mac).
