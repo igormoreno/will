@@ -1,5 +1,7 @@
 import Text.ParserCombinators.Parsec
-import Control.Monad
+import Prelude hiding (mapM)
+import Data.Traversable (mapM)
+import Control.Monad (guard)
 import Control.Applicative ((<*), (*>), (<*>), (<$>))
 import Data.List
 import Data.Int
@@ -433,13 +435,27 @@ type Content = String
 codeGeneration :: Program -> Either Error [XMLFile]
 codeGeneration program @ (Program list) = case mapM generateCommandSet list of
   Right okay -> Right okay
-  Left problem -> Left $ "Code generation error:\n" ++ problem ++ dumpAST program
+  Left problem -> Left $ "Error:\n" ++ problem -- ++ dumpAST program
 
 generateCommandSet :: CommandSet -> Either Error XMLFile
 generateCommandSet (CommandSet context commands) = do
-  c <- normalizeContext context
-  return $ generateXMLFile (makeApplication c) commands
-  where makeApplication c = do {name <- c; return $ Application (getBundleId name) 1} -- hardcoded version
+  maybeContext <- normalizeContext context
+  application <- makeApplication <$> mapM getBundleId maybeContext
+  return $ generateXMLFile application commands
+  where
+  makeApplication :: (Maybe String) -> (Maybe Application)
+  makeApplication c = do {name <- c; return $ Application name 1} -- hardcoded version
+
+-- TODO: What about the version
+-- TODO: get rid of unsafeIO
+getBundleId :: String -> Either Error String
+getBundleId name = unsafePerformIO (do
+  path <- dropLast <$> readProcess "find" ["/Applications", "-name", name++".app"] ""
+  if null path
+  then return $ Left $ "application '" ++ name ++ "' not found"
+  else (Right . dropLast) <$> readProcess "/usr/libexec/PlistBuddy" ["-c", "Print CFBundleIdentifier", path ++ "/Contents/Info.plist"] "")
+  where
+  dropLast l = take (length l - 1) l
 
 normalizeContext :: Context -> Either Error (Maybe String)
 normalizeContext Global = Right Nothing
@@ -490,17 +506,6 @@ xmlify string =
   replacer x = case lookup x encodings of
     Just b -> b
     Nothing -> [x]
-
--- TODO: Add a nice error message in case things went wrong
--- TODO: What about the version
--- TODO: get rid of unsafeIO
-getBundleId :: String -> String
-getBundleId name =
-  let path1 = unsafePerformIO $ readProcess "find" (["/Applications", "-name", name++".app"]) ""
-      dropLast l = take (length l - 1) l
-      path = dropLast path1
-      output = unsafePerformIO $ readProcess "/usr/libexec/PlistBuddy" ["-c", "Print CFBundleIdentifier", path ++ "/Contents/Info.plist"] ""
-  in dropLast output
 
 
 ---------

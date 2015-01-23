@@ -34,12 +34,12 @@ To do
 -----
 
 ### Known limitations
-- Properly report error when the application name doesn't exist
 - The "vendor" should be the username of the current loged in user
 - Look for ID collisions
 - Properly interpret \n
 
 ### Code improvements
+- Add a lower AST
 - Use heredocs or another approach to avoid overly concat strings
 - Re-factor code to avoid using unsafe I/O
 - Break the code in multiple modules
