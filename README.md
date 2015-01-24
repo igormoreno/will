@@ -5,8 +5,8 @@ The Will compiler is implemented in Haskell and right now all its source code is
 So compile it with, for example:
 ghc will.hs
 
-The Will source file is right now read by the compiler from the standard input. So if the source code is in a file called hello.will, compile it with:
-./will < hello.will
+To compile a Will source file:
+./will hello.will
 
 The compiler will output one XML file for each context in the Will file. For example, if the source file contains:
 
@@ -45,7 +45,6 @@ To do
 - Break the code in multiple modules
 
 ### New features
-- Read input from a file instead of the standard input
 - Add syntax for comments
 - Parse key names (instead of just reading them as strings)
 - Read multiple input files from the command line

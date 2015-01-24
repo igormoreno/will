@@ -8,6 +8,7 @@ import Data.Int
 import Data.Hashable
 import System.Random
 import System.Process
+import System.Environment (getArgs, getProgName)
 import System.IO.Unsafe -- :D
 
 data Program = Program [CommandSet] deriving Show
@@ -641,9 +642,21 @@ fileExtension = ".commandstext"
 writingXMLFile :: XMLFile -> IO ()
 writingXMLFile (XMLFile name content) = writeFile name content
 
-main = do
-  content <- getContents
+run wrappedContent = do
+  content <- wrappedContent
   case compile content of
     Left e -> putStrLn e
     Right list -> mapM_ writingXMLFile list
+
+main :: IO ()
+main = do
+  args <- getArgs
+  case args of
+    "-":[] ->
+      run getContents
+    file:[] ->
+      run $ readFile file
+    _ -> do
+      programName <- getProgName
+      putStrLn $ "usage: " ++ programName ++ " (file.will | -)"
 
