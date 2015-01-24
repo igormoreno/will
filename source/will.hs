@@ -499,13 +499,19 @@ generateCommandXML app (Command trigger action) (actionId, triggerId, commandId)
      (actionXML (xmlify actionContent) actionId commandId)
 
 xmlify :: String -> String
-xmlify string =
-  concatMap replacer string
+xmlify = replaceMultiple encodings
   where
-  encodings = [('"', "&quot;"), ('&', "&amp;"), ('\'', "&apos;"), ('<', "&lt;"), ('>', "&gt;")] --, ('\n', "&#xD;&#xA;")]
-  replacer x = case lookup x encodings of
-    Just b -> b
-    Nothing -> [x]
+  encodings = [("\"", "&quot;"), ("&", "&amp;"), ("\'", "&apos;"), ("<", "&lt;"), (">", "&gt;"), ("\\n", "\n")] --, ('\n', "&#xD;&#xA;")]
+
+  replaceMultiple [] target = target
+  replaceMultiple ((p, q):rest) target = replaceMultiple rest (replace p q target)
+
+  -- replace all occurrences of "search" by "substitute" in "list"
+  replace search substitute [] = []
+  replace search substitute list @ (x:rest) =
+    if isPrefixOf search list
+    then substitute ++ (replace search substitute $ drop (length search) list)
+    else x:(replace search substitute rest)
 
 
 ---------

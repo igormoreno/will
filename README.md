@@ -36,7 +36,7 @@ To do
 ### Known limitations
 - The "vendor" should be the username of the current loged in user
 - Look for ID collisions
-- Properly interpret \n
+- Properly interpret \"
 
 ### Code improvements
 - Add a lower AST
