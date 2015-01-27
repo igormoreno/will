@@ -42,10 +42,26 @@ data RepeatNumber = RVariable String | RNumber Int deriving Show
 type Error = String
 
 parsing :: String -> Either Error Program
-parsing input = case parse program "(unknown)" input of
+parsing input = case parse program "(unknown)" (stripComments input) of
   Right program -> Right program
   Left problem -> Left $ "Parsing error:\n" ++ (show problem)
 
+{-
+line 1
+line 2#comment
+line 3
+=>
+line 1
+line 2
+line 3
+-}
+stripComments [] = []
+stripComments code = strip '#' '\n' code
+  where
+  strip start finish code =
+    let (p1, p2) = span (/= start) code
+        (p3, p4) = span (/= finish) p2
+    in p1 ++ stripComments p4
 
 program :: Parser Program
 program = do

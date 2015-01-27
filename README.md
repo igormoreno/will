@@ -45,7 +45,6 @@ To do
 - Break the code in multiple modules
 
 ### New features
-- Add syntax for comments
 - Parse key names (instead of just reading them as strings)
 - Read multiple input files from the command line
 - Optional words in command trigger
