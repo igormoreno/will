@@ -66,21 +66,20 @@ stripComments code = strip '#' '\n' code
 program :: Parser Program
 program = do
   spaces
-  set <- sepEndBy1 commandSet spaces
+  set <- many1 commandSet
   eof
   return $ Program set
 
 commandSet = do
   c <- context
-  -- commands <- many1 command
-  commands <- sepEndBy1 command eol
+  commands <- many1 command
   return $ CommandSet c commands
 
 context :: Parser Context
 context = do
   c <- everywhere <|> programList
   punctuation ":"
-  eol
+  spaces
   return c
 
 everywhere = do
@@ -88,10 +87,9 @@ everywhere = do
   return Global
 
 programList = do
-  string "in" <|> string "In"
+  string "In" <|> string "in"
   ws
-  l <- list
-  return $ In l
+  In <$> list
   where
   list = sepBy1 (many1 (noneOf ",:")) (punctuation ",")
 
@@ -102,7 +100,7 @@ command = do
   t <- trigger
   punctuation ":"
   a <- action
-  ws
+  spaces
   return $ Command t a
 
 action :: Parser Action
