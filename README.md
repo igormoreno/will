@@ -39,13 +39,13 @@ To do
 - Properly interpret \"
 
 ### Code improvements
+- Better parser error messages with <?>
 - Add a lower AST
 - Use heredocs or another approach to avoid overly concat strings
 - Re-factor code to avoid using unsafe I/O
 - Break the code in multiple modules
 
 ### New features
-- Parse key names (instead of just reading them as strings)
 - Read multiple input files from the command line
 - Optional words in command trigger
 - Improve the readme file
