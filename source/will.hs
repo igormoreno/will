@@ -36,13 +36,13 @@ data RepeatNumber = RVariable String | RNumber Int deriving Show
 
 
 ---------
--- Parser
+-- Will parser
 ---------
 
 type Error = String
 
 parsing :: String -> Either Error Program
-parsing input = case parse program "(unknown)" (stripComments input) of
+parsing input = case parse program "Will" (stripComments input) of
   Right program -> Right program
   Left problem -> Left $ "Parsing error:\n" ++ (show problem)
 
@@ -131,8 +131,6 @@ actionElement = try repetition
   <|> try text
   <|> variableUse
 
---  <|> try keystroke
-
 repetition = do
   string "repeat"
   ws
@@ -156,47 +154,6 @@ text = do
 
 variableUse = fmap VariableUse variableName
 
-
---Keystroke = Key | ML "-" Key | ML "-" Variable
---ML = M | M "-" ML
---M = "Command" | "Control" | "Shift" | "Option"
---Key = Char | Digit |
---  "DownArrow" | "LeftArrow" | "RightArrow" | "UpArrow" | "Delete" | "End" | "Esc" | 
---  "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8" | "F9" | "F10" | "F11" | "F12" | 
---  "Home" | "PageDown" | "PageUp" | "Return" | "Space" | "Tab"
---
-
-
--- modifier =  try (string "Command")
---   <|> try (string "Control")
---   <|> try (string "Shift")
---   <|> string "Option"
--- 
--- keystroke = try (string "DownArrow") 
---   <|> try (string "LeftArrow")
---   <|> try (string "RightArrow")
---   <|> try (string "UpArrow")
---   <|> try (string "Delete")
---   <|> try (string "End")
---   <|> try (string "Esc")
---   <|> try (string "F1")
---   <|> try (string "F2")
---   <|> try (string "F3")
---   <|> try (string "F4")
---   <|> try (string "F5")
---   <|> try (string "F6")
---   <|> try (string "F7")
---   <|> try (string "F8")
---   <|> try (string "F9")
---   <|> try (string "F10")
---   <|> try (string "F11")
---   <|> try (string "F12")
---   <|> try (string "Home")
---   <|> try (string "PageDown")
---   <|> try (string "PageUp")
---   <|> try (string "Return")
---   <|> try (string "Space")
---   <|> string "Tab"
 
 trigger :: Parser Trigger
 trigger = fmap Trigger (sepBy1 triggerElement ws)
@@ -237,6 +194,93 @@ eol =   try (string "\n\r")
     <|> string "\n"
     <|> string "\r"
     <?> "end of line"
+
+
+
+---------
+-- Keystroke parser
+---------
+
+-- Keystroke AST
+data KeystrokeList = KeystrokeList [Keystroke]
+data Keystroke = K [ModifierKey] Key
+type ModifierKey = String
+type Key = String
+
+instance Show KeystrokeList where
+  show (KeystrokeList keystrokes) = intercalate " " (map show keystrokes)
+
+instance Show Keystroke where
+  show (K modifiers key) = (concatMap (\s -> s ++ "-") modifiers) ++ key
+
+
+parseKeystroke :: String -> Either Error KeystrokeList
+parseKeystroke input = case parse keystrokeList "Keystroke" input of
+  Right keystrokes -> Right keystrokes
+  Left problem -> Left $  (show problem)
+
+keystrokeList :: Parser KeystrokeList
+keystrokeList = do
+  ws
+  keystrokes <- sepEndBy1 keystroke ws
+  eof
+  return $ KeystrokeList keystrokes
+
+keystroke :: Parser Keystroke
+keystroke = do
+  modifiers <- many modifier
+  k <- key
+  return $ K modifiers k
+
+modifier = do
+  m <- modifierKey
+  char '-'
+  return m
+
+modifierKey = try (string "Command")
+  <|> try (string "Control")
+  <|> try (string "Shift")
+  <|> string "Option"
+
+key = try (string "DownArrow")
+  <|> try (string "LeftArrow")
+  <|> try (string "RightArrow")
+  <|> try (string "UpArrow")
+  <|> try (string "Delete")
+  <|> try (string "End")
+  <|> try (string "Escape")
+  <|> try (string "F1")
+  <|> try (string "F2")
+  <|> try (string "F3")
+  <|> try (string "F4")
+  <|> try (string "F5")
+  <|> try (string "F6")
+  <|> try (string "F7")
+  <|> try (string "F8")
+  <|> try (string "F9")
+  <|> try (string "F10")
+  <|> try (string "F11")
+  <|> try (string "F12")
+  <|> try (string "Home")
+  <|> try (string "PageDown")
+  <|> try (string "PageUp")
+  <|> try (string "Return")
+  <|> try (string "Space")
+  <|> try (string "Tab")
+  <|> normalKey
+
+normalKey = do
+  k <- lower <|> digit
+       <|> char '`'
+       <|> char ','
+       <|> char '.'
+       <|> char '/'
+       <|> char '!'
+       <|> char '~'
+       <|> char '+'
+       <|> char '*'
+       <|> char ':'
+  return [k]
 
 
 ---------
@@ -377,20 +421,45 @@ expandRepeat element  = [element]
 -- Trigger and action contraction
 ---------
 
-triggerAndActionContraction (Program commandSetList) = Right $ Program (do
-  CommandSet context commands <- commandSetList
-  return $ CommandSet context [Command (triggerContraction trigger) (actionContraction action) | Command trigger action <- commands])
-
-triggerContraction (Trigger list) = Trigger [Word $ intercalate " " [word | Word word <- list]]
-
-actionContraction (Action t elements) = case t of
-  Keystroke -> Action t [S $ trim words]
-  ShellScript -> Action t [S $ "#!/bin/bash\n" ++ words]
-  _ -> Action t [S words]
-  where words = intercalate "" [word | S word <- elements]
+triggerAndActionContraction :: Program -> Either Error Program
+triggerAndActionContraction = checkKeystrokeLanguage . contraction
+  where
+  contraction (Program commandSetList) = Program (do
+    CommandSet context commands <- commandSetList
+    return $ CommandSet context [Command (triggerContraction trigger) (actionContraction action) | Command trigger action <- commands])
+  
+  triggerContraction (Trigger list) = Trigger [Word $ intercalate " " [word | Word word <- list]]
+  
+  actionContraction (Action t elements) = case t of
+    Keystroke -> Action t [S $ trim words]
+    ShellScript -> Action t [S $ "#!/bin/bash\n" ++ words]
+    _ -> Action t [S words]
+    where words = intercalate "" [word | S word <- elements]
 
 trim = f . f where f = reverse . dropWhile  (== ' ')
 
+checkKeystrokeLanguage :: Program -> Either Error Program
+checkKeystrokeLanguage (Program commandSetList) = do
+  newCommandSet <- compileErrors $ map g commandSetList
+  return $ Program newCommandSet
+  where
+  g :: CommandSet -> Either Error CommandSet
+  g (CommandSet context commands) = do
+    newCommands <- compileErrors $ map check commands
+    return $ CommandSet context newCommands
+
+  check :: Command -> Either Error Command
+  check (Command trigger (Action Keystroke ((S text):[]))) = case parseKeystroke text of
+    Right keystrokes -> Right $ Command trigger $ Action Keystroke [S (show keystrokes)]
+    Left error -> Left $ "Incorrect keystroke format in \"" ++ text ++ "\" (trigger by \"" ++ triggerToString trigger ++ "\")\n" ++ error
+  check command = Right command
+
+compileErrors list = case [error | Left error <- list] of
+  [] -> sequence list
+  errors -> Left $ intercalate "\n" errors
+
+
+triggerToString (Trigger list) = intercalate " " [word | Word word <- list]
 
 ---------
 -- Context normalization
