@@ -1,6 +1,6 @@
 everywhere:
 saying page down: press "PageDown"
-saying page number = 2-5: press repeat number ("PageDown ")
+saying page number = 2-5: press repeat number ("PageDown")
 saying page up: press "PageUp"
 saying unpleasant: type "git "
 saying Haskell interactive: type "ghci "
@@ -10,14 +10,14 @@ saying chip number = 1-9: presses "Option-" number
 saying escape: presses "Escape"
 saying next up: press "Command-`"
 saying previous up: press "Command-Shift-`"
-saying number = 1-5 down: press repeat number ("DownArrow ")
-saying number = 1-5 up: press repeat number ("UpArrow ")
-saying number = 1-5 left: press repeat number ("LeftArrow ")
-saying number = 1-5 right: press repeat number ("RightArrow ")
-saying select number = 1-9 down: press repeat number ("Shift-DownArrow ")
-saying select number = 1-9 up: press repeat number ("Shift-UpArrow ")
+saying number = 1-5 down: press repeat number ("DownArrow")
+saying number = 1-5 up: press repeat number ("UpArrow")
+saying number = 1-5 left: press repeat number ("LeftArrow")
+saying number = 1-5 right: press repeat number ("RightArrow")
+saying select number = 1-9 down: press repeat number ("Shift-DownArrow")
+saying select number = 1-9 up: press repeat number ("Shift-UpArrow")
 saying Dell: press "Delete"
-saying Dell number = 1-9: press repeat number ("Delete ")
+saying Dell number = 1-9: press repeat number ("Delete")
 saying repeat command number = 1-9: run "/Users/igormoreno/bin/repeatcommand " number
 saying open with MacVim: run "/usr/local/bin/cliclick -w 100 kd:shift,cmd t:'?' ku:shift,cmd t:'open with other' kp:arrow-down kp:return t:MacVim"
 
@@ -34,7 +34,7 @@ saying tab number = 1-9: presses "Command-" number
 saying jump back: press "Command-LeftArrow"
 
 in iTerm, Terminal:
-saying scratch number = 1-4: presses repeat number ("Control-w ")
+saying scratch number = 1-4: presses repeat number ("Control-w")
 saying scratch line: presses "Control-u"
 saying paste: press "Control-y"
 saying do again: presses "UpArrow Return"
@@ -50,15 +50,15 @@ in MacVim:
 saying go back: type "``"
 saying back arrow: type " <- "
 saying visual block: press "Control-v"
-saying scratch number = 1-9: press "Escape " number " b d " number " w a"
-saying save file: press "Escape : w Return"
-saying Camel /!Dictation!/: run "/usr/local/bin/cliclick t:`echo ${varDictation} | runhaskell /Users/igormoreno/bin/camel.hs`"
+saying scratch number = 1-9: press "Escape" number "bd" number "wa"
+saying save file: press "Escape :w Return"
+#saying Camel /!Dictation!/: run "/usr/local/bin/cliclick t:`echo ${varDictation} | runhaskell /Users/igormoreno/bin/camel.hs`"
 
 
 ### Gmail ###
 in Google Chrome:
-saying number = 1-9 down: press repeat number ("DownArrow ")
-saying number = 1-9 up: press repeat number ("UpArrow ")
+saying number = 1-9 down: press repeat number ("DownArrow")
+saying number = 1-9 up: press repeat number ("UpArrow")
 
 # Compose and Chat
 saying focus main window: press "Shift-Escape"
@@ -70,23 +70,23 @@ saying cc: press "Command-Shift-c"
 saying bcc: press "Command-Shift-b"
 
 # Jumping
-saying go to inbox: press "g i"
-saying go to star: press "g s"
-saying go to sent: press "g t"
-saying go to drafts: press "g d"
-saying go to all mail: press "g a"
-saying go to contact: press "g c"
-saying go to label: press "g l"
+sayinggo to inbox: press "gi"
+sayinggo to star: press "gs"
+sayinggo to sent: press "gt"
+sayinggo to drafts: press "gd"
+sayinggo to all mail: press "ga"
+sayinggo to contact: press "gc"
+sayinggo to label: press "gl"
 
 # Threadlist selection
 saying choose: press "x"
-saying choose number = 1-9: press repeat number ("x j ")
-saying choose all: press "* a"
-saying choose nothing: press "* n"
-saying choose read: press "* r"
-saying choose unread: press "* u"
-saying choose special: press "* s"
-saying choose not special: press "* t"
+saying choose number = 1-9: press repeat number ("xj")
+saying choose all: press "*a"
+saying choose nothing: press "*n"
+saying choose read: press "*r"
+saying choose unread: press "*u"
+saying choose special: press "*s"
+saying choose not special: press "*t"
 
 # Navigation
 saying go back: press "u"
@@ -116,8 +116,8 @@ saying undo: press "z"
 saying Mark read: press "Shift-i"
 saying Mark unread: press "Shift-u"
 saying Mark important: press "+"
-saying Mark not important: press "-"
-saying make phone call: press "g p"
+saying Mark not important: type "-"
+saying make phone call: press "gp"
 
 # Gmail shortcuts
 #
