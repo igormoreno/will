@@ -159,8 +159,10 @@ trigger :: Parser Trigger
 trigger = fmap Trigger (sepBy1 triggerElement ws)
 
 triggerElement = try variableDeclaration
-  <|> fmap Word (many1 letter)
+  <|> triggerWord
   -- <|> try optionalWord 
+
+triggerWord = fmap Word $ many1 (letter <|> char '/' <|> char '!')
 
 --optionalWord = do
 --  punctuation "["
