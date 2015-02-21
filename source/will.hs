@@ -536,12 +536,20 @@ generateCommandSet (CommandSet context commands) = do
 -- TODO: get rid of unsafeIO
 getBundleId :: String -> Either Error String
 getBundleId name = unsafePerformIO (do
-  path <- dropLast <$> readProcess "find" ["/Applications", "-name", name++".app"] ""
-  if null path
-  then return $ Left $ "application '" ++ name ++ "' not found"
-  else (Right . dropLast) <$> readProcess "/usr/libexec/PlistBuddy" ["-c", "Print CFBundleIdentifier", path ++ "/Contents/Info.plist"] "")
+  paths <- findCommand (name ++ ".app") "/Applications"
+  case paths of
+    [] -> return $ Left $ "application '" ++ name ++ "' not found"
+    [path] -> Right <$> bundleId path
+    paths -> return $ Left $ "multiple applications with name '" ++ name ++ "' found:\n" ++ unlines paths)
   where
-  dropLast l = take (length l - 1) l
+  bundleId :: String -> IO String
+  bundleId path =
+    dropLast <$> readProcess "/usr/libexec/PlistBuddy" ["-c", "Print CFBundleIdentifier", path ++ "/Contents/Info.plist"] ""
+    where
+    dropLast l = take (length l - 1) l
+
+findCommand :: String -> String -> IO [String]
+findCommand what folder = lines <$> readProcess "find" [folder, "-name", what] ""
 
 normalizeContext :: Context -> Either Error (Maybe String)
 normalizeContext Global = Right Nothing
