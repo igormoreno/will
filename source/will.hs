@@ -148,9 +148,16 @@ repeatWithVariable = fmap RVariable variableName
 
 text = do
   char '"'
-  content <- many1 (noneOf "\"")
+  content <- many1 chars
   char '"'
   return $ S content
+  where
+    chars = escaped <|> noneOf "\""
+    escaped = char '\\' >> choice (zipWith escapedChar codes replacements)
+    escapedChar code replacement = char code >> return replacement
+    codes        = ['b',  'n',  'f',  'r',  't',  '\\', '\"', '/']
+    replacements = ['\b', '\n', '\f', '\r', '\t', '\\', '\"', '/']
+
 
 variableUse = fmap VariableUse variableName
 
@@ -595,7 +602,7 @@ generateCommandXML app (Command trigger action) (actionId, triggerId, commandId)
 xmlify :: String -> String
 xmlify = replaceMultiple encodings
   where
-  encodings = [("\"", "&quot;"), ("&", "&amp;"), ("\'", "&apos;"), ("<", "&lt;"), (">", "&gt;"), ("\\n", "\n")] --, ('\n', "&#xD;&#xA;")]
+  encodings = [("&", "&amp;"), ("<", "&lt;"), (">", "&gt;")] --, ("\\n", "\n")] --, ('\n', "&#xD;&#xA;")]
 
   replaceMultiple [] target = target
   replaceMultiple ((p, q):rest) target = replaceMultiple rest (replace p q target)
