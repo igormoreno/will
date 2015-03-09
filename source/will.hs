@@ -10,6 +10,7 @@ import System.Random
 import System.Process
 import System.Environment (getArgs, getProgName)
 import System.IO.Unsafe -- :D
+import Data.Function (on)
 
 data Program = Program [CommandSet] deriving Show
 data CommandSet = CommandSet Context [Command] deriving Show
@@ -25,7 +26,7 @@ data TriggerElement = Word String
 data Range = Range Int Int deriving Show
 
 data Action = Action ActionType [ActionElement] deriving Show
-data ActionType = Keystroke | Text | Open | ShellScript deriving Show
+data ActionType = Keystroke | Text | Open | ShellScript deriving (Show, Eq)
 data ActionElement = Keys String
   | S String
   | VariableUse String
@@ -325,9 +326,9 @@ rangeValidation program @ (Program commandSetList) =
         return $ "Variable '" ++ name ++ "' with inconsistent range"
   in reportErrors program errorList
 
-reportErrors :: Program -> [Error] -> Either Error Program
-reportErrors program [] = Right program
-reportErrors program errorList = Left $ intercalate "\n" errorList
+reportErrors :: a -> [Error] -> Either Error a
+reportErrors a [] = Right a
+reportErrors a errorList = Left $ intercalate "\n" errorList
 
 
 ---------
@@ -427,50 +428,6 @@ expandRepeat element  = [element]
 
 
 ---------
--- Trigger and action contraction
----------
-
-triggerAndActionContraction :: Program -> Either Error Program
-triggerAndActionContraction = checkKeystrokeLanguage . contraction
-  where
-  contraction (Program commandSetList) = Program (do
-    CommandSet context commands <- commandSetList
-    return $ CommandSet context [Command (triggerContraction trigger) (actionContraction action) | Command trigger action <- commands])
-  
-  triggerContraction (Trigger list) = Trigger [Word $ intercalate " " [word | Word word <- list]]
-  
-  actionContraction (Action t elements) = case t of
-    Keystroke -> Action t [S $ trim words]
-    ShellScript -> Action t [S $ "#!/bin/bash\n" ++ words]
-    _ -> Action t [S words]
-    where words = intercalate "" [word | S word <- elements]
-
-trim = f . f where f = reverse . dropWhile  (== ' ')
-
-checkKeystrokeLanguage :: Program -> Either Error Program
-checkKeystrokeLanguage (Program commandSetList) = do
-  newCommandSet <- compileErrors $ map g commandSetList
-  return $ Program newCommandSet
-  where
-  g :: CommandSet -> Either Error CommandSet
-  g (CommandSet context commands) = do
-    newCommands <- compileErrors $ map check commands
-    return $ CommandSet context newCommands
-
-  check :: Command -> Either Error Command
-  check (Command trigger (Action Keystroke ((S text):[]))) = case parseKeystroke text of
-    Right keystrokes -> Right $ Command trigger $ Action Keystroke [S (show keystrokes)]
-    Left error -> Left $ "Incorrect keystroke format in \"" ++ text ++ "\" (trigger by \"" ++ triggerToString trigger ++ "\")\n" ++ error
-  check command = Right command
-
-compileErrors list = case [error | Left error <- list] of
-  [] -> sequence list
-  errors -> Left $ intercalate "\n" errors
-
-
-triggerToString (Trigger list) = intercalate " " [word | Word word <- list]
-
----------
 -- Context normalization
 ---------
 
@@ -509,35 +466,215 @@ expandContext = concatMap expand1
     (CommandSet (In (name:[])) commands):(expand1 $ CommandSet (In names) commands)
 
 groupCommandsByContext :: [CommandSet] -> [CommandSet]
-groupCommandsByContext = (map $ foldl1 combine) . (groupBy $ f (==)) . (sortBy $ f compare)
+groupCommandsByContext = (map $ foldl1 combine) . (groupBy ((==) `on` f)) . (sortBy (compare `on` f))
   where
-  f g (CommandSet c1 _) (CommandSet c2 _) = g c1 c2
+  f (CommandSet c _) = c
   combine (CommandSet context cmds1) (CommandSet _ cmds2) = CommandSet context (cmds1++cmds2)
 
 
 ---------
--- Code generation
+-- To low IR
 ---------
 
-data Application = Application String Int deriving Show
+data LowIR = LowIR [LowCommandSet] deriving Show
+data LowCommandSet = LowCommandSet LowContext [LowCommand] deriving Show
 
-data XMLFile = XMLFile FileName Content deriving Show
-type FileName = String
-type Content = String
+type LowContext = Maybe Application
+data Application = Application {
+  applicationName :: String,
+  applicationVersion :: Int} deriving Show
 
-codeGeneration :: Program -> Either Error [XMLFile]
-codeGeneration program @ (Program list) = case mapM generateCommandSet list of
-  Right okay -> Right okay
-  Left problem -> Left $ "Error:\n" ++ problem -- ++ dumpAST program
+data LowCommand = LowCommand {
+  commandId :: String,
+  uniqueId :: Int32,
+  commandTrigger :: LowTrigger,
+  commandAction :: LowAction} deriving Show --(Show, Eq, Ord)
 
-generateCommandSet :: CommandSet -> Either Error XMLFile
-generateCommandSet (CommandSet context commands) = do
-  maybeContext <- normalizeContext context
-  application <- makeApplication <$> mapM getBundleId maybeContext
-  return $ generateXMLFile application commands
+data LowTrigger = LowTrigger {
+  triggerId :: String,
+  triggerContent :: String} deriving Show
+
+data LowAction = LowAction {
+  actionId :: String,
+  actionType :: ActionType,
+  actionContent :: String} deriving Show
+
+showApplication :: String -> Maybe Application -> String
+showApplication global (Just (Application name _)) = name
+showApplication global _ = global
+
+
+lowIR :: Program -> Either Error LowIR
+lowIR (Program commandSetList) = LowIR <$> mapM lowCommandSet commandSetList
+
+lowCommandSet :: CommandSet -> Either Error LowCommandSet
+lowCommandSet (CommandSet context commands) = do
+  newContext <- lowContext context
+  let newCommands = zipWith (lowCommand newContext) [0..] commands
+  return $ LowCommandSet newContext newCommands
+
+lowContext :: Context -> Either Error LowContext
+lowContext context = makeApplication <$> normalizeContext context
   where
   makeApplication :: (Maybe String) -> (Maybe Application)
   makeApplication c = do {name <- c; return $ Application name 1} -- hardcoded version
+
+  normalizeContext :: Context -> Either Error (Maybe String)
+  normalizeContext Global = Right Nothing
+  normalizeContext (In (name:[])) = Right $ Just name
+  normalizeContext context @ _ = Left $ "context should have been normalized: " ++ show context
+
+lowCommand :: LowContext -> Int -> Command -> LowCommand
+lowCommand context index (Command trigger action) = LowCommand {
+  commandId = cId,
+  uniqueId = uId,
+  commandTrigger = newTrigger,
+  commandAction = lowAction aId action}
+  where
+    newTrigger = lowTrigger tId trigger
+    z i = "z" ++ show (3*index + i)
+    (aId, tId, cId) = (z 1, z 2, z 3)
+    uId = 0
+
+lowTrigger id (Trigger list) = LowTrigger {
+  triggerId = id,
+  triggerContent = intercalate " " [word | Word word <- list]}
+
+lowAction id (Action t elements) = LowAction {
+  actionId = id,
+  actionType = t,
+  actionContent = actionContraction}
+  where
+  actionContraction = case t of
+    Keystroke -> trim words
+    ShellScript -> "#!/bin/bash\n" ++ words
+    _ -> words
+    where words = intercalate "" [word | S word <- elements]
+
+trim = f . f where f = reverse . dropWhile  (== ' ')
+
+
+---------
+-- Generate unique ID
+---------
+
+generateUniqueId :: LowIR -> Either Error LowIR
+generateUniqueId (LowIR commandSetList) = (Right . LowIR) (do
+  LowCommandSet context commands <- commandSetList
+  return $ LowCommandSet context (map (g context) commands))
+  where
+  g context command = updateUniqueId newId command
+    where newId = makeUniqueId $ generateSeed (commandTrigger command) context
+
+updateUniqueId id command = LowCommand {
+  commandId = commandId command,
+  uniqueId = id,
+  commandTrigger = commandTrigger command,
+  commandAction = commandAction command}
+
+generateSeed :: LowTrigger -> LowContext -> String
+generateSeed lowTrigger context = applicationName ++ (triggerContent lowTrigger)
+  where applicationName = showApplication "" context
+
+makeUniqueId :: String -> Int32
+makeUniqueId string = uId
+  where (uId, _) = random (mkStdGen (hash string)) :: (Int32, StdGen)
+
+
+---------
+-- Check same ID
+---------
+
+checkSameCommand :: LowIR -> Either Error LowIR
+checkSameCommand lowIR @ (LowIR commandSetList) = reportErrors lowIR (concatMap g commandSetList)
+  where
+  g :: LowCommandSet -> [Error]
+  g (LowCommandSet c commands) = map (error c) $ findRepeated (triggerContent . commandTrigger) commands
+  error context command = "Multiple commands with trigger \"" ++ triggerContent (commandTrigger command) ++ "\" found in context " ++ showApplication "Everywhere" context
+
+checkSameId :: LowIR -> Either Error LowIR
+checkSameId (LowIR commandSetList) = (Right . LowIR) (do
+  LowCommandSet context commands <- commandSetList
+  return $ LowCommandSet context (map (g context) commands))
+  where
+  allCommands = concat [commands | LowCommandSet _ commands <- commandSetList]
+  sortedCommands = sortBy (compare `on` uniqueId) allCommands
+  repeatedCommands = findRepeated uniqueId allCommands
+
+  g context command =
+    if isPartOf command repeatedCommands
+    then loop command (generateSeed (commandTrigger command) context)
+    else command
+    where
+    loop command oldSeed =
+      let newSeed = oldSeed ++ show (makeUniqueId oldSeed)
+          newCommand = updateUniqueId (makeUniqueId newSeed) command
+      in if isPartOf newCommand sortedCommands
+         then loop newCommand newSeed
+         else newCommand
+
+isPartOf :: LowCommand -> [LowCommand] -> Bool
+isPartOf command list = case find (((==) `on` uniqueId) command) list of
+  Nothing -> False
+  _ -> True
+
+-- Find same things. Two things a and b are the same iff f a == f b
+findRepeated :: (Eq a, Ord a) => (b -> a) -> [b] -> [b]
+findRepeated f = (map head) . (filter $ \c -> (length c) > 1) . (groupBy ((==) `on` f)) . (sortBy (compare `on` f))
+
+
+---------
+-- Check keystroke language
+---------
+
+checkKeystrokeLanguage :: LowIR -> Either Error LowIR
+checkKeystrokeLanguage (LowIR commandSetList) = LowIR <$> (compileErrors $ map g commandSetList)
+  where
+  g :: LowCommandSet -> Either Error LowCommandSet
+  g (LowCommandSet context commands) =
+    LowCommandSet context <$> (compileErrors $ map check commands)
+
+  check :: LowCommand -> Either Error LowCommand
+  check command = case actionType (commandAction command) of
+    Keystroke -> case parseKeystroke content of
+      Right keystrokes -> Right $ update command (show keystrokes)
+      Left error -> Left $ "Incorrect keystroke format in \"" ++ content ++ "\" (triggered by \"" ++ triggerContent (commandTrigger command) ++ "\")\n" ++ error
+    _ -> Right command
+    where
+    content = actionContent (commandAction command)
+
+    update command keystrokes = LowCommand {
+      commandId = commandId command,
+      uniqueId = uniqueId command,
+      commandTrigger = commandTrigger command,
+      commandAction = LowAction {
+        actionId = actionId (commandAction command),
+        actionType = actionType (commandAction command),
+        actionContent = keystrokes}}
+
+compileErrors :: [Either String a] -> Either String [a]
+compileErrors list = case [error | Left error <- list] of
+  [] -> sequence list
+  errors -> Left $ intercalate "\n" errors
+
+
+---------
+-- Context internal name
+---------
+
+contextInternalName :: LowIR -> Either Error LowIR
+contextInternalName (LowIR commandSetList) = LowIR <$> mapM g commandSetList
+  where
+  g :: LowCommandSet -> Either Error LowCommandSet
+  g (LowCommandSet context commands) = do
+    newContext <- mapM f context
+    return $ LowCommandSet newContext commands
+
+  f :: Application -> Either Error Application
+  f (Application name version) = do
+      newName <- getBundleId name
+      return $ Application newName version
+
 
 -- TODO: What about the version
 -- TODO: get rid of unsafeIO
@@ -558,46 +695,39 @@ getBundleId name = unsafePerformIO (do
 findCommand :: String -> String -> IO [String]
 findCommand what folder = lines <$> readProcess "find" [folder, "-name", what] ""
 
-normalizeContext :: Context -> Either Error (Maybe String)
-normalizeContext Global = Right Nothing
-normalizeContext (In (name:[])) = Right $ Just name
-normalizeContext context @ _ = Left $ "context should have been normalized: " ++ show context
 
-generateXMLFile :: Maybe Application -> [Command] -> XMLFile
-generateXMLFile app commands = case app of
-  Nothing -> XMLFile ("global" ++ fileExtension) (xml app)
-  Just (Application name _) -> XMLFile (name ++ fileExtension) (xml app)
-  where xml app = fullXML $ generateCommandListXML app commands
+---------
+-- Code generation
+---------
 
--- Generate XML for an application and a command list
-generateCommandListXML :: Maybe Application -> [Command] -> String
-generateCommandListXML application commandList =
-  foldl function "" (zip [0..] commandList)
+data XMLFile = XMLFile FileName Content deriving Show
+type FileName = String
+type Content = String
+
+codeGeneration :: LowIR -> Either Error [XMLFile]
+codeGeneration (LowIR list) = Right $ map generateXMLFile list
+
+generateXMLFile :: LowCommandSet -> XMLFile
+generateXMLFile (LowCommandSet context commands) = XMLFile fileName xml
   where
-  function accumulator (index, command) =
-    let z i = "z" ++ show (3*index + i)
-        ids = (z 1, z 2, z 3)
-        uniqueId = generateUniqueId application command
-    in accumulator ++ (generateCommandXML application command ids uniqueId)
+  fileName = (showApplication "global" context) ++ fileExtension
+  xml = fullXML $ concatMap (generateCommandXML context) commands
 
-generateUniqueId :: Maybe Application -> Command -> Int32
-generateUniqueId application command =
-  let (Command (Trigger ((Word trigger):[])) _) = command
-      applicationName =
-        case application of
-          Just (Application name _) -> name
-          _ -> ""
-      (uniqueId, _) = random (mkStdGen (hash (applicationName ++ trigger))) :: (Int32, StdGen)
-  in uniqueId
-
-generateCommandXML app (Command trigger action) (actionId, triggerId, commandId) uniqueId =
+generateCommandXML app (LowCommand {
+  commandId = cid,
+  uniqueId = uid,
+  commandTrigger = (LowTrigger {
+    triggerId = tid,
+    triggerContent = tcontent}),
+  commandAction = (LowAction {
+    actionId = aid,
+    actionType = atype,
+    actionContent = acontent})}) =
   let vendor = "igormoreno"
       triggerDescription = ""
-      Trigger ((Word triggerContent):[]) = trigger
-      Action actionType ((S actionContent):[]) = action
-  in (commandXML app actionType vendor commandId actionId triggerId uniqueId) ++
-     (triggerXML triggerContent triggerDescription triggerId commandId) ++
-     (actionXML (xmlify actionContent) actionId commandId)
+  in (commandXML app atype vendor cid aid tid uid) ++
+     (triggerXML tcontent triggerDescription tid cid) ++
+     (actionXML (xmlify acontent) aid cid)
 
 xmlify :: String -> String
 xmlify = replaceMultiple encodings
@@ -613,6 +743,7 @@ xmlify = replaceMultiple encodings
     if isPrefixOf search list
     then substitute ++ (replace search substitute $ drop (length search) list)
     else x:(replace search substitute rest)
+
 
 
 ---------
@@ -717,7 +848,12 @@ compile input =
   variableUnrolling >>=
   loopUnrolling >>=
   contextNormalization >>=
-  triggerAndActionContraction >>=
+  lowIR >>=
+  checkKeystrokeLanguage >>=
+  contextInternalName >>=
+  generateUniqueId >>=
+  checkSameCommand >>=
+  checkSameId >>=
   codeGeneration
 
 ---------
@@ -728,14 +864,14 @@ dumpAST program = "\n\nAST\n" ++ show program
 
 --test :: String -> Either ParseError Context
 --test input = parse command "(unknown)" input
-test input =
-  parsing input >>=
-  semanticAnalysis >>=
-  variableUnrolling >>=
-  loopUnrolling >>=
-  contextNormalization >>=
-  triggerAndActionContraction >>=
-  codeGeneration
+--test input =
+--  parsing input >>=
+--  semanticAnalysis >>=
+--  variableUnrolling >>=
+--  loopUnrolling >>=
+--  contextNormalization >>=
+--  triggerAndActionContraction >>=
+--  codeGeneration
 
 fileExtension = ".commandstext"
 
