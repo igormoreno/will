@@ -60,5 +60,3 @@ To do
 - Read multiple input files from the command line
 - Optional words in command trigger
 
-ok for ID collisions
-

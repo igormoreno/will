@@ -4,91 +4,91 @@ Language specification
 Program example
 ---------------
 
-everywhere:
-saying page down: press "PageDown"
-saying page number = 2-5: press repeat number ("PageDown")
-saying page up: press "PageUp"
-saying number = 1-5 down: press repeat number ("DownArrow")
-saying number = 1-5 up: press repeat number ("UpArrow")
-saying menu number=1-9: press "Control-F2" repeat number ("RightArrow") "DownArrow"
-
-in Aquamacs:
-saying hello: types "hello world"
-saying matrix something = 1-3 else = 1-3: types repeat something (repeat else ("-") "*")
-
-in Firefox, Google Chrome:
-saying create new tab: presses "Command-t"
-saying close tab: presses "Command-w"
-saying next tab: presses "Control-Tab"
-saying previous tab: presses "Control-Shift-Tab"
-saying tab number = 1-9: presses "Command-" number
-saying jump back: press "Command-LeftArrow"
-
-in iTerm, Terminal:
-saying scratch number = 1-4: presses repeat number ("Control-w")
-saying scratch line: presses "Control-u"
-saying paste: press "Control-y"
-saying do again: presses "UpArrow Return"
-saying complete: presses "Tab Tab"
-saying search: press "Control-r"
+    everywhere:
+    saying page down: press "PageDown"
+    saying page number = 2-5: press repeat number ("PageDown")
+    saying page up: press "PageUp"
+    saying number = 1-5 down: press repeat number ("DownArrow")
+    saying number = 1-5 up: press repeat number ("UpArrow")
+    saying menu number=1-9: press "Control-F2" repeat number ("RightArrow") "DownArrow"
+    
+    in Aquamacs:
+    saying hello: types "hello world"
+    saying matrix something = 1-3 else = 1-3: types repeat something (repeat else ("-") "*")
+    
+    in Firefox, Google Chrome:
+    saying create new tab: presses "Command-t"
+    saying close tab: presses "Command-w"
+    saying next tab: presses "Control-Tab"
+    saying previous tab: presses "Control-Shift-Tab"
+    saying tab number = 1-9: presses "Command-" number
+    saying jump back: press "Command-LeftArrow"
+    
+    in iTerm, Terminal:
+    saying scratch number = 1-4: presses repeat number ("Control-w")
+    saying scratch line: presses "Control-u"
+    saying paste: press "Control-y"
+    saying do again: presses "UpArrow Return"
+    saying complete: presses "Tab Tab"
+    saying search: press "Control-r"
 
 
 Syntax (Grammar in BNF form)
 ----------------------------
 
-Program = CCL
-CCL = CC | CC CCL
-CC = Context CL ":"
-
-Context = Everywhere | In PL
-Everywhere = "Everywhere" | "everywhere"
-In = "In" | "in"
-PL = Program-Name | Program-Name ", " PL
-
-CL = Command | Command CL
-Command = "saying" Trigger ":" Action
-
-Trigger = WL
-WL = W | W WL
-W = VarDeclaration | Word
-VarDeclaration = Word "=" Range
-Range = Number "-" Number
-
-Action = Verb ActionContent
-Verb = "type" | "types" | "press" | "presses" | "run" | "runs"
-ActionContent = AL
-AL = A | A AL
-A = Repeat | Variable | StringLit
-Repeat = "repeat" Count "(" ActionContent ")"
-Count = Number | Variable
-Variable = Word
-StringLit = """ String """
+    Program = CCL
+    CCL = CC | CC CCL
+    CC = Context CL ":"
+    
+    Context = Everywhere | In PL
+    Everywhere = "Everywhere" | "everywhere"
+    In = "In" | "in"
+    PL = Program-Name | Program-Name ", " PL
+    
+    CL = Command | Command CL
+    Command = "saying" Trigger ":" Action
+    
+    Trigger = WL
+    WL = W | W WL
+    W = VarDeclaration | Word
+    VarDeclaration = Word "=" Range
+    Range = Number "-" Number
+    
+    Action = Verb ActionContent
+    Verb = "type" | "types" | "press" | "presses" | "run" | "runs"
+    ActionContent = AL
+    AL = A | A AL
+    A = Repeat | Variable | StringLit
+    Repeat = "repeat" Count "(" ActionContent ")"
+    Count = Number | Variable
+    Variable = Word
+    StringLit = """ String """
 
 
 ### Keystroke language
 
 The use of the Keystroke language is explained in the Semantics section.
 
-Keystroke = KL
-KL = K | K KL
-K = Key | ML "-" Key
-ML = KeyModifier | KeyModifier "-" ML
-KeyModifier = "Command" | "Control" | "Shift" | "Option"
-Key = LowChar | Digit |
-  "DownArrow" | "LeftArrow" | "RightArrow" | "UpArrow" | "Delete" | "End" | "Escape" |
-  "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8 | "F9" | "F10" | "F11" | "F12" |
-  "Home" | "PageDown" | "PageUp" | "Return" | "Space" | "Tab" |
-  "`" | "," | "." | "/" | "!" | "~" | "+" | "*" | ":"
+    Keystroke = KL
+    KL = K | K KL
+    K = Key | ML "-" Key
+    ML = KeyModifier | KeyModifier "-" ML
+    KeyModifier = "Command" | "Control" | "Shift" | "Option"
+    Key = LowChar | Digit |
+      "DownArrow" | "LeftArrow" | "RightArrow" | "UpArrow" | "Delete" | "End" | "Escape" |
+      "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8 | "F9" | "F10" | "F11" | "F12" |
+      "Home" | "PageDown" | "PageUp" | "Return" | "Space" | "Tab" |
+      "`" | "," | "." | "/" | "!" | "~" | "+" | "*" | ":"
 
 
 ### On terminal symbols
 
-Word: represents the word that can be dictated and recognized by the dictation software.
-String: represents informally a string. A more precise definition (including escaping rules) will be
-described in a further iteration of this document.
-LowChar: [a-z]
-Digit: [0-9]
-Number: [1-9][0-9]*
+- Word: represents the word that can be dictated and recognized by the dictation software.
+- String: represents informally a string. A more precise definition (including escaping rules) will be
+  described in a further iteration of this document.
+- LowChar: [a-z]
+- Digit: [0-9]
+- Number: [1-9][0-9]*
 
 
 Semantics
@@ -162,7 +162,8 @@ When using this action type, the action content must have the format specified b
 language. In this language spaces are optional so `abc` is the same as `a b c` or `a bc` or `ab c`.
 The same is valid for key names, so `DownArrow DownArrow` is the same as `DownArrowDownArrow`.
 Capital letters cannot be used directly to write text, so to produce "A" the keystroke should be
-`Shift-a`.
+`Shift-a`. The keystrokes are parsed and check only after all variables are replaced and all repeat
+blocks are expanded.
 
 ### Language features
 
