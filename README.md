@@ -3,10 +3,10 @@ How to use Will
 
 The Will compiler is implemented in Haskell and right now all its source code is in the file will.hs.
 So compile it with, for example:
-ghc will.hs
+`ghc will.hs`
 
 To compile a Will source file:
-./will hello.will
+`./will hello.will`
 
 The compiler will output one XML file for each context in the Will file. For example, if the source file contains:
 
@@ -24,6 +24,18 @@ The compiler will output one XML file for each context in the Will file. For exa
 These files have extension ".commandstext" and can be directly imported into Dragon (for Mac).
 
 
+Project overview
+----------------
+
+Please refer to document docs/overview.md
+
+
+Language specification
+----------------------
+
+Please refer to document docs/language-specification.md
+
+
 Implementation
 --------------
 
@@ -35,18 +47,18 @@ To do
 
 ### Known limitations
 - The "vendor" should be the username of the current loged in user
-- Look for ID collisions
-- Properly interpret \"
 
-### Code improvements
-- Better parser error messages with <?>
-- Add a lower AST
+### Improvements
+- Better testing
 - Use heredocs or another approach to avoid overly concat strings
 - Re-factor code to avoid using unsafe I/O
 - Break the code in multiple modules
+- Better parser error messages with <?>
+- Improve documentation
 
 ### New features
 - Read multiple input files from the command line
 - Optional words in command trigger
-- Improve the readme file
+
+ok for ID collisions
 
