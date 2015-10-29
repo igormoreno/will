@@ -636,14 +636,10 @@ checkKeystrokeLanguage (LowIR commandSetList) = LowIR <$> (compileErrors $ map g
     where
     content = actionContent (commandAction command)
 
-    update command keystrokes = LowCommand {
-      commandId = commandId command,
-      uniqueId = uniqueId command,
-      commandTrigger = commandTrigger command,
-      commandAction = LowAction {
-        actionId = actionId (commandAction command),
-        actionType = actionType (commandAction command),
-        actionContent = keystrokes}}
+    update (LowCommand {commandId = cId, uniqueId = uId, commandTrigger = cTrigger, commandAction =
+      LowAction {actionId = aId, actionType = aType, actionContent = _}}) keystrokes =
+            LowCommand {commandId = cId, uniqueId = uId, commandTrigger = cTrigger, commandAction =
+              LowAction {actionId = aId, actionType = aType, actionContent = keystrokes}}
 
 
 
@@ -660,9 +656,7 @@ contextInternalName (LowIR commandSetList) = LowIR <$> mapM g commandSetList
     return $ LowCommandSet newContext commands
 
   f :: Application -> Either Error Application
-  f (Application name version) = do
-      newName <- getBundleId name
-      return $ Application newName version
+  f (Application name version) = Application <$> getBundleId name <*> return version
 
 
 -- TODO: What about the version
