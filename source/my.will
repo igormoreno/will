@@ -1,6 +1,7 @@
 everywhere:
 saying page down: press "PageDown"
-saying page number = 2-5: press repeat number ("PageDown")
+#saying page number = 2-5: press repeat number ("PageDown")
+saying page number = 2-5: run "/usr/local/bin/cliclick -w 500 " repeat number ("kp:page-down ")
 saying page up: press "PageUp"
 saying unpleasant: type "git "
 saying Haskell interactive: type "ghci "
@@ -36,6 +37,8 @@ saying next tab: presses "Control-Tab"
 saying previous tab: presses "Control-Shift-Tab"
 saying tab number = 1-9: presses "Command-" number
 saying jump back: press "Command-LeftArrow"
+saying jump forward: press "Command-RightArrow"
+saying scroll number = 2-5: run "/usr/local/bin/cliclick -w 500 " repeat number ("kp:arrow-down ")
 
 in iTerm, Terminal:
 saying scratch number = 1-4: presses repeat number ("Control-w")
@@ -46,11 +49,19 @@ saying complete: presses "Tab Tab"
 saying search: press "Control-r"
 saying Dell: press "Delete"
 saying Dell number = 1-9: press repeat number ("Delete")
+saying make directory: types "mkdir "
+saying scala build: types "sbt "
+saying node package: types "npm "
+saying bighead: types "HEAD "
+saying good: types "git "
 
 in Skype:
 saying search: presses "Command-Option-f"
 saying click call: presses "Command-Shift-r"
 saying hang up: presses "Command-Shift-h"
+saying mute microphone: presses "Command-Shift-m"
+saying down number = 1-5: presses repeat number ("Command-Option-RightArrow")
+saying up number = 1-5: presses repeat number ("Command-Option-LeftArrow")
 
 in MacVim:
 saying go back: type "``"
@@ -63,16 +74,34 @@ saying Dell: press "Delete"
 saying Dell number = 1-9: press repeat number ("Delete")
 saying function arrow: type " ->"
 saying escape: run "/usr/local/bin/cliclick kp:esc; osascript -e 'tell application \"Dragon Dictate\" to set microphone to spelling'"
+saying insert: run "/usr/local/bin/cliclick t:i; osascript -e 'tell application \"Dragon Dictate\" to set microphone to dictation'"
+saying show nerd: presses "Escape : Shift-n Shift-e Shift-r Shift-d Shift-t ree"
+saying split left: press "Escape Control-w h"
+saying split right: press "Escape Control-w l"
+saying split up: press "Escape Control-w k"
+saying split down: press "Escape Control-w j"
+saying split next: presses "Escape Control-w Control-w"
+saying complete: press "Control-x Control-p"
+saying change word: run "/usr/local/bin/cliclick t:ce; osascript -e 'tell application \"Dragon Dictate\" to set microphone to dictation'"
 
 ### Vimium ###
 in Google Chrome:
-saying show links: run "osascript -e 'tell application \"Dragon Dictate\" to set microphone to spelling'; /usr/local/bin/cliclick t:f"
+# saying show links: run "osascript -e 'tell application \"Dragon Dictate\" to set microphone to spelling'; /usr/local/bin/cliclick t:f"
+saying show links: press "f"
+# saying Fox: press "f"
+saying big Fox: press "Shift-f"
 saying escape: press "Escape"
+saying search tab: presses "Shift-t"
+saying close number = 1-5 tab: presses number "x"
+saying Magic number = 1-5: run "/Users/igormoreno/bin/magic" number
 
 ### Gmail ###
 in Google Chrome, Firefox:
-saying number = 1-9 down: press repeat number ("DownArrow")
-saying number = 1-9 up: press repeat number ("UpArrow")
+#saying page number = 2-5: run "/usr/local/bin/cliclick -w 500 " repeat number ("kp:page-down ")
+#saying number = 1-9 down: press repeat number ("DownArrow")
+#saying number = 1-9 up: press repeat number ("UpArrow")
+#saying number = 1-9 left: press repeat number ("LeftArrow")
+#saying number = 1-9 right: press repeat number ("RightArrow")
 
 # Compose and Chat
 saying focus main window: press "Shift-Escape"
@@ -210,3 +239,55 @@ saying make phone call: press "gp"
 # - :	Mark as not important
 # g then p or h then p :	Make a phone call
 # <Shift> + t :	Add conversation to Tasks
+
+# Google inbox
+saying jump to inbox: presses "i"
+saying down number = 1-5: presses repeat number ("j")
+saying up number = 1-5: presses repeat number ("k")
+saying pin message: presses "Shift-p"
+
+# Google inbox
+#
+# Everywhere
+#
+# c	Compose
+# /	Search
+# i	Go to inbox
+# t	Create reminder
+# z	Undo last action
+#
+# Compose
+#
+# ⌘ b	Bold
+# ⌘ i	Italics
+# ⌘ u	Underline
+# ⌘ k	Insert link
+# ⌘ Shift 7	Numbered list
+# ⌘ Shift 8	Bulleted list
+# ⌘ Enter	Send
+# Esc	Closes compose and deletes empty drafts
+#
+# List navigation
+#
+# Enter or o	Open
+# Esc or u	Close
+# j or ▶	Next item
+# k or ◀	Previous item
+# n	Next message
+# p	Previous message
+#
+# Focused item
+#
+# e or y	Mark done
+# ] or [	Mark done and advance
+# Shift p	Pin
+# a	Reply all
+# Shift a	Reply all in a new window
+# r	Reply
+# Shift r	Reply in a new window
+# f	Forward
+# #	Trash
+# !	Report as spam
+# m	Mute
+# .	Toggle move-to menu
+# x	Select
