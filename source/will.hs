@@ -40,8 +40,6 @@ data RepeatNumber = RVariable String | RNumber Int deriving Show
 -- Will parser
 ---------
 
-type Error = String
-
 parsing :: String -> Either Error Program
 parsing input = case parse program "Will" (stripComments input) of
   Right program -> Right program
@@ -325,11 +323,6 @@ rangeValidation program @ (Program commandSetList) =
         guard $ begin >= end
         return $ "Variable '" ++ name ++ "' with inconsistent range"
   in reportErrors program errorList
-
-reportErrors :: a -> [Error] -> Either Error a
-reportErrors a [] = Right a
-reportErrors a errorList = Left $ intercalate "\n" errorList
-
 
 ---------
 -- Option expansion
@@ -652,10 +645,6 @@ checkKeystrokeLanguage (LowIR commandSetList) = LowIR <$> (compileErrors $ map g
         actionType = actionType (commandAction command),
         actionContent = keystrokes}}
 
-compileErrors :: [Either String a] -> Either String [a]
-compileErrors list = case [error | Left error <- list] of
-  [] -> sequence list
-  errors -> Left $ intercalate "\n" errors
 
 
 ---------
@@ -855,6 +844,21 @@ compile input =
   checkSameCommand >>=
   checkSameId >>=
   codeGeneration
+
+
+---------
+-- simple error handling
+
+type Error = String
+
+reportErrors :: a -> [Error] -> Either Error a
+reportErrors a [] = Right a
+reportErrors a errorList = Left $ intercalate "\n" errorList
+
+compileErrors :: [Either String a] -> Either String [a]
+compileErrors list = case [error | Left error <- list] of
+  [] -> sequence list
+  errors -> Left $ intercalate "\n" errors
 
 ---------
 
