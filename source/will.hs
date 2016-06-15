@@ -1,3 +1,5 @@
+{-# LANGUAGE FlexibleContexts #-}
+
 import Text.ParserCombinators.Parsec
 import Prelude hiding (mapM)
 import Data.Traversable (mapM)
