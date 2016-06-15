@@ -290,6 +290,10 @@ normalKey = do
        <|> char '+'
        <|> char '*'
        <|> char ':'
+       <|> char '^'
+       <|> char '%'
+       <|> char '['
+       <|> char ']'
   return [k]
 
 
