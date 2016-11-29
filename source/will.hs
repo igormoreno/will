@@ -745,85 +745,88 @@ xmlify = replaceMultiple encodings
 --                  |    -- Noam Chomsky
 --                  |]
 
-fullXML body = "<database>\n" ++
-      "  <databaseInfo>\n" ++
-      "    <version>134481920</version>\n" ++
-      "    <UUID>C6588137-5AC4-4FA0-ACA4-818FBA19D3AB</UUID>\n" ++
-      "    <nextObjectID>113</nextObjectID>\n" ++
-      "    <metadata>\n" ++
-      "      <plist version=\"1.0\">\n" ++
-      "        <dict>\n" ++
-      "          <key>NSPersistenceFrameworkVersion</key>\n" ++
-      "          <integer>407</integer>\n" ++
-      "          <key>NSStoreModelVersionHashes</key>\n" ++
-      "          <dict>\n" ++
-      "            <key>action</key>\n" ++
-      "            <data>Gl79yicU/qMmmjW+02T6r/N/3wY/MXt1/ETG6BgiQvk=</data>\n" ++
-      "            <key>command</key>\n" ++
-      "            <data>LnTEAxQizumf4LEx7vWu/AEuw8pYLvlU+A+QAxxNV1Q=</data>\n" ++
-      "            <key>location</key>\n" ++
-      "            <data>l1GW8zsQs6xToCTE303HdInkm0pvem69Qmej6Ixq3k4=</data>\n" ++
-      "            <key>trigger</key>\n" ++
-      "            <data>kWwewq0GT8KPB4ELML1wT0S2IYIZ5+/6CI0GsK9LDns=</data>\n" ++
-      "          </dict>\n" ++
-      "          <key>NSStoreModelVersionHashesVersion</key>\n" ++
-      "          <integer>3</integer>\n" ++
-      "          <key>NSStoreModelVersionIdentifiers</key>\n" ++
-      "          <array>\n" ++
-      "            <string></string>\n" ++
-      "          </array>\n" ++
-      "        </dict>\n" ++
-      "      </plist>\n" ++
-      "    </metadata>\n" ++
-      "  </databaseInfo>\n" ++
+fullXML body = "<database>\n\
+      \  <databaseInfo>\n\
+      \    <version>134481920</version>\n\
+      \    <UUID>C6588137-5AC4-4FA0-ACA4-818FBA19D3AB</UUID>\n\
+      \    <nextObjectID>113</nextObjectID>\n\
+      \    <metadata>\n\
+      \      <plist version=\\1.0\\>\n\
+      \        <dict>\n\
+      \          <key>NSPersistenceFrameworkVersion</key>\n\
+      \          <integer>407</integer>\n\
+      \          <key>NSStoreModelVersionHashes</key>\n\
+      \          <dict>\n\
+      \            <key>action</key>\n\
+      \            <data>Gl79yicU/qMmmjW+02T6r/N/3wY/MXt1/ETG6BgiQvk=</data>\n\
+      \            <key>command</key>\n\
+      \            <data>LnTEAxQizumf4LEx7vWu/AEuw8pYLvlU+A+QAxxNV1Q=</data>\n\
+      \            <key>location</key>\n\
+      \            <data>l1GW8zsQs6xToCTE303HdInkm0pvem69Qmej6Ixq3k4=</data>\n\
+      \            <key>trigger</key>\n\
+      \            <data>kWwewq0GT8KPB4ELML1wT0S2IYIZ5+/6CI0GsK9LDns=</data>\n\
+      \          </dict>\n\
+      \          <key>NSStoreModelVersionHashesVersion</key>\n\
+      \          <integer>3</integer>\n\
+      \          <key>NSStoreModelVersionIdentifiers</key>\n\
+      \          <array>\n\
+      \            <string></string>\n\
+      \          </array>\n\
+      \        </dict>\n\
+      \      </plist>\n\
+      \    </metadata>\n\
+      \  </databaseInfo>\n" ++
          body ++
       "</database>\n"
 
-commandXML app commandType vendor commandId actionId triggerId uniqueId
-  = "<object type=\"COMMAND\" id=" ++ show commandId ++ ">\n" ++
-  "  <attribute name=\"version\" type=\"int32\">1</attribute>\n" ++
-  "  <attribute name=\"vendor\" type=\"string\">" ++ vendor ++"</attribute>\n" ++
-  "  <attribute name=\"type\" type=\"string\">" ++ show commandType ++ "</attribute>\n" ++
-  "  <attribute name=\"spokenlanguage\" type=\"string\">en_US</attribute>\n" ++
-  "  <attribute name=\"oslanguage\" type=\"string\">en_GB</attribute>\n" ++
-  "  <attribute name=\"isspelling\" type=\"bool\">0</attribute>\n" ++
-  "  <attribute name=\"issleep\" type=\"bool\">0</attribute>\n" ++
-  "  <attribute name=\"isdictation\" type=\"bool\">0</attribute>\n" ++
-  "  <attribute name=\"iscorrection\" type=\"bool\">0</attribute>\n" ++
-  "  <attribute name=\"iscommand\" type=\"bool\">1</attribute>\n" ++
-  "  <attribute name=\"engineid\" type=\"int32\">-1</attribute>\n" ++
-  "  <attribute name=\"display\" type=\"bool\">1</attribute>\n" ++
-  "  <attribute name=\"commandid\" type=\"int32\">" ++ show uniqueId ++ "</attribute>\n" ++
+commandXML app commandType vendor commandId actionId triggerId uniqueId =
+  "<object type=\"COMMAND\" id=" ++ show commandId ++ ">\n\
+  \  <attribute name=\"version\" type=\"int32\">1</attribute>\n\
+  \  <attribute name=\"vendor\" type=\"string\">" ++ vendor ++ "</attribute>\n\
+  \  <attribute name=\"type\" type=\"string\">" ++ show commandType ++ "</attribute>\n\
+  \  <attribute name=\"spokenlanguage\" type=\"string\">en_US</attribute>\n\
+  \  <attribute name=\"oslanguage\" type=\"string\">en_GB</attribute>\n\
+  \  <attribute name=\"isspelling\" type=\"bool\">0</attribute>\n\
+  \  <attribute name=\"issleep\" type=\"bool\">0</attribute>\n\
+  \  <attribute name=\"isdictation\" type=\"bool\">0</attribute>\n\
+  \  <attribute name=\"iscorrection\" type=\"bool\">0</attribute>\n\
+  \  <attribute name=\"iscommand\" type=\"bool\">1</attribute>\n\
+  \  <attribute name=\"engineid\" type=\"int32\">-1</attribute>\n\
+  \  <attribute name=\"display\" type=\"bool\">1</attribute>\n\
+  \  <attribute name=\"commandid\" type=\"int32\">" ++ show uniqueId ++ "</attribute>\n" ++
   printApplication app ++
-  "  <attribute name=\"active\" type=\"bool\">1</attribute>\n" ++
-  "  <relationship name=\"currentaction\" type=\"1/1\" destination=\"ACTION\"></relationship>\n" ++
-  "  <relationship name=\"currenttrigger\" type=\"1/1\" destination=\"TRIGGER\"></relationship>\n" ++
-  "  <relationship name=\"location\" type=\"1/1\" destination=\"LOCATION\"></relationship>\n" ++
-  "  <relationship name=\"action\" type=\"0/0\" destination=\"ACTION\" idrefs=" ++ show actionId ++ "></relationship>\n" ++
-  "  <relationship name=\"trigger\" type=\"1/0\" destination=\"TRIGGER\" idrefs=" ++ show triggerId ++ "></relationship>\n" ++
-  "</object>\n" 
+  "  <attribute name=\"active\" type=\"bool\">1</attribute>\n\
+  \  <relationship name=\"currentaction\" type=\"1/1\" destination=\"ACTION\"></relationship>\n\
+  \  <relationship name=\"currenttrigger\" type=\"1/1\" destination=\"TRIGGER\"></relationship>\n\
+  \  <relationship name=\"location\" type=\"1/1\" destination=\"LOCATION\"></relationship>\n\
+  \  <relationship name=\"action\" type=\"0/0\" destination=\"ACTION\" idrefs=" ++ show actionId ++ "></relationship>\n\
+  \  <relationship name=\"trigger\" type=\"1/0\" destination=\"TRIGGER\" idrefs=" ++ show triggerId ++ "></relationship>\n\
+  \</object>\n"
   where
-  printApplication (Just (Application name version)) = "  <attribute name=\"appversion\" type=\"int32\">" ++ show version ++ "</attribute>\n" ++ "  <attribute name=\"appbundle\" type=\"string\">" ++ name ++ "</attribute>\n"
-  printApplication (Nothing) = "  <attribute name=\"appversion\" type=\"int32\">0</attribute>\n"
+  printApplication (Just (Application name version)) =
+    "  <attribute name=\"appversion\" type=\"int32\">" ++ show version ++ "</attribute>\n\
+    \  <attribute name=\"appbundle\" type=\"string\">" ++ name ++ "</attribute>\n"
+  printApplication (Nothing) =
+    "  <attribute name=\"appversion\" type=\"int32\">0</attribute>\n"
 
-triggerXML triggerContent triggerDescription triggerId commandId
-  ="<object type=\"TRIGGER\" id=" ++ show triggerId ++ ">\n" ++
-  "  <attribute name=\"string\" type=\"string\">" ++ triggerContent ++"</attribute>\n" ++
-  "  <attribute name=\"spokenlanguage\" type=\"string\">en_US</attribute>\n" ++
-  "  <attribute name=\"isuser\" type=\"bool\">1</attribute>\n" ++
-  "  <attribute name=\"desc\" type=\"string\">" ++ triggerDescription ++"</attribute>\n" ++
-  "  <relationship name=\"command\" type=\"1/1\" destination=\"COMMAND\" idrefs=" ++ show commandId ++ "></relationship>\n" ++
-  "  <relationship name=\"currentcommand\" type=\"1/1\" destination=\"COMMAND\"></relationship>\n" ++
-  "</object>\n"
+triggerXML triggerContent triggerDescription triggerId commandId =
+  "<object type=\"TRIGGER\" id=" ++ show triggerId ++ ">\n\
+  \  <attribute name=\"string\" type=\"string\">" ++ triggerContent ++ "</attribute>\n\
+  \  <attribute name=\"spokenlanguage\" type=\"string\">en_US</attribute>\n\
+  \  <attribute name=\"isuser\" type=\"bool\">1</attribute>\n\
+  \  <attribute name=\"desc\" type=\"string\">" ++ triggerDescription ++ "</attribute>\n\
+  \  <relationship name=\"command\" type=\"1/1\" destination=\"COMMAND\" idrefs=" ++ show commandId ++ "></relationship>\n\
+  \  <relationship name=\"currentcommand\" type=\"1/1\" destination=\"COMMAND\"></relationship>\n\
+  \</object>\n"
 
-actionXML actionContent actionId commandId
-  = "<object type=\"ACTION\" id="++ show actionId ++ ">\n" ++
-  "  <attribute name=\"text\" type=\"string\">" ++ actionContent ++"</attribute>\n" ++
-  "  <attribute name=\"oslanguage\" type=\"string\">en_GB</attribute>\n" ++
-  "  <attribute name=\"isuser\" type=\"bool\">1</attribute>\n" ++
-  "  <relationship name=\"command\" type=\"1/1\" destination=\"COMMAND\" idrefs=" ++ show commandId ++ "></relationship>\n" ++
-  "  <relationship name=\"currentcommand\" type=\"1/1\" destination=\"COMMAND\"></relationship>\n" ++
-  "</object>\n"
+actionXML actionContent actionId commandId =
+  "<object type=\"ACTION\" id="++ show actionId ++ ">\n\
+  \  <attribute name=\"text\" type=\"string\">" ++ actionContent ++ "</attribute>\n\
+  \  <attribute name=\"oslanguage\" type=\"string\">en_GB</attribute>\n\
+  \  <attribute name=\"isuser\" type=\"bool\">1</attribute>\n\
+  \  <relationship name=\"command\" type=\"1/1\" destination=\"COMMAND\" idrefs=" ++ show commandId ++ "></relationship>\n\
+  \  <relationship name=\"currentcommand\" type=\"1/1\" destination=\"COMMAND\"></relationship>\n\
+  \</object>\n"
 
 
 
