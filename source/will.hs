@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 import Text.ParserCombinators.Parsec
 import Prelude hiding (mapM)
@@ -13,6 +14,8 @@ import System.Process
 import System.Environment (getArgs, getProgName)
 import System.IO.Unsafe -- :D
 import Data.Function (on)
+import qualified Data.Text as T
+import qualified Data.Text.IO as TIO
 
 data Program = Program [CommandSet] deriving Show
 data CommandSet = CommandSet Context [Command] deriving Show
@@ -691,7 +694,7 @@ findCommand what folder = lines <$> readProcess "find" [folder, "-name", what] "
 
 data XMLFile = XMLFile FileName Content deriving Show
 type FileName = String
-type Content = String
+type Content = T.Text
 
 codeGeneration :: LowIR -> Either Error [XMLFile]
 codeGeneration (LowIR list) = Right $ map generateXMLFile list
@@ -700,7 +703,7 @@ generateXMLFile :: LowCommandSet -> XMLFile
 generateXMLFile (LowCommandSet context commands) = XMLFile fileName xml
   where
   fileName = (showApplication "global" context) ++ fileExtension
-  xml = fullXML $ concatMap (generateCommandXML context) commands
+  xml = fullXML $ T.concat (map (generateCommandXML context) commands)
 
 generateCommandXML app (LowCommand {
   commandId = cid,
@@ -714,8 +717,8 @@ generateCommandXML app (LowCommand {
     actionContent = acontent})}) =
   let vendor = "igormoreno"
       triggerDescription = ""
-  in (commandXML app atype vendor cid aid tid uid) ++
-     (triggerXML tcontent triggerDescription tid cid) ++
+  in (commandXML app atype vendor cid aid tid uid) `T.append`
+     (triggerXML tcontent triggerDescription tid cid) `T.append`
      (actionXML (xmlify acontent) aid cid)
 
 xmlify :: String -> String
@@ -745,7 +748,7 @@ xmlify = replaceMultiple encodings
 --                  |    -- Noam Chomsky
 --                  |]
 
-fullXML body = "<database>\n\
+fullXML body = T.concat ["<database>\n\
       \  <databaseInfo>\n\
       \    <version>134481920</version>\n\
       \    <UUID>C6588137-5AC4-4FA0-ACA4-818FBA19D3AB</UUID>\n\
@@ -775,11 +778,11 @@ fullXML body = "<database>\n\
       \        </dict>\n\
       \      </plist>\n\
       \    </metadata>\n\
-      \  </databaseInfo>\n" ++
-         body ++
-      "</database>\n"
+      \  </databaseInfo>\n",
+         body,
+      "</database>\n"]
 
-commandXML app commandType vendor commandId actionId triggerId uniqueId =
+commandXML app commandType vendor commandId actionId triggerId uniqueId = T.pack (
   "<object type=\"COMMAND\" id=" ++ show commandId ++ ">\n\
   \  <attribute name=\"version\" type=\"int32\">1</attribute>\n\
   \  <attribute name=\"vendor\" type=\"string\">" ++ vendor ++ "</attribute>\n\
@@ -801,7 +804,7 @@ commandXML app commandType vendor commandId actionId triggerId uniqueId =
   \  <relationship name=\"location\" type=\"1/1\" destination=\"LOCATION\"></relationship>\n\
   \  <relationship name=\"action\" type=\"0/0\" destination=\"ACTION\" idrefs=" ++ show actionId ++ "></relationship>\n\
   \  <relationship name=\"trigger\" type=\"1/0\" destination=\"TRIGGER\" idrefs=" ++ show triggerId ++ "></relationship>\n\
-  \</object>\n"
+  \</object>\n")
   where
   printApplication (Just (Application name version)) =
     "  <attribute name=\"appversion\" type=\"int32\">" ++ show version ++ "</attribute>\n\
@@ -809,7 +812,7 @@ commandXML app commandType vendor commandId actionId triggerId uniqueId =
   printApplication (Nothing) =
     "  <attribute name=\"appversion\" type=\"int32\">0</attribute>\n"
 
-triggerXML triggerContent triggerDescription triggerId commandId =
+triggerXML triggerContent triggerDescription triggerId commandId = T.pack (
   "<object type=\"TRIGGER\" id=" ++ show triggerId ++ ">\n\
   \  <attribute name=\"string\" type=\"string\">" ++ triggerContent ++ "</attribute>\n\
   \  <attribute name=\"spokenlanguage\" type=\"string\">en_US</attribute>\n\
@@ -817,16 +820,16 @@ triggerXML triggerContent triggerDescription triggerId commandId =
   \  <attribute name=\"desc\" type=\"string\">" ++ triggerDescription ++ "</attribute>\n\
   \  <relationship name=\"command\" type=\"1/1\" destination=\"COMMAND\" idrefs=" ++ show commandId ++ "></relationship>\n\
   \  <relationship name=\"currentcommand\" type=\"1/1\" destination=\"COMMAND\"></relationship>\n\
-  \</object>\n"
+  \</object>\n")
 
-actionXML actionContent actionId commandId =
+actionXML actionContent actionId commandId = T.pack (
   "<object type=\"ACTION\" id="++ show actionId ++ ">\n\
   \  <attribute name=\"text\" type=\"string\">" ++ actionContent ++ "</attribute>\n\
   \  <attribute name=\"oslanguage\" type=\"string\">en_GB</attribute>\n\
   \  <attribute name=\"isuser\" type=\"bool\">1</attribute>\n\
   \  <relationship name=\"command\" type=\"1/1\" destination=\"COMMAND\" idrefs=" ++ show commandId ++ "></relationship>\n\
   \  <relationship name=\"currentcommand\" type=\"1/1\" destination=\"COMMAND\"></relationship>\n\
-  \</object>\n"
+  \</object>\n")
 
 
 
@@ -883,7 +886,7 @@ dumpAST program = "\n\nAST\n" ++ show program
 fileExtension = ".commandstext"
 
 writingXMLFile :: XMLFile -> IO ()
-writingXMLFile (XMLFile name content) = writeFile name content
+writingXMLFile (XMLFile name content) = TIO.writeFile name content
 
 run wrappedContent = do
   content <- wrappedContent
