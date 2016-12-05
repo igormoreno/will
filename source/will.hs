@@ -14,8 +14,7 @@ import System.Process
 import System.Environment (getArgs, getProgName)
 import System.IO.Unsafe -- :D
 import Data.Function (on)
-import qualified Data.Text as T
-import qualified Data.Text.IO as TIO
+import qualified Data.ByteString.Char8 as T
 
 data Program = Program [CommandSet] deriving Show
 data CommandSet = CommandSet Context [Command] deriving Show
@@ -694,7 +693,7 @@ findCommand what folder = lines <$> readProcess "find" [folder, "-name", what] "
 
 data XMLFile = XMLFile FileName Content deriving Show
 type FileName = String
-type Content = T.Text
+type Content = T.ByteString
 
 codeGeneration :: LowIR -> Either Error [XMLFile]
 codeGeneration (LowIR list) = Right $ map generateXMLFile list
@@ -721,7 +720,6 @@ generateCommandXML app (LowCommand {
      (triggerXML tcontent triggerDescription tid cid) `T.append`
      (actionXML (xmlify acontent) aid cid)
 
-xmlify :: String -> String
 xmlify = replaceMultiple encodings
   where
   encodings = [("&", "&amp;"), ("<", "&lt;"), (">", "&gt;")] --, ("\\n", "\n")] --, ('\n', "&#xD;&#xA;")]
@@ -782,11 +780,11 @@ fullXML body = T.concat ["<database>\n\
          body,
       "</database>\n"]
 
-commandXML app commandType vendor commandId actionId triggerId uniqueId = T.pack (
-  "<object type=\"COMMAND\" id=" ++ show commandId ++ ">\n\
+commandXML app commandType vendor commandId actionId triggerId uniqueId =
+  "<object type=\"COMMAND\" id=" `T.append` T.pack commandId `T.append` ">\n\
   \  <attribute name=\"version\" type=\"int32\">1</attribute>\n\
-  \  <attribute name=\"vendor\" type=\"string\">" ++ vendor ++ "</attribute>\n\
-  \  <attribute name=\"type\" type=\"string\">" ++ show commandType ++ "</attribute>\n\
+  \  <attribute name=\"vendor\" type=\"string\">" `T.append` vendor `T.append` "</attribute>\n\
+  \  <attribute name=\"type\" type=\"string\">" `T.append` T.pack (show commandType) `T.append` "</attribute>\n\
   \  <attribute name=\"spokenlanguage\" type=\"string\">en_US</attribute>\n\
   \  <attribute name=\"oslanguage\" type=\"string\">en_GB</attribute>\n\
   \  <attribute name=\"isspelling\" type=\"bool\">0</attribute>\n\
@@ -796,40 +794,40 @@ commandXML app commandType vendor commandId actionId triggerId uniqueId = T.pack
   \  <attribute name=\"iscommand\" type=\"bool\">1</attribute>\n\
   \  <attribute name=\"engineid\" type=\"int32\">-1</attribute>\n\
   \  <attribute name=\"display\" type=\"bool\">1</attribute>\n\
-  \  <attribute name=\"commandid\" type=\"int32\">" ++ show uniqueId ++ "</attribute>\n" ++
-  printApplication app ++
+  \  <attribute name=\"commandid\" type=\"int32\">" `T.append` T.pack (show uniqueId) `T.append` "</attribute>\n" `T.append`
+  printApplication app `T.append`
   "  <attribute name=\"active\" type=\"bool\">1</attribute>\n\
   \  <relationship name=\"currentaction\" type=\"1/1\" destination=\"ACTION\"></relationship>\n\
   \  <relationship name=\"currenttrigger\" type=\"1/1\" destination=\"TRIGGER\"></relationship>\n\
   \  <relationship name=\"location\" type=\"1/1\" destination=\"LOCATION\"></relationship>\n\
-  \  <relationship name=\"action\" type=\"0/0\" destination=\"ACTION\" idrefs=" ++ show actionId ++ "></relationship>\n\
-  \  <relationship name=\"trigger\" type=\"1/0\" destination=\"TRIGGER\" idrefs=" ++ show triggerId ++ "></relationship>\n\
-  \</object>\n")
+  \  <relationship name=\"action\" type=\"0/0\" destination=\"ACTION\" idrefs=" `T.append` T.pack actionId `T.append` "></relationship>\n\
+  \  <relationship name=\"trigger\" type=\"1/0\" destination=\"TRIGGER\" idrefs=" `T.append` T.pack triggerId `T.append` "></relationship>\n\
+  \</object>\n"
   where
   printApplication (Just (Application name version)) =
-    "  <attribute name=\"appversion\" type=\"int32\">" ++ show version ++ "</attribute>\n\
-    \  <attribute name=\"appbundle\" type=\"string\">" ++ name ++ "</attribute>\n"
+    "  <attribute name=\"appversion\" type=\"int32\">" `T.append` T.pack (show version) `T.append` "</attribute>\n\
+    \  <attribute name=\"appbundle\" type=\"string\">" `T.append` T.pack name `T.append` "</attribute>\n"
   printApplication (Nothing) =
     "  <attribute name=\"appversion\" type=\"int32\">0</attribute>\n"
 
-triggerXML triggerContent triggerDescription triggerId commandId = T.pack (
-  "<object type=\"TRIGGER\" id=" ++ show triggerId ++ ">\n\
-  \  <attribute name=\"string\" type=\"string\">" ++ triggerContent ++ "</attribute>\n\
+triggerXML triggerContent triggerDescription triggerId commandId =
+  "<object type=\"TRIGGER\" id=" `T.append` T.pack (show triggerId) `T.append` ">\n\
+  \  <attribute name=\"string\" type=\"string\">" `T.append` T.pack triggerContent `T.append` "</attribute>\n\
   \  <attribute name=\"spokenlanguage\" type=\"string\">en_US</attribute>\n\
   \  <attribute name=\"isuser\" type=\"bool\">1</attribute>\n\
-  \  <attribute name=\"desc\" type=\"string\">" ++ triggerDescription ++ "</attribute>\n\
-  \  <relationship name=\"command\" type=\"1/1\" destination=\"COMMAND\" idrefs=" ++ show commandId ++ "></relationship>\n\
+  \  <attribute name=\"desc\" type=\"string\">" `T.append` triggerDescription `T.append` "</attribute>\n\
+  \  <relationship name=\"command\" type=\"1/1\" destination=\"COMMAND\" idrefs=" `T.append` T.pack (show commandId) `T.append` "></relationship>\n\
   \  <relationship name=\"currentcommand\" type=\"1/1\" destination=\"COMMAND\"></relationship>\n\
-  \</object>\n")
+  \</object>\n"
 
-actionXML actionContent actionId commandId = T.pack (
-  "<object type=\"ACTION\" id="++ show actionId ++ ">\n\
-  \  <attribute name=\"text\" type=\"string\">" ++ actionContent ++ "</attribute>\n\
+actionXML actionContent actionId commandId =
+  "<object type=\"ACTION\" id=" `T.append` T.pack (show actionId) `T.append` ">\n\
+  \  <attribute name=\"text\" type=\"string\">" `T.append` T.pack actionContent `T.append` "</attribute>\n\
   \  <attribute name=\"oslanguage\" type=\"string\">en_GB</attribute>\n\
   \  <attribute name=\"isuser\" type=\"bool\">1</attribute>\n\
-  \  <relationship name=\"command\" type=\"1/1\" destination=\"COMMAND\" idrefs=" ++ show commandId ++ "></relationship>\n\
+  \  <relationship name=\"command\" type=\"1/1\" destination=\"COMMAND\" idrefs=" `T.append` T.pack (show commandId) `T.append` "></relationship>\n\
   \  <relationship name=\"currentcommand\" type=\"1/1\" destination=\"COMMAND\"></relationship>\n\
-  \</object>\n")
+  \</object>\n"
 
 
 
@@ -886,7 +884,7 @@ dumpAST program = "\n\nAST\n" ++ show program
 fileExtension = ".commandstext"
 
 writingXMLFile :: XMLFile -> IO ()
-writingXMLFile (XMLFile name content) = TIO.writeFile name content
+writingXMLFile (XMLFile name content) = T.writeFile name content
 
 run wrappedContent = do
   content <- wrappedContent
