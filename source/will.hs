@@ -294,6 +294,8 @@ normalKey = do
        <|> char '%'
        <|> char '['
        <|> char ']'
+       <|> char '_'
+       <|> char '='
   return [k]
 
 

@@ -1,0 +1,23 @@
+Dictation software
+  mouse
+    click, double-click...
+    movement: grid...
+    solution: commands
+  keyboard
+    dictation
+      capitalization, spacing, punctuation, new lines, visual feedback
+      solution: commands
+      context formatting: scratch that, "text" select "text"... (non-essential)
+      correction options
+      training
+    nodes
+      spelling
+      solution: commands
+    commands
+      contexts
+      dynamic commands
+  others
+    browser
+      number links
+      click "text"
+      solution: commands

@@ -5,9 +5,8 @@ saying page number = 2-5: run "/usr/local/bin/cliclick -w 500 " repeat number ("
 saying page up: press "PageUp"
 saying unpleasant: type "git "
 saying Haskell interactive: type "ghci "
-saying function arrow: type " ->"
-saying chip: presses "Option-Space"
-saying chip number = 1-9: presses "Option-" number
+#saying chip: presses "Option-Space"
+#saying chip number = 1-9: presses "Option-" number
 saying escape: presses "Escape"
 saying next up: press "Command-`"
 saying previous up: press "Command-Shift-`"
@@ -20,7 +19,7 @@ saying select number = 1-9 up: press repeat number ("Shift-UpArrow")
 saying Dell: press "Delete"
 saying Dell number = 1-9: press repeat number ("Delete")
 saying repeat command number = 1-9: run "/Users/igormoreno/bin/repeatcommand " number
-saying open with MacVim: run "/usr/local/bin/cliclick -w 100 kd:shift,cmd t:'?' ku:shift,cmd t:'open with other' kp:arrow-down kp:return t:MacVim"
+#saying open with MacVim: run "/usr/local/bin/cliclick -w 100 kd:shift,cmd t:'?' ku:shift,cmd t:'open with other' kp:arrow-down kp:return t:MacVim"
 saying my copy: press "Command-c"
 saying my paste: press "Command-v"
 saying my move: press "Command-Option-v"
@@ -32,34 +31,22 @@ saying record mouse number = 1-9: run "/Users/igormoreno/bin/recordmouse " numbe
 saying move number = 1-9: run "/usr/local/bin/cliclick -f /Users/igormoreno/bin/move" number
 saying click number = 1-9: run "/usr/local/bin/cliclick -f /Users/igormoreno/bin/click" number
 
-saying lights on: run "/Users/igormoreno/bin/phillips.bash true"
-saying lights of: run "/Users/igormoreno/bin/phillips.bash false"
-
-saying to dark: run "/Users/igormoreno/bin/phillips.bash true"
-saying make it special: run "/Users/igormoreno/bin/phillips_color.bash"
-saying normal lights: run "/Users/igormoreno/bin/phillips_normal.bash"
+# saying lights on: run "/Users/igormoreno/bin/phillips.bash true"
+# saying lights of: run "/Users/igormoreno/bin/phillips.bash false"
+#
+# saying to dark: run "/Users/igormoreno/bin/phillips.bash true"
+# saying make it special: run "/Users/igormoreno/bin/phillips_color.bash"
+# saying normal lights: run "/Users/igormoreno/bin/phillips_normal.bash"
 
 saying date stamp: run "/usr/local/bin/cliclick t:`/bin/date +%Y%m%d`"
 saying timestamp: run "/usr/local/bin/cliclick t:`/bin/date +%Y%m%d%H%M%S`"
 
+saying term: run "osascript -e 'tell application \"Terminal\" to activate'"
+saying chrome: run "osascript -e 'tell application \"Google Chrome\" to activate'"
 
 # in Aquamacs, Firefox:
 # saying hello: types " single quote -> <-'"
 # saying matrix something = 1-3 else = 1-3: types repeat something (repeat else ("-") "\n")
-
-in Firefox, Google Chrome:
-saying create new tab: presses "Command-t"
-saying close tab: presses "Command-w"
-saying next tab: presses "Control-Tab"
-saying next number = 1-5 tab: presses repeat number ("Control-Tab")
-saying previous tab: presses "Control-Shift-Tab"
-saying previous number = 1-5 tab: presses repeat number ("Control-Shift-Tab")
-saying tab number = 1-9: presses "Command-" number
-saying jump back: press "Command-LeftArrow"
-saying jump forward: press "Command-RightArrow"
-saying scroll number = 2-5: run "/usr/local/bin/cliclick -w 500 " repeat number ("kp:arrow-down ")
-saying refresh page: press "Command-r"
-saying address bar: press "Command-l"
 
 in iTerm, Terminal:
 saying scratch number = 1-4: presses repeat number ("Control-w")
@@ -67,17 +54,30 @@ saying scratch line: presses "Control-u"
 saying paste: press "Control-y"
 saying do again: presses "UpArrow Return"
 saying complete: presses "Tab Tab"
+saying history: press "Control-r"
+saying history /!Dictation!/: run "/usr/local/bin/cliclick kd:ctrl t:r ku:ctrl t:`echo ${varDictation}`"
 saying search: press "Control-r"
+saying search /!Dictation!/: run "/usr/local/bin/cliclick kd:ctrl t:r ku:ctrl t:`echo ${varDictation}`"
 saying Dell: press "Delete"
 saying Dell number = 1-9: press repeat number ("Delete")
 saying make directory: types "mkdir "
 saying change mode: types "chmod "
 saying scala build: types "sbt "
 saying node package: types "npm "
-saying bighead: types "HEAD "
-saying good: types "git "
 saying abort command: presses "Control-c"
+saying go up number = 1-5: types "cd " repeat number ("../")
 
+saying good: types "git "
+saying bighead: types "HEAD"
+saying status: presses "git Space status Return"
+saying difference: presses "git Space diff Return"
+saying check: types "git checkout "
+saying yes: press "y Return"
+saying no: press "n Return"
+
+saying edit command: presses "Control-x Control-e"
+
+in Terminal:
 # tmux
 saying split left: press "Control-b LeftArrow"
 saying split right: press "Control-b RightArrow"
@@ -90,13 +90,24 @@ saying list Windows: press "Control-b w"
 saying find window: press "Control-b f"
 saying search window: press "Control-b f"
 saying vertical split: press "Control-b %"
+# saying horizontal split: press "Control-b \""
 saying window number = 1-9: press "Control-b" number
 saying create window: press "Control-b c"
 saying new window: press "Control-b c"
 saying rename window: press "Control-b ,"
 saying page up: press "Control-b [ PageUp"
 saying Zoom terminal: press "Control-b z"
+saying Zoom window: press "Control-b z"
+saying choose pain: press "Control-b q"
+# saying kill window: press "Control-b &"
+# saying close window: press "Control-b &"
 
+in iTerm:
+saying create new tab: presses "Command-t"
+saying close tab: presses "Command-w"
+saying next tab: presses "Control-Tab"
+saying previous tab: presses "Control-Shift-Tab"
+saying tab number = 1-9: presses "Command-" number
 
 in Skype:
 saying search: presses "Command-Option-f"
@@ -115,250 +126,11 @@ saying previous: presses "Command-LeftArrow"
 saying previous song: presses "Command-LeftArrow"
 
 
-in MacVim:
-saying go back: type "``"
-saying back arrow: type " <- "
-saying function arrow: type " ->"
-saying visual block: press "Control-v"
-saying scratch number = 1-9: press "Escape" number "bd" number "wa"
-saying save file: press "Escape :w Return"
-saying Dell: press "Delete"
-saying Dell number = 1-9: press repeat number ("Delete")
-saying complete: press "Control-x Control-p"
-saying search beginning: press "Escape / ^ Control-r Control-w"
 
-saying run number = 1-9: run "/Users/igormoreno/bin/run" number
+in Eclipse:
+saying next error: presses "Command-."
+saying quick fix: presses "Command-1"
+saying organize imports: presses "Command-Shift-o"
+saying save file: presses "Command-s"
+saying format file: presses "Command-Shift-f"
 
-saying escape: run "/usr/local/bin/cliclick kp:esc; osascript -e 'tell application \"Dragon Dictate\" to set microphone to spelling'"
-saying insert: run "/usr/local/bin/cliclick t:i; osascript -e 'tell application \"Dragon Dictate\" to set microphone to dictation'"
-saying append: run "/usr/local/bin/cliclick t:a; osascript -e 'tell application \"Dragon Dictate\" to set microphone to dictation'"
-saying change word: run "/usr/local/bin/cliclick t:ce; osascript -e 'tell application \"Dragon Dictate\" to set microphone to dictation'"
-
-saying Camel /!Dictation!/: run "/usr/local/bin/cliclick t:`echo ${varDictation} | /usr/local/bin/runhaskell /Users/igormoreno/bin/camel.hs`"
-saying cripple /!Dictation!/: run "/usr/local/bin/cliclick t:`echo ${varDictation} | /usr/local/bin/runhaskell /Users/igormoreno/bin/cripple.hs`"
-
-saying split left: press "Escape Control-w h"
-saying split number = 1-5 left: press "Escape" repeat number ("Control-w h")
-saying split right: press "Escape Control-w l"
-saying split number = 1-5 right: press "Escape" repeat number ("Control-w l")
-saying split up: press "Escape Control-w k"
-saying split down: press "Escape Control-w j"
-saying split next: presses "Escape Control-w Control-w"
-saying split horizontal: press "Escape Control-w s"
-saying split vertical: press "Escape Control-w v"
-
-saying next hunk: press "]c"
-saying previous hunk: press "[c"
-saying revert hunk: press ",hr"
-saying show nerd: presses "Escape : Shift-n Shift-e Shift-r Shift-d Shift-t ree"
-saying show filer: presses "Escape : Shift-v im Shift-f iler Return"
-
-
-
-### Vimium ###
-in Google Chrome:
-# saying show links: run "osascript -e 'tell application \"Dragon Dictate\" to set microphone to spelling'; /usr/local/bin/cliclick t:f"
-saying show links: press "f"
-# saying Fox: press "f"
-saying big Fox: press "Shift-f"
-saying escape: press "Escape"
-saying search tab: presses "Shift-t"
-saying close number = 1-5 tab: presses number "x"
-saying Magic number = 1-5: run "/Users/igormoreno/bin/magic" number
-
-### Gmail ###
-in Google Chrome, Firefox:
-#saying page number = 2-5: run "/usr/local/bin/cliclick -w 500 " repeat number ("kp:page-down ")
-#saying number = 1-9 down: press repeat number ("DownArrow")
-#saying number = 1-9 up: press repeat number ("UpArrow")
-#saying number = 1-9 left: press repeat number ("LeftArrow")
-#saying number = 1-9 right: press repeat number ("RightArrow")
-
-# Compose and Chat
-saying focus main window: press "Shift-Escape"
-saying focus chat: press "Escape"
-saying next chat: press "Control-."
-saying previous chat: press "Control-,"
-saying send: press "Command-Return"
-saying cc: press "Command-Shift-c"
-saying bcc: press "Command-Shift-b"
-
-# Jumping
-saying go to inbox: press "gi"
-saying go to star: press "gs"
-saying go to sent: press "gt"
-saying go to drafts: press "gd"
-saying go to all mail: press "ga"
-saying go to contact: press "gc"
-saying go to label: press "gl"
-
-# Threadlist selection
-saying choose: press "x"
-saying choose number = 1-9: press repeat number ("xj")
-saying choose all: press "*a"
-saying choose nothing: press "*n"
-saying choose read: press "*r"
-saying choose unread: press "*u"
-saying choose special: press "*s"
-saying choose not special: press "*t"
-
-# Navigation
-saying go back: press "u"
-saying open: press "o"
-saying next message: press "n"
-saying previous message: press "p"
-
-# Application
-saying compose: press "c"
-saying search mail: press "/"
-saying searched chat: press "q"
-saying more actions: press "."
-saying moved to: press "v"
-saying open label: press "l"
-
-# Actions
-saying star message: press "s"
-saying removes label: press "y"
-saying archives: press "e"
-saying mute conversation: press "m"
-saying report spam: press "!"
-#saying delete message: press "#"
-saying reply: press "r"
-saying reply all: press "a"
-saying forward: press "f"
-saying undo: press "z"
-saying Mark read: press "Shift-i"
-saying Mark unread: press "Shift-u"
-saying Mark important: press "+"
-saying Mark not important: type "-"
-saying make phone call: press "gp"
-
-# Gmail shortcuts
-#
-# Compose and Chat
-# <Shift> + <Esc> :	Focus main window
-# <Esc> :	Focus latest chat or compose
-# <Ctrl> + . :	Advance to next chat or compose
-# <Ctrl> + , :	Advance to previous chat or compose
-# <⌘> + <Enter> :	Send
-# <⌘> + <Shift> + c :	Add cc recipients
-# <⌘> + <Shift> + b :	Add bcc recipients
-# <⌘> + <Shift> + f :	Access custom from
-# <⌘> + k :	Insert a link
-# <⌘> + ; :	Go to previous misspelled word
-# <⌘> + ' :	Go to next misspelled word
-# <⌘> + m :	Open spelling suggestions
-# 
-# Jumping
-# g then i :	Go to Inbox
-# g then s :	Go to Starred conversations
-# g then t :	Go to Sent messages
-# g then d :	Go to Drafts
-# g then a :	Go to All mail
-# g then c :	Go to Contacts
-# g then k :	Go to Tasks
-# g then l :	Go to Label
-# 
-# Threadlist selection
-# * then a :	Select all conversations
-# * then n :	Deselect all conversations
-# * then r :	Select read conversations
-# * then u :	Select unread conversations
-# * then s :	Select starred conversations
-# * then t :	Select unstarred conversations
-# 
-# Navigation
-# u :	Back to threadlist
-# k / j :	Newer/older conversation
-# o or <Enter> :	Open conversation; collapse/expand conversation
-# p / n :	Read previous/next message
-# ` :	Go to next inbox section
-# ~ :	Go to previous inbox section
-# 
-# Application
-# c :	Compose
-# d :	Compose in a tab (new compose only)
-# / :	Search mail
-# q :	Search chat contacts
-# . :	Open "more actions" menu
-# v :	Open "move to" menu
-# l :	Open "label as" menu
-# 
-# Actions
-# , :	Move focus to toolbar
-# x :	Select conversation
-# s :	Rotate superstar
-# y :	Remove label
-# e :	Archive
-# m :	Mute conversation
-# ! :	Report as spam
-# # :	Delete
-# r :	Reply
-# <Shift> + r :	Reply in a new window
-# a :	Reply all
-# <Shift> + a :	Reply all in a new window
-# f :	Forward
-# <Shift> + f :	Forward in a new window
-# <Shift> + n :	Update conversation
-# ] / [ :	Remove conversation from current view and go previous/next
-# } / { :	Archive conversation and go previous/next
-# z :	Undo last action
-# <Shift> + i :	Mark as read
-# <Shift> + u :	Mark as unread
-# _ :	Mark unread from the selected message
-# + or = :	Mark as important
-# - :	Mark as not important
-# g then p or h then p :	Make a phone call
-# <Shift> + t :	Add conversation to Tasks
-
-# Google inbox
-saying jump to inbox: presses "i"
-saying down number = 1-5: presses repeat number ("j")
-saying up number = 1-5: presses repeat number ("k")
-saying pin message: presses "Shift-p"
-
-# Google inbox
-#
-# Everywhere
-#
-# c	Compose
-# /	Search
-# i	Go to inbox
-# t	Create reminder
-# z	Undo last action
-#
-# Compose
-#
-# ⌘ b	Bold
-# ⌘ i	Italics
-# ⌘ u	Underline
-# ⌘ k	Insert link
-# ⌘ Shift 7	Numbered list
-# ⌘ Shift 8	Bulleted list
-# ⌘ Enter	Send
-# Esc	Closes compose and deletes empty drafts
-#
-# List navigation
-#
-# Enter or o	Open
-# Esc or u	Close
-# j or ▶	Next item
-# k or ◀	Previous item
-# n	Next message
-# p	Previous message
-#
-# Focused item
-#
-# e or y	Mark done
-# ] or [	Mark done and advance
-# Shift p	Pin
-# a	Reply all
-# Shift a	Reply all in a new window
-# r	Reply
-# Shift r	Reply in a new window
-# f	Forward
-# #	Trash
-# !	Report as spam
-# m	Mute
-# .	Toggle move-to menu
-# x	Select

@@ -1,0 +1,1408 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE database SYSTEM "file:///System/Library/DTDs/CoreData.dtd">
+
+<database>
+    <databaseInfo>
+        <version>134481920</version>
+        <UUID>6B35EBF6-685A-4E35-B327-375E3CB6B6BE</UUID>
+        <nextObjectID>344</nextObjectID>
+        <metadata>
+            <plist version="1.0">
+                <dict>
+                    <key>NSPersistenceFrameworkVersion</key>
+                    <integer>481</integer>
+                    <key>NSStoreModelVersionHashes</key>
+                    <dict>
+                        <key>GeneralTerm</key>
+                        <data>
+		viq8omf+2O5b0fq11zhAdXE34fIC3k5xmFDwX+vPQ0A=
+		</data>
+                        <key>SpecificTerm</key>
+                        <data>
+		kR9hYZ8J0txqQcn0EJ6+yJsAVfza/wG8AD5YVW/8ULQ=
+		</data>
+                    </dict>
+                    <key>NSStoreModelVersionHashesVersion</key>
+                    <integer>3</integer>
+                    <key>NSStoreModelVersionIdentifiers</key>
+                    <array>
+                        <string></string>
+                    </array>
+                </dict>
+            </plist>
+        </metadata>
+    </databaseInfo>
+    <object type="SPECIFICTERM" id="z102">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">This</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z279"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z103">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Make or Create</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.safari</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z316 z146"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z104">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Display</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z283"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z105">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Someplace</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z303 z150 z155 z297"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z106">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Back or Previous</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.finder</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z338 z205"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z107">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">This or The</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.reminders</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z332 z154"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z108">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Open</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z270"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z109">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">using</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z254"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z110">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Close</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z293"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z111">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Forward</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z294"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z112">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Text</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.TextEdit</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z314"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z113">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Window</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z163"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z114">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Close</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z126"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z115">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Enter or Switch to</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z318 z222"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z116">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Open</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z132"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z117">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Close</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z330"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z118">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">A</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.TextEdit</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z295"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z119">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">This</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z333"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z120">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Window</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.safari</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z189"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z121">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">This</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z138"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z122">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">The</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z310"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z123">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Open</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z281"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z124">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Message or Email</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.mail</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z131 z291 z344 z275"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z125">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Make</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z148"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z126">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Hide or Close</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.finder</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z114 z174"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z127">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Make or Create</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.finder</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z197 z206"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z128">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">This</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z264"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z129">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Post</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z161"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z130">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">This or The</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.TextEdit</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z165 z172"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z131">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Message</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z124"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z132">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Show or Open</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z178 z116"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z133">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Access</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z196"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z134">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Make or Create</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.ical</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z149 z218"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z135">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Display</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z334"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z136">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">A</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.safari</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z211"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z137">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">status</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z289"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z138">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">This or The</attribute>
+        <attribute name="bundleidentifier" type="string">com.dragon.dictate</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z121 z184"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z139">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Display</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z317"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z140">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Facebook</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z195"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z141">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Windows</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z305"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z142">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">to</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z304"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z143">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Toggle</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z196"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z144">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Create</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z162"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z145">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Close</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z343"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z146">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Make</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z103"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z147">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Access</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z299"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z148">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Make or Create</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.Notes</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z125 z194"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z149">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Make</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z134"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z150">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Spotlight</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z105"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z151">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Window</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z188"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z152">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">To</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z307"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z153">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">icons</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z311"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z154">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">This</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z107"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z155">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Finder</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z105"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z156">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">To The</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z175"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z157">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Button</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z215"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z158">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">The</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z176"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z159">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Open</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z317"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z160">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">The</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z264"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z161">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Post or Update</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z335 z167 z328 z129"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z162">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Make or Create</attribute>
+        <attribute name="bundleidentifier" type="string">com.dragon.dictate</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z144 z212"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z163">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Window</attribute>
+        <attribute name="bundleidentifier" type="string">com.dragon.dictate</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z113"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z164">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">To The</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z323"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z165">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">The</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z130"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z166">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Hide</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z185"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z167">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Update</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z161"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z168">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Show</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z283"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z169">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Folder</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z237"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z170">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Tweet</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z195"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z171">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Windows</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z327"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z172">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">This</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z130"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z173">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">with</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z254"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z174">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Hide</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z126"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z175">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">To The</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.TextEdit</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z156 z233"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z176">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">This or The</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.finder</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z158 z234"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z177">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">The</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z273"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z178">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Show</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z132"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z179">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Post or Send</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z340 z248"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z180">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Toggle</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z330"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z181">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">my</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z200"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z182">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Make</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z238"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z183">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Express</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z230"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z184">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">The</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z138"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z185">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Hide or Close</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.ical</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z166 z242"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z186">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Access</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z281"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z187">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Create</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z238"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z188">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Window</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z151"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z189">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Window</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z120"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z190">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Twitter</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z195"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z191">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Closed</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z250"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z192">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Facebook</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z214"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z193">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Mail or Mailbox</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.mail</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z287 z341"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z194">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Create</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z148"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z195">
+        <attribute name="termtype" type="string">Alt</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Social Networking Action</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z140 z170 z190"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z196">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Toggle</attribute>
+        <attribute name="bundleidentifier" type="string">com.dragon.dictate</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z133 z143 z210 z219 z292 z221"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z197">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Make</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z127"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z198">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Press</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z227"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z199">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Display</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z330"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z200">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">my</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z181"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z201">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Show</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z334"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z202">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">View</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z270"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z203">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">This</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z273"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z204">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">page</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z289"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z205">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Previous</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z106"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z206">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Create</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z127"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z207">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Window</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.ical</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z282"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z208">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Access</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z317"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z209">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Google</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z249"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z210">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Close</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z196"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z211">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">A</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z136"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z212">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Make</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z162"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z213">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Window</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z271"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z214">
+        <attribute name="termtype" type="string">Alt</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Social Networking Site</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z192 z266"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z215">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Button</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.finder</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z157"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z216">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Display</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z299"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z217">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Show</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z281"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z218">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Create</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z134"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z219">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Display</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z196"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z220">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Display</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z246"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z221">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Hide</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z196"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z222">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Switch to</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z115"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z223">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">The</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z307"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z224">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">cover flow</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z311"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z225">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Windows</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z325"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z226">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">All</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z286"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z227">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Press</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z198 z278"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z228">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">To The</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z322"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z229">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Folder</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z255"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z230">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Express</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z183"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z231">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Window</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z290"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z232">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Create</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z251"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z233">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">To</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z175"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z234">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">This</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z176"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z235">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">View</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z317"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z236">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Windows</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.ical</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z280"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z237">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Folder</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.finder</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z169"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z238">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Make or Create</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.mail</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z187 z182"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z239">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">To</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z323"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z240">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">The</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z333"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z241">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">The</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z263"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z242">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Close</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z185"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z243">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Window</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z301"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z244">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Access</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z270"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z245">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">View</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z281"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z246">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">View or Display</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.finder</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z298 z220"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z247">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">with</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z308"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z248">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Send</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z179"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z249">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Provider</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z296 z209 z274"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z250">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Closed</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.safari</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z191"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z251">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Make or Create</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.TextEdit</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z232 z309"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z252">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">To</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z322"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z253">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">All</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z261"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z254">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Using</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.finder</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z109 z173 z268"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z255">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Folder or Window</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.finder</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z229 z306"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z256">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Show</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z330"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z257">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Windows</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z324"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z258">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Windows</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z326"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z259">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">The</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z279"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z260">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Display</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z270"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z261">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">All</attribute>
+        <attribute name="bundleidentifier" type="string">com.dragon.dictate</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z253"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z262">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Browser</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.safari</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z267"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z263">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">This or The</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.safari</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z241 z320"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z264">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">This or Current</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z339 z128 z160"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z265">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Access</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z283"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z266">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Twitter</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z214"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z267">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Browser</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z262"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z268">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">as</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z254"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z269">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Hide</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z293"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z270">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Access or Show</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.mail</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z336 z108 z244 z260 z202"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z271">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Window</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.mail</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z213"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z272">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Next</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z294"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z273">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">This or The</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.ical</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z203 z177"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z274">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Bing</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z249"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z275">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Email</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z124"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z276">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Display</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z281"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z277">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Hide</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z330"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z278">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Click</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z227"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z279">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">This or The</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.mail</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z259 z102"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z280">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Windows</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z236"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z281">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Access or Show</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.ical</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z245 z276 z186 z123 z217"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z282">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Window</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z207"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z283">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Access or Show</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.finder</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z104 z168 z265"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z284">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">the Text</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z337"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z285">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">This</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z310"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z286">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">All</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.TextEdit</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z226"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z287">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Mailbox</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z193"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z288">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">All</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z321"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z289">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">wall or page or status</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z313 z137 z204"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z290">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Window</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.TextEdit</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z231"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z291">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Messages</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z124"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z292">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Show</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z196"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z293">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Hide or Close</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.safari</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z269 z110"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z294">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Forward or Next</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.finder</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z272 z111"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z295">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">A</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z118"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z296">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Yahoo</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z249"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z297">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Computer</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z105"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z298">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">View</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z246"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z299">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Access or Show</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.TextEdit</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z216 z319 z147"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z300">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">columns</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z311"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z301">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Window</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.finder</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z243"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z302">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Access</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z334"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z303">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Mac</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z105"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z304">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">to</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z142"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z305">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Windows</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.finder</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z141"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z306">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Window</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z255"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z307">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">To The</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.finder</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z223 z329 z152"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z308">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">with</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z247"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z309">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Make</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z251"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z310">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">This or The</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z285 z122"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z311">
+        <attribute name="termtype" type="string">Alt</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">View Style</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.finder</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z331 z300 z153 z224"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z312">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Show</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z317"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z313">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">wall</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z289"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z314">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Text</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z112"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z315">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Hide</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z343"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z316">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Create</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z103"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z317">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Access or Show</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.safari</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z235 z208 z312 z159 z139"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z318">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Enter</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z115"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z319">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Show</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z299"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z320">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">This</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z263"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z321">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">All</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.mail</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z288"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z322">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">To The</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.ical</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z252 z228"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z323">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">To The</attribute>
+        <attribute name="bundleidentifier" type="string">com.dragon.dictate</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z164 z239"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z324">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Windows</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.safari</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z257"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z325">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Windows</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.TextEdit</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z225"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z326">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Windows</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z258"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z327">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Windows</attribute>
+        <attribute name="bundleidentifier" type="string">com.dragon.dictate</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z171"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z328">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Facebook</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z161"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z329">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">To The</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z307"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z330">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Toggle</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.TextEdit</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z199 z342 z180 z277 z256 z117"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z331">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">list</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z311"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z332">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">The</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z107"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z333">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">This or The</attribute>
+        <attribute name="bundleidentifier" type="string">com.apple.Notes</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z119 z240"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z334">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Access or Show</attribute>
+        <attribute name="bundleidentifier" type="string">com.dragon.dictate</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z201 z302 z135"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z335">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Tweet</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z161"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z336">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Show</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z270"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z337">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">the Text</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z284"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z338">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Back</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z106"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z339">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Current</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z264"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z340">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Post</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z179"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z341">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Mail</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z193"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z342">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Access</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z330"></relationship>
+    </object>
+    <object type="GENERALTERM" id="z343">
+        <attribute name="termtype" type="string">Syn</attribute>
+        <attribute name="spokenlanguage" type="string">en_US</attribute>
+        <attribute name="name" type="string">Hide or Close</attribute>
+        <attribute name="bundleidentifier" type="string">#</attribute>
+        <relationship name="specificterms" type="0/0" destination="SPECIFICTERM" idrefs="z315 z145"></relationship>
+    </object>
+    <object type="SPECIFICTERM" id="z344">
+        <attribute name="numericvalue" type="int32">0</attribute>
+        <attribute name="name" type="string">Emails</attribute>
+        <relationship name="generalterm" type="1/1" destination="GENERALTERM" idrefs="z124"></relationship>
+    </object>
+</database>
