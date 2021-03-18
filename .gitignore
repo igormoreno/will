@@ -4,3 +4,7 @@
 *.o
 source/*.commandstext
 will
+bin/
+.hpc/
+*.prof
+*.tix
